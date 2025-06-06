@@ -1,17 +1,23 @@
+import "./app.css";
+
 import { MetaProvider, Title } from "@solidjs/meta";
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
-import "./app.css";
+import { Navbar } from "./components/ui/navbar";
+import { createPrefersDarkEffect } from "./signal/theme";
 
 export default function App() {
+  createPrefersDarkEffect();
+
   return (
     <Router
-      root={props => (
+      root={(props) => (
         <MetaProvider>
-          <Title>SolidStart - Basic</Title>
-          <a href="/">Index</a>
-          <a href="/about">About</a>
+          <Title>noriapiのホーム</Title>
+          <header>
+            <Navbar />
+          </header>
           <Suspense>{props.children}</Suspense>
         </MetaProvider>
       )}

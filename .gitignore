@@ -28,3 +28,7 @@ gitignore
 Thumbs.db
 
 .dev.vars*
+
+## Panda
+styled-system
+styled-system-studio
