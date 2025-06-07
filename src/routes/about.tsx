@@ -41,7 +41,7 @@ export default function About() {
           </Heading>
         </Ojisan>
 
-        <Text>noriapiのホームページです。</Text>
+        <Text>noriapiのホームページです。自作のアプリを紹介します。</Text>
       </Box>
       <styled.section mt="28">
         <Ojisan mb="6">
@@ -60,7 +60,7 @@ export default function About() {
                   </Link>
                 </Card.Header>
                 <Card.Body fontSize="sm">
-                  AltキーやWinキーを押したときに表示されるメニューを抑制するアプリ
+                  AltキーやWinキーを離したときにメニューを表示させないアプリ
                 </Card.Body>
               </Card.Root>
             </li>

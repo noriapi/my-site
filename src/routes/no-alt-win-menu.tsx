@@ -9,20 +9,18 @@ import { Text } from "~/components/ui/text";
 export default function NoAltWinMenu() {
   return (
     <main class={container({ maxWidth: "6xl" })}>
-      <Meta.Title>No Alt Win Menu</Meta.Title>
+      <Meta.Title>No Alt Win Menu ― メニュー表示させないアプリ</Meta.Title>
       <Meta.Link rel="icon" href="/no-alt-win-menu/favicon.ico" />
       <Meta.Meta
         name="description"
-        content="AltキーやWinキーを離したときに表示されるメニューを抑制するアプリ、No Alt Win Menuの紹介。"
+        content="AltキーやWinキーを離したときにメニューを表示させないアプリ、No Alt Win Menuの紹介。"
       />
 
       <Box mt="10">
         <Heading as="h1" size="5xl">
           No Alt Win Menu
         </Heading>
-        <Text>
-          AltキーやWinキーを離したときに表示されるメニューを抑制するアプリ
-        </Text>
+        <Text>AltキーやWinキーを離したときにメニューを表示させないアプリ</Text>
       </Box>
 
       <Box backgroundColor="black.a6" height="400px" my="10">
