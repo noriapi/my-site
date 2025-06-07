@@ -11,13 +11,17 @@ export default function NoAltWinMenu() {
     <main class={container({ maxWidth: "6xl" })}>
       <Meta.Title>No Alt Win Menu</Meta.Title>
       <Meta.Link rel="icon" href="/no-alt-win-menu/favicon.ico" />
+      <Meta.Meta
+        name="description"
+        content="AltキーやWinキーを離したときに表示されるメニューを抑制するアプリ、No Alt Win Menuの紹介。"
+      />
 
       <Box mt="10">
         <Heading as="h1" size="5xl">
           No Alt Win Menu
         </Heading>
         <Text>
-          AltキーやWinキーを押したときに表示されるメニューを抑制するアプリ
+          AltキーやWinキーを離したときに表示されるメニューを抑制するアプリ
         </Text>
       </Box>
 

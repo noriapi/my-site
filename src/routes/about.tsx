@@ -1,5 +1,5 @@
 import * as Meta from "@solidjs/meta";
-import { ParentProps, splitProps } from "solid-js";
+import { splitProps } from "solid-js";
 import { css } from "styled-system/css";
 import { Box, Center, HstackProps, styled } from "styled-system/jsx";
 import { HStack } from "styled-system/jsx/hstack.mjs";
@@ -27,6 +27,10 @@ export default function About() {
         href="/noriapi/apple-touch-icon.png"
       />
       <Meta.Link rel="manifest" href="/noriapi/site.webmanifest" />
+      <Meta.Meta
+        name="description"
+        content="noriapiのホームページです。自作のアプリを紹介します。"
+      />
 
       <Box mt="10" textAlign="center">
         <Ojisan mb="2">
@@ -37,7 +41,6 @@ export default function About() {
 
         <Text>noriapiのホームページです。</Text>
       </Box>
-
       <styled.section mt="28">
         <Ojisan mb="6">
           <Heading as="h2" size="2xl" css={fineTextStyles}>
