@@ -28,6 +28,7 @@
     "@pandacss/dev": "^0.53.7",
     "@park-ui/panda-preset": "^0.43.1",
     "@types/node": "^22.15.29",
+    "vite-imagetools": "^7.1.0",
     "vite-tsconfig-paths": "^5.1.4",
     "wrangler": "^4.19.1"
   }

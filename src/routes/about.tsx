@@ -9,6 +9,8 @@ import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { Text } from "~/components/ui/text";
 
+import ojisan from "~/assets/images/ojisan.png?w=60&format=webp&imagetools";
+
 export default function About() {
   return (
     <main class={container({ maxWidth: "6xl" })}>
@@ -93,7 +95,7 @@ function Ojisan(props: HstackProps) {
 function OjisanSolo() {
   return (
     <img
-      src="/noriapi/favicon.ico"
+      src={ojisan}
       alt="ojisan"
       class={css({ width: "10", height: "10", transform: "skew(-10deg)" })}
     />
