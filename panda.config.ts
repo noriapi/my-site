@@ -14,6 +14,11 @@ export default defineConfig({
   ],
   include: ["./src/**/*.{js,jsx,ts,tsx}"],
   exclude: [],
+  conditions: {
+    extend: {
+      dark: [".dark &", "@media (prefers-color-scheme: dark)"],
+    },
+  },
   theme: { extend: {} },
   globalCss: {
     extend: {
