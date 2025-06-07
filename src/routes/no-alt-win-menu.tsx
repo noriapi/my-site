@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import * as Meta from "@solidjs/meta";
 import { css } from "styled-system/css";
 import { Box, HStack } from "styled-system/jsx";
 import { container } from "styled-system/patterns/container.mjs";
@@ -9,7 +9,8 @@ import { Text } from "~/components/ui/text";
 export default function NoAltWinMenu() {
   return (
     <main class={container({ maxWidth: "6xl" })}>
-      <Title>No Alt Win Menu</Title>
+      <Meta.Title>No Alt Win Menu</Meta.Title>
+      <Meta.Link rel="icon" href="/no-alt-win-menu/favicon.ico" />
 
       <Box mt="10">
         <Heading as="h1" size="5xl">
