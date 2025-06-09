@@ -1,12 +1,8 @@
 import * as Meta from "@solidjs/meta";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-solid";
-import { For } from "solid-js";
 import { css } from "styled-system/css";
 import { Box, HStack } from "styled-system/jsx";
 import { container } from "styled-system/patterns/container.mjs";
-import { Carousel } from "~/components/ui/carousel";
 import { Heading } from "~/components/ui/heading";
-import { IconButton } from "~/components/ui/icon-button";
 import { Kbd } from "~/components/ui/kbd";
 import { Text } from "~/components/ui/text";
 
