@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import { css } from "styled-system/css";
+import { Box, HStack } from "styled-system/jsx";
+import { container } from "styled-system/patterns";
+import { Heading } from "~/components/ui/heading";
+import { Text } from "~/components/ui/text";
+import { Kbd } from "~/components/ui/kbd";
+import { Link } from "~/components/ui/link";
+import NoAltWinMenuLayout from "~/layouts/NoAltWinMenu.astro";
+
+import heroAlt from "~/assets/images/no-alt-win-menu-alt-ja.png";
+import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
+---
+
+<NoAltWinMenuLayout>
+  <Fragment slot="head">
+    <title>No Alt Win Menu ― メニュー表示させないアプリ</title>
+    <meta
+      name="description"
+      content="AltキーやWinキーを離したときにメニューを表示させないアプリ、No Alt Win Menuの紹介。"
+    />
+  </Fragment>
+  <main class={container({ maxWidth: "6xl" })}>
+    <Box mt="10">
+      <Heading as="h1" size="5xl"> No Alt Win Menu </Heading>
+      <Text>AltキーやWinキーを離したときにメニューを表示させないアプリ</Text>
+    </Box>
+
+    <HStack overflow="scroll" width="full" my="20">
+      <Image
+        src={heroAlt}
+        alt="alt"
+        height="300"
+        densities={[1.5, 2]}
+        class={css({
+          objectFit: "contain",
+          borderRadius: "l3",
+        })}
+      />
+
+      <Image
+        src={heroWin}
+        alt="win"
+        height="300"
+        densities={[1.5, 2]}
+        class={css({
+          objectFit: "contain",
+          borderRadius: "l3",
+        })}
+      />
+    </HStack>
+
+    <section class={css({ mt: "10" })}>
+      <Heading as="h2" size="xl" mb="3"> 主な機能 </Heading>
+
+      <ul class={css({ listStyleType: "disc", listStylePosition: "inside" })}>
+        <li class={css({ my: "2" })}>
+          <Kbd size="lg">Alt</Kbd>キーを離したときにメニューを出させない
+        </li>
+        <li class={css({ my: "2" })}>
+          <Kbd size="lg">Win</Kbd>
+          キーを離したときにスタートメニューを出させない
+        </li>
+        <li class={css({ my: "2" })}>
+          <Text as="em" fontWeight="semibold"> 特定のアプリで </Text>
+          だけメニュー表示を抑制
+        </li>
+        <li class={css({ my: "2" })}>
+          <Text as="em" fontWeight="semibold"> 長押し </Text>
+          したときだけメニュー表示を抑制
+        </li>
+      </ul>
+    </section>
+
+    <section class={css({ mt: "10" })}>
+      <Heading as="h2" size="xl"> ダウンロード </Heading>
+      <HStack justifyContent="center" mt="5">
+        <Box>Microsoft Store からダウンロード</Box>
+      </HStack>
+    </section>
+
+    <Link href="/no-alt-win-menu/privacy">プライバシーポリシー</Link>
+  </main>
+</NoAltWinMenuLayout>

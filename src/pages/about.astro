@@ -1,0 +1,74 @@
+---
+import { css } from "styled-system/css";
+import { Box, Center, styled } from "styled-system/jsx";
+import { container, hstack } from "styled-system/patterns";
+import { Heading } from "~/components/ui/heading";
+import { Link } from "~/components/ui/link";
+import { Text } from "~/components/ui/text";
+import Ojisan from "~/components/ui/Ojisan.astro";
+import NoriapiLayout from "~/layouts/Noriapi.astro";
+import { card } from "styled-system/recipes";
+
+const fineTextStyles = css.raw({
+  fontFamily:
+    "MS Gothic, MS PGothic, var(--global-font-body, var(--font-fallback))",
+  fontStyle: "italic",
+  fontOpticalSizing: "none",
+  fontSmooth: "never",
+  fontSmoothing: "none",
+});
+
+const encompassStyles = hstack.raw({
+  justifyContent: "center",
+  gap: "5",
+});
+
+const cardStyles = card();
+---
+
+<NoriapiLayout>
+  <Fragment slot="head">
+    <title>noriapiのホーム</title>
+    <meta
+      name="description"
+      content="noriapiのホームページです。自作のアプリを紹介します。"
+    />
+  </Fragment>
+  <main class={container({ maxWidth: "6xl" })}>
+    <Box mt="10" textAlign="center">
+      <div class={css(encompassStyles, { mb: "2" })}>
+        <Ojisan />
+        <Heading as="h1" size="2xl" css={fineTextStyles}>
+          noriapiのホーム
+        </Heading>
+        <Ojisan />
+      </div>
+
+      <Text>noriapiのホームページです。自作のアプリを紹介します。</Text>
+    </Box>
+    <styled.section mt="28">
+      <div class={css(encompassStyles, { mb: "6" })}>
+        <Ojisan />
+        <Heading as="h2" size="2xl" css={fineTextStyles}> 作ったもの </Heading>
+        <Ojisan />
+      </div>
+
+      <Center>
+        <ul>
+          <li>
+            <div class={cardStyles.root}>
+              <div class={cardStyles.header}>
+                <Link href="/no-alt-win-menu" fontSize="xl">
+                  No Alt Win Menu
+                </Link>
+              </div>
+              <styled.div fontSize="sm" class={cardStyles.body}>
+                AltキーやWinキーを離したときにメニューを表示させないアプリ
+              </styled.div>
+            </div>
+          </li>
+        </ul>
+      </Center>
+    </styled.section>
+  </main>
+</NoriapiLayout>

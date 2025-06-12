@@ -1,21 +1,24 @@
 {
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "allowJs": true,
-    "strict": true,
-    "noEmit": true,
-    "types": ["./worker-configuration.d.ts", "node", "vinxi/types/client"],
-    "isolatedModules": true,
+    "types": [
+      "./worker-configuration.d.ts",
+      "node"
+    ],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
-    }
-  },
-  "include": ["src", "styled-system"]
+      "~/*": [
+        "./src/*"
+      ]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
 }
