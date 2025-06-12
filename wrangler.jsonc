@@ -17,9 +17,5 @@
       "pattern": "noriapi.com",
       "custom_domain": true,
     },
-    {
-      "pattern": "www.noriapi.com",
-      "custom_domain": true,
-    },
   ],
 }
