@@ -1,0 +1,51 @@
+---
+import { css } from "styled-system/css";
+import { token } from "styled-system/tokens";
+import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
+import type { MarkdownLayoutProps } from "astro";
+import { Icon } from "astro-icon/components";
+import { Link } from "~/components/ui/link";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { Container, HStack } from "styled-system/jsx";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  description: string;
+}>;
+
+const { frontmatter } = Astro.props;
+
+const path = "no-alt-win-menu/privacy";
+---
+
+<NoAltWinMenuLayout>
+  <Fragment slot="head">
+    <title>{frontmatter.title}</title>
+    <meta name="description" content={frontmatter.description} />
+    <link
+      rel="alternate"
+      hreflang="ja"
+      href={getAbsoluteLocaleUrl("ja", path)}
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href={getAbsoluteLocaleUrl("en", path)}
+    />
+  </Fragment>
+  <Container maxWidth="6xl">
+    <HStack justifyContent="end">
+      <Icon name="mdi:language-box" size={token("sizes.10")} />
+      <HStack>
+        <Link href={getRelativeLocaleUrl("ja", path)}>日本語</Link>
+        /
+        <Link href={getRelativeLocaleUrl("en", path)}>English</Link>
+      </HStack>
+    </HStack>
+    <main class={css({ maxWidth: "4xl" })}>
+      <article class={css({ my: "5" })}>
+        <slot />
+      </article>
+    </main>
+  </Container>
+</NoAltWinMenuLayout>

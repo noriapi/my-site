@@ -1,0 +1,16 @@
+---
+import Root from "./Root.astro";
+import { Navbar } from "~/components/ui/navbar";
+---
+
+<Root>
+  <Fragment slot="head">
+    <link rel="icon" href="/no-alt-win-menu/favicon.ico" />
+    <slot name="head" />
+  </Fragment>
+
+  <header>
+    <Navbar />
+  </header>
+  <slot />
+</Root>

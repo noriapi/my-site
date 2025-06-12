@@ -9,17 +9,19 @@ export default defineConfig({
     createPreset({
       accentColor: indigo,
       grayColor: neutral,
-      radius: "xs",
+      radius: "md",
     }),
   ],
-  include: ["./src/**/*.{js,jsx,ts,tsx}"],
+  include: ["./src/**/*.{ts,tsx,js,jsx,astro}"],
   exclude: [],
   conditions: {
     extend: {
       dark: [".dark &", "@media (prefers-color-scheme: dark)"],
     },
   },
-  theme: { extend: {} },
+  theme: {
+    extend: {},
+  },
   globalCss: {
     extend: {
       html: {
@@ -28,6 +30,6 @@ export default defineConfig({
       },
     },
   },
-  jsxFramework: "solid",
   outdir: "styled-system",
+  jsxFramework: "solid",
 });

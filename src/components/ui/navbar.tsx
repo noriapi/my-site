@@ -1,6 +1,6 @@
 import { css } from "styled-system/css";
 import { Container, HStack } from "styled-system/jsx";
-import { Link, LinkProps } from "./link";
+import { Link, type LinkProps } from "./link";
 
 export function Navbar() {
   return (

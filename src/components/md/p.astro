@@ -1,0 +1,9 @@
+---
+import { Text } from "../ui/text";
+
+const props = Astro.props;
+---
+
+<Text {...props} as="p" my="1.5">
+  <slot />
+</Text>

@@ -1,0 +1,9 @@
+---
+import { Heading } from "../ui/heading";
+
+const props = Astro.props;
+---
+
+<Heading {...props} as="h1" size="4xl" my="3">
+  <slot />
+</Heading>

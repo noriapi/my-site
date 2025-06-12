@@ -1,0 +1,14 @@
+---
+import { css } from "styled-system/css";
+
+const props = Astro.props;
+
+const style = css({
+  listStyleType: "disc",
+  listStylePosition: "inside",
+});
+---
+
+<ul {...props} class={style}>
+  <slot />
+</ul>
