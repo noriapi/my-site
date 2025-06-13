@@ -1,0 +1,8 @@
+---
+import { type ComponentProps } from "astro/types";
+import { Image } from "astro:assets";
+
+export type Props = ComponentProps<typeof Image>;
+---
+
+<Image densities={[1.5, 2]} {...Astro.props as any} />

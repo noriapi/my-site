@@ -1,15 +1,14 @@
 ---
-import { Image } from "astro:assets";
 import { css } from "styled-system/css";
+import Img from "./Img.astro";
 
 import ojisan from "~/assets/images/ojisan.png";
 ---
 
-<Image
+<Img
   src={ojisan}
   alt="ojisan"
   width="40"
   height="40"
-  densities={[1.5, 2]}
   class={css({ transform: "skew(-10deg)" })}
 />

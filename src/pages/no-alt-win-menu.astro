@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { css } from "styled-system/css";
 import { Box, HStack } from "styled-system/jsx";
 import { container } from "styled-system/patterns";
@@ -8,6 +7,7 @@ import { Text } from "~/components/ui/text";
 import { Kbd } from "~/components/ui/kbd";
 import { Link } from "~/components/ui/link";
 import NoAltWinMenuLayout from "~/layouts/NoAltWinMenu.astro";
+import Img from "~/components/ui/Img.astro";
 
 import icon from "~/assets/images/no-alt-win-menu.png";
 import heroAlt from "~/assets/images/no-alt-win-menu-alt-ja.png";
@@ -29,12 +29,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
   <main class={container({ maxWidth: "6xl" })}>
     <Box mt="10">
       <HStack>
-        <Image
-          alt="No Alt Win Menu icon"
-          src={icon}
-          width="80"
-          densities={[1.5, 2]}
-        />
+        <Img alt="No Alt Win Menu icon" src={icon} width="80" />
 
         <div>
           <Heading as="h1" size="5xl"> No Alt Win Menu </Heading>
@@ -45,18 +40,17 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
     </Box>
 
     <HStack overflow="scroll" width="full" my="16">
-      <Image
+      <Img
         src={heroAlt}
         alt="alt"
         height="300"
-        densities={[1.5, 2]}
         class={css({
           objectFit: "contain",
           borderRadius: "l3",
         })}
       />
 
-      <Image
+      <Img
         src={heroWin}
         alt="win"
         height="300"
