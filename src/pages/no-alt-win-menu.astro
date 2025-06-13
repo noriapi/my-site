@@ -20,6 +20,10 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
       name="description"
       content="AltキーやWinキーを離したときにメニューを表示させないアプリ、No Alt Win Menuの紹介。"
     />
+    <script
+      is:inline
+      type="module"
+      src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
   </Fragment>
   <main class={container({ maxWidth: "6xl" })}>
     <Box mt="10">
@@ -27,7 +31,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
       <Text>AltキーやWinキーを離したときにメニューを表示させないアプリ</Text>
     </Box>
 
-    <HStack overflow="scroll" width="full" my="20">
+    <HStack overflow="scroll" width="full" my="16">
       <Image
         src={heroAlt}
         alt="alt"
@@ -51,7 +55,21 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
       />
     </HStack>
 
-    <section class={css({ mt: "10" })}>
+    <section class={css({ my: "10" })}>
+      <Heading as="h2" size="xl"> ダウンロード </Heading>
+      <HStack justifyContent="center" mt="1">
+        <ms-store-badge
+          productid="9NBHXKQ70QCK"
+          productname="No Alt Win Menu"
+          window-mode="direct"
+          theme="auto"
+          language="ja"
+        >
+        </ms-store-badge>
+      </HStack>
+    </section>
+
+    <section class={css({ my: "10" })}>
       <Heading as="h2" size="xl" mb="3"> 主な機能 </Heading>
 
       <ul class={css({ listStyleType: "disc", listStylePosition: "inside" })}>
@@ -71,13 +89,6 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
           したときだけメニュー表示を抑制
         </li>
       </ul>
-    </section>
-
-    <section class={css({ mt: "10" })}>
-      <Heading as="h2" size="xl"> ダウンロード </Heading>
-      <HStack justifyContent="center" mt="5">
-        <Box>Microsoft Store からダウンロード</Box>
-      </HStack>
     </section>
 
     <Link href="/no-alt-win-menu/privacy">プライバシーポリシー</Link>
