@@ -5,12 +5,18 @@ import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
+import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   site: "https://noriapi.com",
   vite: {
-    plugins: [tsconfigPaths({ root: "./" })],
+    plugins: [
+      tsconfigPaths({ root: "./" }),
+      Icons({
+        compiler: "solid",
+      }),
+    ],
   },
 
   adapter: cloudflare({

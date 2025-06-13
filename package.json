@@ -18,18 +18,21 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/solid-js": "^5.1.0",
+    "@solid-primitives/media": "^2.3.1",
+    "@solid-primitives/storage": "^4.3.2",
     "astro": "^5.9.2",
     "astro-icon": "^1.1.5",
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/lucide": "^1.2.48",
     "@pandacss/dev": "^0.53.7",
     "@park-ui/panda-preset": "^0.43.1",
     "@types/node": "^24.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.34.2",
+    "unplugin-icons": "^22.1.0",
     "vite-tsconfig-paths": "^5.1.4",
     "wrangler": "^4.19.1"
   }
