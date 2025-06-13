@@ -1,13 +1,14 @@
 // @ts-check
-import { defineConfig } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
-import tsconfigPaths from "vite-tsconfig-paths";
-import solidJs from "@astrojs/solid-js";
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import icon from "astro-icon";
+import { defineConfig } from "astro/config";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://astro.build/config
 export default defineConfig({
+  site: "https://noriapi.com",
   vite: {
     plugins: [tsconfigPaths({ root: "./" })],
   },
@@ -18,7 +19,7 @@ export default defineConfig({
     },
   }),
 
-  integrations: [solidJs(), mdx(), icon()],
+  integrations: [solidJs(), mdx(), icon(), sitemap()],
 
   i18n: {
     locales: ["ja", "en"],
