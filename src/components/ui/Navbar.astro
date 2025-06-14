@@ -1,0 +1,32 @@
+---
+import { css } from "styled-system/css";
+import { Container, Divider, HStack } from "styled-system/jsx";
+import { Link } from "./link";
+import { ThemeSelect } from "./theme-select";
+
+const linkProps = {
+  textStyle: "xl",
+  variant: "navbar",
+} as const;
+---
+
+<nav
+  class={css({
+    position: "sticky",
+    borderBottomWidth: "medium",
+  })}
+>
+  <Container maxWidth="6xl">
+    <HStack gap="10" minHeight="3rem" alignItems="stretch">
+      <HStack flexGrow="1" alignItems="stretch">
+        <Link {...linkProps} href="/no-alt-win-menu">No Alt Win Menu</Link>
+      </HStack>
+      <HStack alignItems="stretch" gap="3">
+        <Link {...linkProps} href="/about" textStyle="md"> noriapi </Link>
+        <Divider orientation="vertical" h="6" alignSelf="center" />
+        <!-- NOTE: client:loadでは初期値が反映されない -->
+        <ThemeSelect client:only="solid" lang={Astro.currentLocale} />
+      </HStack>
+    </HStack>
+  </Container>
+</nav>

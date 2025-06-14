@@ -15,9 +15,7 @@ export default defineConfig({
   include: ["./src/**/*.{ts,tsx,js,jsx,astro}"],
   exclude: [],
   conditions: {
-    extend: {
-      dark: [".dark &", "@media (prefers-color-scheme: dark)"],
-    },
+    extend: {},
   },
   theme: {
     extend: {},
