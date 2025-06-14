@@ -1,12 +1,12 @@
 ---
 import { css } from "styled-system/css";
-import { token } from "styled-system/tokens";
 import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
 import type { MarkdownLayoutProps } from "astro";
-import { Icon } from "astro-icon/components";
 import { Link } from "~/components/ui/link";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { Container, HStack } from "styled-system/jsx";
+import LanguagesIcon from "~icons/lucide/languages";
+import { icon } from "styled-system/recipes";
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -35,7 +35,7 @@ const path = "no-alt-win-menu/privacy";
   </Fragment>
   <Container maxWidth="6xl">
     <HStack justifyContent="end">
-      <Icon name="mdi:language-box" size={token("sizes.10")} />
+      <LanguagesIcon class={icon({ size: "xl" })} />
       <HStack>
         <Link href={getRelativeLocaleUrl("ja", path)}>日本語</Link>
         /
