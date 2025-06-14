@@ -10,6 +10,13 @@ import "~/index.css";
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <slot name="head" />
+    <script is:inline>
+      const e = localStorage.getItem("theme");
+      (("auto" === e &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches) ||
+        "dark" === e) &&
+        document.documentElement.classList.add("dark");
+    </script>
   </head>
   <body>
     <slot />
