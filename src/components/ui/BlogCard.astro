@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { card as cardRecipe } from "styled-system/recipes";
+import { Heading } from "~/components/ui/heading";
+import { Text } from "~/components/ui/text";
+import { css, cx } from "styled-system/css";
+import { displayDate } from "~/lib/display-date";
+import TagsList from "./TagsList.astro";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+const { entry } = Astro.props;
+
+const card = cardRecipe();
+
+const date = displayDate(entry.data.publishDate);
+---
+
+<article class={card.root}>
+  <div class={cx(card.header, css({ pb: "0" }))}>
+    <a href={`/blog/${entry.slug}`}>
+      <Heading as="h2" size="md" textWrap="wrap"> {entry.data.title} </Heading>
+    </a>
+  </div>
+  <div class={cx(card.footer, css({ alignItems: "end" }))}>
+    <div class={css({ flexGrow: "1" })}>
+      <TagsList tags={entry.data.tags} />
+    </div>
+    <Text as="small" class={css({ textStyle: "sm", color: "fg.muted" })}
+      >{date}</Text
+    >
+  </div>
+</article>

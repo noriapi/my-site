@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry } from "astro:content";
+import type { ComponentProps } from "solid-js";
+import { styled } from "styled-system/jsx";
+import { grid } from "styled-system/patterns";
+import BlogCard from "~/components/ui/BlogCard.astro";
+
+interface Props extends Omit<ComponentProps<typeof styled.ul>, "class"> {
+  entries: CollectionEntry<"blog">[];
+}
+
+const { entries, ...ulProps } = Astro.props;
+---
+
+<styled.ul
+  class={grid({
+    columns: { base: 1, md: 2 },
+    columnGap: "8",
+    rowGap: "4",
+  })}
+  {...ulProps}
+>
+  {
+    entries.map((entry) => (
+      <li>
+        <BlogCard entry={entry} />
+      </li>
+    ))
+  }
+</styled.ul>

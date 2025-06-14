@@ -1,0 +1,20 @@
+---
+import { hstack } from "styled-system/patterns";
+import { styled } from "styled-system/jsx";
+import Ojisan from "./Ojisan.astro";
+import type { ComponentProps } from "solid-js";
+
+type Props = Omit<ComponentProps<typeof styled.div>, "class">;
+---
+
+<styled.div
+  class={hstack({
+    justifyContent: "center",
+    gap: "5",
+  })}
+  {...Astro.props}
+>
+  <Ojisan />
+  <slot />
+  <Ojisan />
+</styled.div>

@@ -1,0 +1,22 @@
+---
+import { css, cx } from "styled-system/css";
+import { badge } from "styled-system/recipes";
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+{
+  tags.map((tag) => (
+    <a href={`/blog/tag/${tag}`}>
+      <div
+        class={cx(badge({ variant: "outline" }), css({ color: "fg.muted" }))}
+      >
+        {tag}
+      </div>
+    </a>
+  ))
+}

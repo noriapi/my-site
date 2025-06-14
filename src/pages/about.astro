@@ -1,27 +1,13 @@
 ---
-import { css } from "styled-system/css";
 import { Box, Center, styled } from "styled-system/jsx";
-import { container, hstack } from "styled-system/patterns";
+import { container } from "styled-system/patterns";
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { Text } from "~/components/ui/text";
-import Ojisan from "~/components/ui/Ojisan.astro";
 import NoriapiLayout from "~/layouts/Noriapi.astro";
 import { card } from "styled-system/recipes";
-
-const fineTextStyles = css.raw({
-  fontFamily:
-    "MS Gothic, MS PGothic, var(--global-font-body, var(--font-fallback))",
-  fontStyle: "italic",
-  fontOpticalSizing: "none",
-  fontSmooth: "never",
-  fontSmoothing: "none",
-});
-
-const encompassStyles = hstack.raw({
-  justifyContent: "center",
-  gap: "5",
-});
+import OjisanContainer from "~/components/ui/OjisanContainer.astro";
+import { fancyTextStyles } from "~/styles/fancy-text";
 
 const cardStyles = card();
 ---
@@ -36,22 +22,18 @@ const cardStyles = card();
   </Fragment>
   <main class={container({ maxWidth: "6xl" })}>
     <Box mt="10" textAlign="center">
-      <div class={css(encompassStyles, { mb: "2" })}>
-        <Ojisan />
-        <Heading as="h1" size="2xl" css={fineTextStyles}>
+      <OjisanContainer css={{ mb: "2" }}>
+        <Heading as="h1" size="2xl" css={fancyTextStyles}>
           noriapiのホーム
         </Heading>
-        <Ojisan />
-      </div>
+      </OjisanContainer>
 
       <Text>noriapiのホームページです。自作のアプリを紹介します。</Text>
     </Box>
     <styled.section mt="28">
-      <div class={css(encompassStyles, { mb: "6" })}>
-        <Ojisan />
-        <Heading as="h2" size="2xl" css={fineTextStyles}> 作ったもの </Heading>
-        <Ojisan />
-      </div>
+      <OjisanContainer css={{ mb: "6" }}>
+        <Heading as="h2" size="2xl" css={fancyTextStyles}> 作ったもの </Heading>
+      </OjisanContainer>
 
       <Center>
         <ul>
