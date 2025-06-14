@@ -26,6 +26,9 @@ export default defineConfig({
         "--global-font-body":
           "Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans, BIZ UDPGothic, Meiryo, sans-serif",
       },
+      "*::selection": {
+        bg: "colorPalette.a4",
+      },
     },
   },
   outdir: "styled-system",
