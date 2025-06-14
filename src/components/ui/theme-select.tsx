@@ -5,6 +5,7 @@ import {
   createMemo,
   createSignal,
   For,
+  splitProps,
   type Signal,
 } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -15,6 +16,7 @@ import ChevronDownIcon from "~icons/lucide/chevron-down";
 import MoonIcon from "~icons/lucide/moon";
 import SunIcon from "~icons/lucide/sun";
 import { createListCollection, Select } from "./select";
+import { visuallyHidden } from "styled-system/patterns";
 
 const THEME_STORAGE_KEY = "theme";
 
@@ -22,30 +24,58 @@ export interface ThemeSelectProps
   extends Omit<
     Select.RootProps,
     "collection" | "value" | "onValueChange" | "class"
-  > {}
+  > {
+  lang: string;
+}
 
 type ThemeSetting = "auto" | "light" | "dark";
 
 const dict = {
-  auto: "自動",
-  light: "ライト",
-  dark: "ダーク",
+  ja: {
+    values: {
+      auto: "自動",
+      light: "ライト",
+      dark: "ダーク",
+    },
+
+    label: "テーマ",
+    placeholder: "テーマを選択",
+  },
+
+  en: {
+    values: {
+      auto: "Auto",
+      light: "Light",
+      dark: "Dark",
+    },
+
+    label: "Theme",
+    placeholder: "Select a Theme",
+  },
 };
 
 export function ThemeSelect(props: ThemeSelectProps) {
   const [theme, setTheme] = createTheme();
+  const [, selectProps] = splitProps(props, ["lang"]);
 
-  const collection = createListCollection({
-    items: Object.entries(dict).map(([value, label]) => ({ value, label })),
-  });
+  const t = createMemo(() => dict[props.lang as keyof typeof dict]);
+
+  const collection = createMemo(() =>
+    createListCollection({
+      items: Object.entries(t().values).map(([value, label]) => ({
+        value,
+        label,
+      })),
+    }),
+  );
 
   return (
     <Select.Root
       positioning={{ sameWidth: true }}
       skipAnimationOnMount
-      {...props}
+      {...selectProps}
       size="sm"
-      collection={collection}
+      collection={collection()}
       value={[theme()]}
       onValueChange={(e) => {
         const theme = e.value[0] as ThemeSetting;
@@ -59,6 +89,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
       })}
     >
       <Select.Label>
+        <span class={visuallyHidden()}>{t().label}</span>
         <MoonIcon
           class={cx(
             icon(),
@@ -74,7 +105,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
       </Select.Label>
       <Select.Control>
         <Select.Trigger>
-          <Select.ValueText placeholder="Select a Theme" />
+          <Select.ValueText placeholder={t().placeholder} />
           <Select.Indicator display="flex" alignItems="center">
             <ChevronDownIcon />
           </Select.Indicator>
@@ -83,7 +114,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
       <Portal>
         <Select.Positioner>
           <Select.Content>
-            <For each={collection.items}>
+            <For each={collection().items}>
               {(item) => (
                 <Select.Item item={item}>
                   <Select.ItemText>{item.label}</Select.ItemText>
