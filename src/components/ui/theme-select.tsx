@@ -107,7 +107,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
         <Select.Trigger>
           <Select.ValueText placeholder={t().placeholder} />
           <Select.Indicator display="flex" alignItems="center">
-            <ChevronDownIcon />
+            <ChevronDownIcon class={icon()} />
           </Select.Indicator>
         </Select.Trigger>
       </Select.Control>
