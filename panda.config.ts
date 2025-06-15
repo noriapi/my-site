@@ -18,7 +18,20 @@ export default defineConfig({
     extend: {},
   },
   theme: {
-    extend: {},
+    extend: {
+      semanticTokens: {
+        colors: {
+          fg: {
+            link: {
+              value: {
+                _light: indigo.tokens.light["10"].value,
+                _dark: indigo.tokens.dark["11"].value,
+              },
+            },
+          },
+        },
+      },
+    },
   },
   globalCss: {
     extend: {

@@ -22,11 +22,13 @@ export const link = cva({
   variants: {
     variant: {
       trad: {
-        color: "colorPalette.emphasized",
-        textDecoration: "underline 0.1em transparent",
+        color: "fg.link",
+        textDecoration: "underline 0.1em",
+        textDecorationColor: "fg.link",
         textUnderlineOffset: "0.125em",
+        transitionProperty: "text-decoration-color",
         _hover: {
-          textDecorationColor: "colorPalette.emphasized",
+          textDecorationColor: "transparent",
         },
       },
       navbar: {
