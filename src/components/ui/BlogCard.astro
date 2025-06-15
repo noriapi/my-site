@@ -25,7 +25,7 @@ const date = displayDate(entry.data.publishDate);
     </a>
   </div>
   <div class={cx(card.footer, css({ alignItems: "end" }))}>
-    <div class={css({ flexGrow: "1" })}>
+    <div class={css({ flexGrow: "1", display: "flex", gap: "2" })}>
       <TagsList tags={entry.data.tags} />
     </div>
     <Text as="small" class={css({ textStyle: "sm", color: "fg.muted" })}
