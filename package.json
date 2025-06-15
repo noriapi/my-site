@@ -24,6 +24,7 @@
     "@solid-primitives/storage": "^4.3.2",
     "astro": "^5.9.2",
     "dayjs": "^1.11.13",
+    "is-absolute-url": "^4.0.1",
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
