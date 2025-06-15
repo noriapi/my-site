@@ -25,7 +25,7 @@ export interface ThemeSelectProps
     Select.RootProps,
     "collection" | "value" | "onValueChange" | "class"
   > {
-  lang: string;
+  lang?: string;
 }
 
 type ThemeSetting = "auto" | "light" | "dark";
@@ -54,11 +54,15 @@ const dict = {
   },
 };
 
+function isLang(mayLang?: string): mayLang is keyof typeof dict {
+  return mayLang != null && mayLang in dict;
+}
+
 export function ThemeSelect(props: ThemeSelectProps) {
   const [theme, setTheme] = createTheme();
   const [, selectProps] = splitProps(props, ["lang"]);
 
-  const t = createMemo(() => dict[props.lang as keyof typeof dict]);
+  const t = createMemo(() => dict[isLang(props.lang) ? props.lang : "en"]);
 
   const collection = createMemo(() =>
     createListCollection({
