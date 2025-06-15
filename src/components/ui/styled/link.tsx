@@ -10,7 +10,7 @@ export const link = cva({
     color: "fg.default",
     cursor: "pointer",
     fontWeight: "medium",
-    gap: "2",
+    gap: "1",
     transitionDuration: "normal",
     transitionTimingFunction: "default",
     "& svg": {

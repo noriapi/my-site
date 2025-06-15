@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import { css } from "styled-system/css";
+import { center, container } from "styled-system/patterns";
+import { Box } from "styled-system/jsx";
+import Noriapi from "~/layouts/Noriapi.astro";
+import { Heading } from "~/components/ui/heading";
+import BlogCardList from "~/components/ui/BlogCardList.astro";
+import { Link } from "~/components/ui/link";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blog");
+  const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))];
+  return tags.map((tag) => {
+    const filtered = entries.filter((entry) => entry.data.tags.includes(tag));
+
+    return {
+      params: { tag },
+      props: { entries: filtered },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { entries } = Astro.props;
+---
+
+<Noriapi>
+  <Fragment slot="head">
+    <title>{tag} | noriapiのブログ</title>
+    <meta
+      name="description"
+      content=`noriapiのブログ記事のうち、${tag}タグがついているもの一覧です。`
+    />
+  </Fragment>
+
+  <main class={container({ maxWidth: "6xl" })}>
+    <Box my="10" textAlign="center">
+      <Heading as="h1" size="2xl">
+        「 <span class={css({ fontStyle: "italic" })}>{tag}</span> 」のタグがついた記事一覧
+      </Heading>
+    </Box>
+
+    <div>
+      <BlogCardList entries={entries} />
+    </div>
+
+    <footer class={center({ mt: "20" })}>
+      <Link href="/blog/">記事一覧へ戻る</Link>
+    </footer>
+  </main>
+</Noriapi>

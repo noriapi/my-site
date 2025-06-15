@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import { container } from "styled-system/patterns";
+import Noriapi from "~/layouts/Noriapi.astro";
+import { Heading } from "~/components/ui/heading";
+import { Text } from "~/components/ui/text";
+import BlogCardList from "~/components/ui/BlogCardList.astro";
+import { Box } from "styled-system/jsx";
+import OjisanContainer from "~/components/ui/OjisanContainer.astro";
+import { fancyTextStyles } from "~/styles/fancy-text";
+
+const entries = await getCollection("blog");
+---
+
+<Noriapi>
+  <Fragment slot="head">
+    <title>noriapiのブログ</title>
+    <meta
+      name="description"
+      content="noriapiのブログです。自作アプリやプログラミングのこと、生活のことについて記します。"
+    />
+  </Fragment>
+
+  <main class={container({ maxWidth: "6xl" })}>
+    <Box my="10" textAlign="center">
+      <OjisanContainer css={{ mb: "2" }}>
+        <Heading as="h1" size="2xl" css={fancyTextStyles}>
+          noriapiのブログ
+        </Heading>
+      </OjisanContainer>
+
+      <Text>
+        noriapiのブログです。自作アプリやプログラミングのこと、生活のことについて記します。
+      </Text>
+    </Box>
+
+    <div>
+      <BlogCardList entries={entries} />
+    </div>
+  </main>
+</Noriapi>

@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import { center, container } from "styled-system/patterns";
+import { Box, Flex } from "styled-system/jsx";
+import Noriapi from "~/layouts/Noriapi.astro";
+import { Heading } from "~/components/ui/heading";
+import { Text } from "~/components/ui/text";
+import { Link } from "~/components/ui/link";
+import { components } from "~/components/ui/markdown";
+import { displayDate } from "~/lib/display-date";
+import TagsList from "~/components/ui/TagsList.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blog");
+
+  return entries.map((entry) => {
+    return {
+      params: { slug: entry.slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const published = displayDate(entry.data.publishDate);
+---
+
+<Noriapi>
+  <Fragment slot="head">
+    <title>{entry.data.title} | noriapiのブログ</title>
+    <meta name="description" content={entry.data.description} />
+  </Fragment>
+
+  <main class={container({ maxWidth: "5xl" })}>
+    <Box textAlign="center" mt="16" mb="10">
+      <Heading as="h1" size="2xl">
+        {entry.data.title}
+      </Heading>
+
+      <Text color="fg.muted" mt="7">{published}に公開</Text>
+    </Box>
+
+    <Flex gap="2" my="6">
+      <TagsList tags={entry.data.tags} />
+    </Flex>
+    <Content components={components} />
+
+    <footer class={center({ mt: "20" })}>
+      <Link href="/blog/">記事一覧へ戻る</Link>
+    </footer>
+  </main>
+</Noriapi>

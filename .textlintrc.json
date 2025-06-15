@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "@textlint/markdown": {
+      "extensions": [".mdx"]
+    }
+  },
+  "rules": {
+    "preset-japanese": true,
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        "space": ["alphabets", "numbers"]
+      }
+    },
+    "preset-ja-technical-writing": {
+      "max": 120,
+      "ja-no-mixed-period": {
+        "periodMark": "。",
+        "allowPeriodMarks": ["："]
+      }
+    }
+  },
+  "filters": {
+    "comments": true,
+    "allowlist": {
+      "allow": []
+    }
+  }
+}
