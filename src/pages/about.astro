@@ -1,6 +1,6 @@
 ---
 import { Box, Center, styled } from "styled-system/jsx";
-import { container } from "styled-system/patterns";
+import { center, container } from "styled-system/patterns";
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { Text } from "~/components/ui/text";
@@ -53,4 +53,9 @@ const cardStyles = card();
       </Center>
     </styled.section>
   </main>
+  <footer class={center({ mt: "300px", py: "4" })}>
+    <Link href="/third-party-licenses.txt" textStyle="xs"
+      >Third‑Party Licenses</Link
+    >
+  </footer>
 </NoriapiLayout>
