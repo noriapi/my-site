@@ -10,6 +10,10 @@ import OjisanContainer from "~/components/ui/OjisanContainer.astro";
 import { fancyTextStyles } from "~/styles/fancy-text";
 
 const entries = await getCollection("blog");
+
+const sortedEntries = entries.toSorted(
+  (a, b) => -(a.data.publishDate.getTime() - b.data.publishDate.getTime()),
+);
 ---
 
 <Noriapi>
@@ -35,7 +39,7 @@ const entries = await getCollection("blog");
     </Box>
 
     <div>
-      <BlogCardList entries={entries} />
+      <BlogCardList entries={sortedEntries} />
     </div>
   </main>
 </Noriapi>
