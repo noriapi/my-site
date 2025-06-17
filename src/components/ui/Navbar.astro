@@ -4,6 +4,10 @@ import { Container, Divider, HStack } from "styled-system/jsx";
 import { Link } from "./link";
 import { ThemeSelect } from "./theme-select";
 
+import ojisan from "~/assets/images/ojisan.png";
+import Img from "./Img.astro";
+import { circle, visuallyHidden } from "styled-system/patterns";
+
 const linkProps = {
   textStyle: "xl",
   variant: "navbar",
@@ -23,7 +27,16 @@ const linkProps = {
       </HStack>
       <HStack alignItems="stretch" gap="3">
         <Link {...linkProps} href="/blog/" textStyle="md"> Blog </Link>
-        <Link {...linkProps} href="/about" textStyle="md"> noriapi </Link>
+        <Link {...linkProps} href="/about" textStyle="md">
+          <span class={visuallyHidden()}>About</span>
+          <Img
+            src={ojisan}
+            alt="Noriapiのアイコン"
+            width="30"
+            height="30"
+            class={circle()}
+          />
+        </Link>
         <Divider orientation="vertical" h="6" alignSelf="center" />
         <!-- NOTE: client:loadでは初期値が反映されない -->
         <ThemeSelect client:only="solid" lang={Astro.currentLocale} />
