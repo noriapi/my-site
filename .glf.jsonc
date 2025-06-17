@@ -1,0 +1,12 @@
+{
+  "inputs": ["./package.json"],
+  "output": "./public/third-party-licenses.txt",
+  "overwrite": true,
+  "replace": {
+    "@cloudflare/kv-asset-handler@0.4.0": "https://raw.githubusercontent.com/cloudflare/workers-sdk/refs/tags/%40cloudflare/kv-asset-handler%400.4.0/LICENSE-MIT",
+    "@cloudflare/unenv-preset@2.3.2": "https://raw.githubusercontent.com/cloudflare/workers-sdk/refs/tags/%40cloudflare/unenv-preset%402.3.2/LICENSE-MIT",
+    "@cloudflare/workers-types@4.20250610.0": "https://spdx.org/licenses/MIT.txt",
+    "wrangler@4.19.1": "https://raw.githubusercontent.com/cloudflare/workers-sdk/refs/tags/wrangler%404.19.1/LICENSE-MIT",
+    "type-fest@4.41.0": "node_modules/.pnpm/type-fest@4.41.0/node_modules/type-fest/license-mit",
+  },
+}
