@@ -19,9 +19,11 @@ const date = displayDate(entry.data.publishDate);
 ---
 
 <article class={card.root}>
-  <div class={cx(card.header, css({ pb: "0" }))}>
+  <div class={cx(card.header, css({ pb: "2" }))}>
     <a href={`/blog/${entry.slug}`}>
-      <Heading as="h2" size="md" textWrap="wrap"> {entry.data.title} </Heading>
+      <Heading as="h2" size="md" textWrap="wrap" pb="4">
+        {entry.data.title}
+      </Heading>
     </a>
   </div>
   <div class={cx(card.footer, css({ alignItems: "end" }))}>
