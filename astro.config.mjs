@@ -34,4 +34,6 @@ export default defineConfig({
   redirects: {
     "/": "/no-alt-win-menu",
   },
+
+  prefetch: true,
 });
