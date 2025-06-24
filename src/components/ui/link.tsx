@@ -19,7 +19,7 @@ export function Link(props: LinkProps) {
     props.external || (props.href != null && isAbsoluteUrl(props.href));
 
   return (
-    <StyledLink {...omitChildren}>
+    <StyledLink {...omitChildren} target="_blank">
       {props.children}
       <Show when={isExternal()}>
         <ExternalLinkIcon class={icon(props.icon)} />
