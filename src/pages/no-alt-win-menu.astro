@@ -98,6 +98,20 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
       </ul>
     </section>
 
-    <Link href="/no-alt-win-menu/privacy">プライバシーポリシー</Link>
+    <section class={css({ my: "10" })}>
+      <Heading as="h2" size="xl" mb="3"> 各種リンク </Heading>
+
+      <ul class={css({ listStyleType: "disc", listStylePosition: "inside" })}>
+        <li class={css({ my: "2" })}>
+          <Link
+            href="https://github.com/noriapi/no-alt-win-menu-support/discussions"
+            >不具合報告や質問はこちら</Link
+          >
+        </li>
+        <li class={css({ my: "2" })}>
+          <Link href="/no-alt-win-menu/privacy">プライバシーポリシー</Link>
+        </li>
+      </ul>
+    </section>
   </main>
 </NoAltWinMenuLayout>
