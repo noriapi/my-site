@@ -1,0 +1,59 @@
+name: Deploy Preview
+
+on: pull_request
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Generate GitHub token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy preview
+        id: deploy-workers-preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload --message "Deployed by GitHub Actions branch ${{ github.ref_name }}"
+
+      - name: Create comment file
+        id: create-comment-file
+        env:
+          DEPLOYMENT_URL: "${{ steps.deploy-workers-preview.outputs.deployment-url }}"
+        run: |
+          cat  << EOF > comment.md
+          ## 🚀 Deploying ${{ github.event.repository.name }} with Cloudflare Workers
+          <table>
+            <tr>
+              <th scope="row">Workers Preview URL</th>
+              <td><a href="$DEPLOYMENT_URL" target="_blank" rel="noopener noreferrer">$DEPLOYMENT_URL</a></td>
+            </tr>
+          </table>
+          EOF
+
+      - name: Create PR comment
+        if: ${{ steps.deploy-workers-preview.outcome == 'success' }}
+        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
