@@ -9,6 +9,8 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    outputs:
+      deployment-url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
     steps:
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
@@ -57,3 +59,43 @@ jobs:
         run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+  visual-tests:
+    name: Visual Tests
+    # Preview 環境へのデプロイが成功したときに実行
+    needs: deploy-preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    # Playwright が提供する Docker イメージ
+    container:
+      image: mcr.microsoft.com/playwright:v1.53.0-noble
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+
+      # 本番環境でスクリーンショットを撮る
+      - name: Take screenshots
+        run: pnpm test:visual-update
+        env:
+          BASE_URL: https://noriapi.com/
+
+      # Preview 環境でスクリーンショットを撮り、比較する
+      - name: Visual tests
+        run: pnpm test:visual
+        env:
+          BASE_URL: ${{ needs.deploy-preview.outputs.deployment-url }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
