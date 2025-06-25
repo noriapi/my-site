@@ -13,8 +13,7 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "test:visual": "playwright test",
-    "test:visual-update": "playwright test --update-snapshots"
+    "test:visual": "playwright test"
   },
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",

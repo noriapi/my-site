@@ -1,24 +1,25 @@
-import { expect, test, type Page } from "@playwright/test";
+import { test } from "@playwright/test";
+import path from "node:path";
 
-const TARGET_PAGES: TargetPage[] = [
-  { name: "blog", path: "/blog/" },
-  { name: "blog article", path: "/blog/release-no-alt-win-menu-v0_1_1" },
-  { name: "About", path: "/about" },
-  { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
-];
+test.describe("Take screenshots", () => {
+  [
+    { name: "blog", path: "/blog/" },
+    { name: "blog article", path: "/blog/release-no-alt-win-menu-v0_1_1" },
+    { name: "About", path: "/about" },
+    { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
+  ].forEach((targetPage) => {
+    test(targetPage.name, async ({ page }, info) => {
+      await page.goto(targetPage.path);
 
-for (const targetPage of TARGET_PAGES) {
-  test(targetPage.name, async ({ page }) => {
-    await screenshot(page, targetPage);
+      const ss = path.normalize(
+        path.format({
+          dir: path.join("screenshots", targetPage.path),
+          name: info.project.name,
+          ext: "png",
+        }),
+      );
+
+      await page.screenshot({ path: ss, fullPage: true });
+    });
   });
-}
-
-interface TargetPage {
-  name: string;
-  path: string;
-}
-
-async function screenshot(page: Page, targetPage: TargetPage) {
-  await page.goto(targetPage.path);
-  await expect(page).toHaveScreenshot({ fullPage: true });
-}
+});
