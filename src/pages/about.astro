@@ -1,6 +1,6 @@
 ---
-import { Box, Center, styled } from "styled-system/jsx";
-import { center, container } from "styled-system/patterns";
+import { Box, Container, styled } from "styled-system/jsx";
+import { container, vstack } from "styled-system/patterns";
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { Text } from "~/components/ui/text";
@@ -10,6 +10,23 @@ import OjisanContainer from "~/components/ui/OjisanContainer.astro";
 import { fancyTextStyles } from "~/styles/fancy-text";
 
 const cardStyles = card();
+
+interface Item {
+  href: string;
+  title: string;
+  description?: string;
+}
+const items: Item[] = [
+  {
+    href: "/no-alt-win-menu",
+    title: "No Alt Win Menu",
+    description: "AltキーやWinキーを離したときにメニューを表示させないアプリ",
+  },
+  {
+    href: "https://github.com/noriapi/my-site",
+    title: "このサイト",
+  },
+];
 ---
 
 <NoriapiLayout>
@@ -35,27 +52,28 @@ const cardStyles = card();
         <Heading as="h2" size="2xl" css={fancyTextStyles}> 作ったもの </Heading>
       </OjisanContainer>
 
-      <Center>
-        <ul>
-          <li>
-            <div class={cardStyles.root}>
-              <div class={cardStyles.header}>
-                <Link href="/no-alt-win-menu" fontSize="xl">
-                  No Alt Win Menu
-                </Link>
-              </div>
-              <styled.div fontSize="sm" class={cardStyles.body}>
-                AltキーやWinキーを離したときにメニューを表示させないアプリ
-              </styled.div>
-            </div>
-          </li>
+      <Container maxW="lg">
+        <ul class={vstack({ alignItems: "stretch", gap: "6" })}>
+          {
+            items.map((item) => (
+              <li>
+                <div class={cardStyles.root}>
+                  <div class={cardStyles.header}>
+                    <Link href={item.href} fontSize="xl">
+                      {item.title}
+                    </Link>
+                  </div>
+                  {item.description && (
+                    <styled.div fontSize="sm" class={cardStyles.body}>
+                      {item.description}
+                    </styled.div>
+                  )}
+                </div>
+              </li>
+            ))
+          }
         </ul>
-      </Center>
+      </Container>
     </styled.section>
   </main>
-  <footer class={center({ mt: "300px", py: "4" })}>
-    <Link href="/third-party-licenses.txt" textStyle="xs"
-      >Third‑Party Licenses</Link
-    >
-  </footer>
 </NoriapiLayout>
