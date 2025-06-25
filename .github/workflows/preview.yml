@@ -21,11 +21,12 @@ jobs:
 
       - name: Deploy preview
         id: deploy-workers-preview
+        continue-on-error: true
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: versions upload --message "Deployed pages by GitHub Actions branch ${{ github.ref_name }}"
+          command: versions upload --message "Deployed by GitHub Actions branch ${{ github.ref_name }}"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create comment file
