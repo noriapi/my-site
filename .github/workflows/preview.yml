@@ -1,0 +1,39 @@
+name: Deploy Preview
+
+on: pull_request
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy preview
+        id: deploy-workers-preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload --message "Deployed pages by GitHub Actions branch ${{ github.ref_name }}"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create comment file
+        id: create-comment-file
+        env:
+          DEPLOYMENT_URL: "${{ steps.deploy-workers-preview.outputs.deployment-url }}"
+        run: |
+          cat  << EOF > comment.md
+          ## 🚀 Deploying ${{ github.event.repository.name }} with Cloudflare Workers
+          <table>
+            <tr>
+              <th scope="row">Workers Preview URL</th>
+              <td><a href="$DEPLOYMENT_URL" target="_blank" rel="noopener noreferrer">$DEPLOYMENT_URL</a></td>
+            </tr>
+          </table>
+          EOF
+
+      - name: Create PR comment
+        if: ${{ steps.deploy-workers-preview.outcome == 'success' }}
+        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
