@@ -86,12 +86,14 @@ jobs:
         run: pnpm test:visual-update
         env:
           BASE_URL: https://noriapi.com/
+          HOME: /root
 
       # Preview 環境でスクリーンショットを撮り、比較する
       - name: Visual tests
         run: pnpm test:visual
         env:
           BASE_URL: ${{ needs.deploy-preview.outputs.deployment-url }}
+          HOME: /root
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
