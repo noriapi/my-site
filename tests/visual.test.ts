@@ -1,6 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const TARGET_PAGES: TargetPage[] = [{ name: "blog", path: "/blog/" }];
+const TARGET_PAGES: TargetPage[] = [
+  { name: "blog", path: "/blog/" },
+  { name: "blog article", path: "/blog/release-no-alt-win-menu-v0_1_1" },
+  { name: "About", path: "/about" },
+  { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
+];
 
 for (const targetPage of TARGET_PAGES) {
   test(targetPage.name, async ({ page }) => {
