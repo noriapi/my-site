@@ -11,8 +11,6 @@ jobs:
     name: Deploy
     permissions:
       contents: read
-    outputs:
-      deployment-url: ${{ steps.deploy-workers.outputs.deployment-url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +25,6 @@ jobs:
         run: pnpm build
 
       - name: Deploy
-        id: deploy-workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -65,7 +62,7 @@ jobs:
       - name: Visual tests
         run: pnpm test:visual
         env:
-          BASE_URL: ${{ needs.deploy.outputs.deployment-url }}
+          BASE_URL: https://noriapi.com/
           HOME: /root
 
       - uses: actions/upload-artifact@v4
