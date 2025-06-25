@@ -13,7 +13,9 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "license": "generate-license-file"
+    "license": "generate-license-file",
+    "test:visual": "playwright test",
+    "test:visual-update": "playwright test --update-snapshots"
   },
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",
@@ -34,6 +36,7 @@
     "@iconify-json/lucide": "^1.2.48",
     "@pandacss/dev": "^0.54.0",
     "@park-ui/panda-preset": "^0.43.1",
+    "@playwright/test": "^1.53.1",
     "@textlint/textlint-plugin-markdown": "^14.8.1",
     "@types/node": "^24.0.0",
     "generate-license-file": "^4.0.0",
