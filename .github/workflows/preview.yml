@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
+      - name: Build
+        run: pnpm build
+
       - name: Deploy preview
         id: deploy-workers-preview
         uses: cloudflare/wrangler-action@v3
