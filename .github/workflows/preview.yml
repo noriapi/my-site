@@ -71,7 +71,7 @@ jobs:
 
     # Playwright が提供する Docker イメージ
     container:
-      image: mcr.microsoft.com/playwright:v1.53.0-noble
+      image: mcr.microsoft.com/playwright:v1.53.1-noble
 
     steps:
       - uses: actions/checkout@v4
