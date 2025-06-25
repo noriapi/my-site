@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
     outputs:
       deployment-url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
     steps:
@@ -74,6 +73,13 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.53.1-noble
 
     steps:
+      - name: Generate GitHub token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -81,14 +87,7 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
-      # 本番環境でスクリーンショットを撮る
-      - name: Take screenshots
-        run: pnpm test:visual-update
-        env:
-          BASE_URL: https://noriapi.com/
-          HOME: /root
-
-      # Preview 環境でスクリーンショットを撮り、比較する
+      # スクリーンショットを撮る
       - name: Visual tests
         run: pnpm test:visual
         env:
@@ -101,3 +100,9 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      # スクリーンショットの比較管理
+      - uses: reg-viz/reg-actions@v2
+        with:
+          github-token: ${{ steps.generate-token.outputs.token }}
+          image-directory-path: "./screenshots"
