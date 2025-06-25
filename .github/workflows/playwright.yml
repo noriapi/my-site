@@ -1,12 +1,12 @@
 name: Visual Tests
 on:
-  # デプロイが成功したときに実行
-  deployment_status:
+  # デプロイされたときに実行
+  deployment_status
 
 jobs:
   screenshots:
     # Preview 環境へのデプロイが成功したときに実行
-    if: github.event.deployment_status.state == 'success'
+    if: github.event.deployment_status.environment == 'Preview' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
