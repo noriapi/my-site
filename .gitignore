@@ -33,3 +33,9 @@ styled-system-studio
 
 # license
 third-party-licenses.txt
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
