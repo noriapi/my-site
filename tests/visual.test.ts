@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import path from "node:path";
 
 test.describe("Take screenshots", () => {
@@ -9,7 +9,9 @@ test.describe("Take screenshots", () => {
     { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
   ].forEach((targetPage) => {
     test(targetPage.name, async ({ page }, info) => {
-      await page.goto(targetPage.path);
+      await page.goto(targetPage.path, { waitUntil: "networkidle" });
+      await seeFullPage(page);
+      await waitForAllImages(page);
 
       const ss = path.normalize(
         path.format({
@@ -23,3 +25,30 @@ test.describe("Take screenshots", () => {
     });
   });
 });
+
+async function seeFullPage(page: Page) {
+  await page.evaluate(async () => {
+    function delay(ms: number) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    // scroll to bottom
+    for (let i = 0; i < document.body.scrollHeight; i += 100) {
+      window.scrollTo(0, i);
+      await delay(50);
+    }
+
+    // scroll to top
+    for (let i = document.body.scrollHeight; i > 0; i -= 100) {
+      window.scrollTo(0, i);
+      await delay(50);
+    }
+  });
+}
+
+async function waitForAllImages(page: Page) {
+  for (const img of await page.locator("img").all()) {
+    await expect(img).toHaveJSProperty("complete", true);
+    await expect(img).not.toHaveJSProperty("naturalWidth", 0);
+  }
+}
