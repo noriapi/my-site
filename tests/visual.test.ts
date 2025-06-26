@@ -28,6 +28,10 @@ test.describe("Take screenshots", () => {
 
 async function seeFullPage(page: Page) {
   await page.evaluate(async () => {
+    function delay(ms: number) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
     // scroll to bottom
     for (let i = 0; i < document.body.scrollHeight; i += 100) {
       window.scrollTo(0, i);
@@ -42,12 +46,8 @@ async function seeFullPage(page: Page) {
   });
 }
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 async function waitForAllImages(page: Page) {
-  for (const img of await page.getByRole("img").all()) {
+  for (const img of await page.locator("img").all()) {
     await expect(img).toHaveJSProperty("complete", true);
     await expect(img).not.toHaveJSProperty("naturalWidth", 0);
   }
