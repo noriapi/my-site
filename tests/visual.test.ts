@@ -9,7 +9,7 @@ test.describe("Take screenshots", () => {
     { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
   ].forEach((targetPage) => {
     test(targetPage.name, async ({ page }, info) => {
-      await page.goto(targetPage.path);
+      await page.goto(targetPage.path, { waitUntil: "networkidle" });
 
       const ss = path.normalize(
         path.format({
