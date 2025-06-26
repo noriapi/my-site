@@ -5,18 +5,19 @@ import {
   createMemo,
   createSignal,
   For,
+  onMount,
   splitProps,
   type Signal,
 } from "solid-js";
 import { Dynamic, Portal } from "solid-js/web";
 import { css, cx } from "styled-system/css";
+import { flex, hstack, visuallyHidden } from "styled-system/patterns";
 import { icon } from "styled-system/recipes";
 import CheckIcon from "~icons/lucide/check";
-import SunMoonIcon from "~icons/lucide/sun-moon";
 import MoonIcon from "~icons/lucide/moon";
 import SunIcon from "~icons/lucide/sun";
+import SunMoonIcon from "~icons/lucide/sun-moon";
 import { createListCollection, Select } from "./select";
-import { flex, hstack, visuallyHidden } from "styled-system/patterns";
 
 const THEME_STORAGE_KEY = "theme";
 
@@ -171,7 +172,20 @@ function createTheme(): Signal<ThemeSetting> {
     }
   });
 
-  return [setting, setSetting];
+  // NOTE: ハイドレーションミスマッチを回避するために必要
+  // makePersistedの現在の実装では、サーバー上の初期値はシグナルの初期値である一方、
+  // クライアント上での初期値はストレージから取得した値。そのためミスマッチが
+  // 発生する。
+  // 参照: https://github.com/solidjs-community/solid-primitives/pull/738
+  const [mounted, setMounted] = createSignal(false);
+  onMount(() => {
+    setMounted(true);
+  });
+  const deferredSetting = createMemo<ThemeSetting>(() =>
+    mounted() ? setting() : "auto",
+  );
+
+  return [deferredSetting, setSetting];
 }
 
 function isThemeSetting(value: string): value is ThemeSetting {
