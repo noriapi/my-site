@@ -8,15 +8,15 @@ import {
   splitProps,
   type Signal,
 } from "solid-js";
-import { Portal } from "solid-js/web";
+import { Dynamic, Portal } from "solid-js/web";
 import { css, cx } from "styled-system/css";
 import { icon } from "styled-system/recipes";
 import CheckIcon from "~icons/lucide/check";
-import ChevronDownIcon from "~icons/lucide/chevron-down";
+import SunMoonIcon from "~icons/lucide/sun-moon";
 import MoonIcon from "~icons/lucide/moon";
 import SunIcon from "~icons/lucide/sun";
 import { createListCollection, Select } from "./select";
-import { visuallyHidden } from "styled-system/patterns";
+import { flex, hstack, visuallyHidden } from "styled-system/patterns";
 
 const THEME_STORAGE_KEY = "theme";
 
@@ -58,6 +58,12 @@ function isLang(mayLang?: string): mayLang is keyof typeof dict {
   return mayLang != null && mayLang in dict;
 }
 
+const icons = {
+  dark: MoonIcon,
+  light: SunIcon,
+  auto: SunMoonIcon,
+} as const;
+
 export function ThemeSelect(props: ThemeSelectProps) {
   const [theme, setTheme] = createTheme();
   const [, selectProps] = splitProps(props, ["lang"]);
@@ -75,7 +81,8 @@ export function ThemeSelect(props: ThemeSelectProps) {
 
   return (
     <Select.Root
-      positioning={{ sameWidth: true }}
+      positioning={{ sameWidth: false }}
+      variant="ghost"
       skipAnimationOnMount
       {...selectProps}
       size="sm"
@@ -94,25 +101,17 @@ export function ThemeSelect(props: ThemeSelectProps) {
     >
       <Select.Label>
         <span class={visuallyHidden()}>{t().label}</span>
-        <MoonIcon
-          class={cx(
-            icon(),
-            css({ display: { base: "none", _dark: "inline-block" } }),
-          )}
-        />
-        <SunIcon
-          class={cx(
-            icon(),
-            css({ display: { base: "inline-block", _dark: "none" } }),
-          )}
-        />
       </Select.Label>
       <Select.Control>
         <Select.Trigger>
-          <Select.ValueText placeholder={t().placeholder} />
-          <Select.Indicator display="flex" alignItems="center">
-            <ChevronDownIcon class={icon()} />
-          </Select.Indicator>
+          <Select.ValueText
+            placeholder={t().placeholder}
+            class={visuallyHidden()}
+          />
+          <Dynamic
+            component={icons[theme()]}
+            class={cx(icon(), css({ color: "fg.default" }))}
+          />
         </Select.Trigger>
       </Select.Control>
       <Portal>
@@ -120,9 +119,15 @@ export function ThemeSelect(props: ThemeSelectProps) {
           <Select.Content>
             <For each={collection().items}>
               {(item) => (
-                <Select.Item item={item}>
-                  <Select.ItemText>{item.label}</Select.ItemText>
-                  <Select.ItemIndicator>
+                <Select.Item item={item} class={css({ gap: "2" })}>
+                  <Select.ItemText class={hstack()}>
+                    <Dynamic
+                      component={icons[item.value as ThemeSetting]}
+                      class={icon()}
+                    />
+                    {item.label}
+                  </Select.ItemText>
+                  <Select.ItemIndicator class={flex()}>
                     <CheckIcon class={icon()} />
                   </Select.ItemIndicator>
                 </Select.Item>
