@@ -101,6 +101,9 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
+      - name: Add safe directory
+        run: git config --global --add safe.directory $PWD
+
       # スクリーンショットの比較管理
       - uses: reg-viz/reg-actions@v2
         with:
