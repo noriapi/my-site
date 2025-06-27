@@ -38,8 +38,7 @@ const linkProps = {
           />
         </Link>
         <Divider orientation="vertical" h="6" alignSelf="center" />
-        <!-- NOTE: client:loadでは初期値が反映されない -->
-        <ThemeSelect client:only="solid" lang={Astro.currentLocale} />
+        <ThemeSelect client:load lang={Astro.currentLocale} />
       </HStack>
     </HStack>
   </Container>
