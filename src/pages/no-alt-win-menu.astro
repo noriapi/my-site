@@ -8,18 +8,34 @@ import { Kbd } from "~/components/ui/kbd";
 import { Link } from "~/components/ui/link";
 import NoAltWinMenuLayout from "~/layouts/NoAltWinMenu.astro";
 import Img from "~/components/ui/Img.astro";
+import { getLocale, translator } from "~/lib/i18n";
 
 import icon from "~/assets/images/no-alt-win-menu.png";
-import heroAlt from "~/assets/images/no-alt-win-menu-alt-ja.png";
-import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
+import heroAltJa from "~/assets/images/no-alt-win-menu-alt-ja.png";
+import heroAltEn from "~/assets/images/no-alt-win-menu-alt-en.png";
+import heroWinJa from "~/assets/images/no-alt-win-menu-win-ja.png";
+import heroWinEn from "~/assets/images/no-alt-win-menu-win-en.png";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const t = translator(Astro.currentLocale);
 ---
 
 <NoAltWinMenuLayout>
   <Fragment slot="head">
-    <title>No Alt Win Menu ― メニュー表示させないアプリ</title>
+    <title>
+      {
+        t({
+          ja: "No Alt Win Menu ― メニュー表示させないアプリ",
+          en: "No Alt Win Menu ― Prevent unwanted menu popups",
+        })
+      }
+    </title>
     <meta
       name="description"
-      content="AltキーやWinキーを離したときにメニューを表示させないアプリ、No Alt Win Menuの紹介。"
+      content={t({
+        ja: "作業やゲーム中にAltキーやWinキーでメニューが開いてしまうのを防ぐアプリ、No Alt Win Menuの紹介。",
+        en: "No Alt Win Menu is a small utility that prevents the Alt and Windows keys from opening unwanted menus on Windows. Ideal for developers, gamers, and power users.",
+      })}
     />
     <script
       is:inline
@@ -33,7 +49,13 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
 
         <div>
           <Heading as="h1" size="5xl"> No Alt Win Menu </Heading>
-          <Text>AltキーやWinキーを離したときにメニューを表示させないアプリ</Text
+          <Text
+            >{
+              t({
+                ja: "作業やゲーム中にAltキーやWinキーでメニューが開いてしまうのを防ぐアプリ",
+                en: "No more accidental menu triggers during work or gameplay.",
+              })
+            }</Text
           >
         </div>
       </HStack>
@@ -41,7 +63,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
 
     <HStack overflow="scroll" width="full" my="16">
       <Img
-        src={heroAlt}
+        src={t({ ja: heroAltJa, en: heroAltEn })}
         alt="alt"
         height="300"
         priority
@@ -52,7 +74,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
       />
 
       <Img
-        src={heroWin}
+        src={t({ ja: heroWinJa, en: heroWinEn })}
         alt="win"
         height="300"
         priority
@@ -64,53 +86,123 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
     </HStack>
 
     <section class={css({ my: "10" })}>
-      <Heading as="h2" size="xl"> ダウンロード </Heading>
+      <Heading as="h2" size="xl">
+        {t({ ja: "ダウンロード", en: "Download" })}
+      </Heading>
       <HStack justifyContent="center" mt="1">
         <ms-store-badge
           productid="9NBHXKQ70QCK"
           productname="No Alt Win Menu"
           window-mode="direct"
           theme="auto"
-          language="ja"
+          language={getLocale(Astro.currentLocale)}
         >
         </ms-store-badge>
       </HStack>
     </section>
 
     <section class={css({ my: "10" })}>
-      <Heading as="h2" size="xl" mb="3"> 主な機能 </Heading>
+      <Heading as="h2" size="xl" mb="3">
+        {t({ ja: "主な機能", en: "Key Features" })}
+      </Heading>
 
       <ul class={css({ listStyleType: "disc", listStylePosition: "inside" })}>
         <li class={css({ my: "2" })}>
-          <Kbd size="lg">Alt</Kbd>キーを離したときにメニューを出させない
+          {
+            t({
+              ja: (
+                <>
+                  <Kbd size="lg">Alt</Kbd>キーを離したときにメニューを出させない
+                </>
+              ),
+              en: (
+                <>
+                  Blocks the system menu triggered by releasing the{" "}
+                  <Kbd size="lg">Alt</Kbd> key
+                </>
+              ),
+            })
+          }
         </li>
         <li class={css({ my: "2" })}>
-          <Kbd size="lg">Win</Kbd>
-          キーを離したときにスタートメニューを出させない
+          {
+            t({
+              ja: (
+                <>
+                  <Kbd size="lg">Win</Kbd>
+                  キーを離したときにスタートメニューを出させない
+                </>
+              ),
+              en: (
+                <>
+                  Blocks the Start menu from opening when the{" "}
+                  <Kbd size="lg">Win</Kbd> key is released
+                </>
+              ),
+            })
+          }
         </li>
         <li class={css({ my: "2" })}>
-          <Text as="em" fontWeight="semibold"> 特定のアプリで </Text>
-          だけメニュー表示を抑制
+          {
+            t({
+              ja: (
+                <>
+                  <Text as="em" fontWeight="semibold">
+                    {" "}
+                    特定のアプリで{" "}
+                  </Text>
+                  だけメニュー表示を抑制
+                </>
+              ),
+
+              en: <>Works only in selected apps, if needed</>,
+            })
+          }
         </li>
         <li class={css({ my: "2" })}>
-          <Text as="em" fontWeight="semibold"> 長押し </Text>
-          したときだけメニュー表示を抑制
+          {
+            t({
+              ja: (
+                <>
+                  <Text as="em" fontWeight="semibold">
+                    {" "}
+                    長押し{" "}
+                  </Text>
+                  したときだけメニュー表示を抑制
+                </>
+              ),
+
+              en: <>Option to block menus only when the key is held briefly</>,
+            })
+          }
         </li>
       </ul>
     </section>
 
     <section class={css({ my: "10" })}>
-      <Heading as="h2" size="xl" mb="3"> 各種リンク </Heading>
+      <Heading as="h2" size="xl" mb="3">
+        {t({ ja: "各種リンク", en: "Links" })}
+      </Heading>
 
       <ul class={css({ listStyleType: "disc", listStylePosition: "inside" })}>
         <li class={css({ my: "2" })}>
           <Link
             href="https://github.com/noriapi/no-alt-win-menu-support/discussions"
-            >不具合報告や質問はこちら</Link
+            >{
+              t({
+                ja: "不具合報告や質問はこちら",
+                en: "Report a bug or ask a question",
+              })
+            }</Link
           >
         </li>
         <li class={css({ my: "2" })}>
-          <Link href="/no-alt-win-menu/privacy">プライバシーポリシー</Link>
+          <Link
+            href={getRelativeLocaleUrl(
+              getLocale(Astro.currentLocale),
+              "/no-alt-win-menu/privacy",
+            )}>{t({ ja: "プライバシーポリシー", en: "Privacy Policy" })}</Link
+          >
         </li>
       </ul>
     </section>
