@@ -29,7 +29,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
   <main class={container({ maxWidth: "6xl" })}>
     <Box mt="10">
       <HStack>
-        <Img alt="No Alt Win Menu icon" src={icon} width="80" />
+        <Img alt="No Alt Win Menu icon" src={icon} width="80" priority />
 
         <div>
           <Heading as="h1" size="5xl"> No Alt Win Menu </Heading>
@@ -44,6 +44,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
         src={heroAlt}
         alt="alt"
         height="300"
+        priority
         class={css({
           objectFit: "contain",
           borderRadius: "l3",
@@ -54,7 +55,7 @@ import heroWin from "~/assets/images/no-alt-win-menu-win-ja.png";
         src={heroWin}
         alt="win"
         height="300"
-        densities={[1.5, 2]}
+        priority
         class={css({
           objectFit: "contain",
           borderRadius: "l3",
