@@ -18,8 +18,10 @@ export function Link(props: LinkProps) {
   const isExternal = () =>
     props.external || (props.href != null && isAbsoluteUrl(props.href));
 
+  const targetProps = () => (isExternal() ? { target: "_blank" } : {});
+
   return (
-    <StyledLink {...omitChildren} target="_blank">
+    <StyledLink {...omitChildren} {...targetProps}>
       {props.children}
       <Show when={isExternal()}>
         <ExternalLinkIcon class={icon(props.icon)} />
