@@ -1,6 +1,4 @@
-import config from "astro.config.mjs";
-
-export const LOCALES = config.i18n!.locales;
+export const LOCALES = ["ja", "en"];
 
 export type Locale = (typeof LOCALES)[number];
 
