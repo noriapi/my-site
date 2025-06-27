@@ -1,0 +1,22 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { Link } from "~/components/ui/link";
+import LanguagesIcon from "~icons/lucide/languages";
+import { HStack } from "styled-system/jsx";
+import { icon } from "styled-system/recipes";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+---
+
+<HStack justifyContent="end" mt="3">
+  <LanguagesIcon class={icon({ size: "xl" })} />
+  <HStack>
+    <Link href={getRelativeLocaleUrl("ja", path)}>日本語</Link>
+    /
+    <Link href={getRelativeLocaleUrl("en", path)}>English</Link>
+  </HStack>
+</HStack>

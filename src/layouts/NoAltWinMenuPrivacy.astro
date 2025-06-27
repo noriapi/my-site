@@ -2,12 +2,9 @@
 import { css } from "styled-system/css";
 import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
 import type { MarkdownLayoutProps } from "astro";
-import { Link } from "~/components/ui/link";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { Container, HStack } from "styled-system/jsx";
-import LanguagesIcon from "~icons/lucide/languages";
-import { icon } from "styled-system/recipes";
+import { Container } from "styled-system/jsx";
 import AlternateLangs from "~/components/meta/AlternateLangs.astro";
+import LanguageLinks from "~/components/ui/LanguageLinks.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -26,14 +23,7 @@ const path = "no-alt-win-menu/privacy";
     <AlternateLangs path={path} />
   </Fragment>
   <Container maxWidth="6xl">
-    <HStack justifyContent="end" mt="3">
-      <LanguagesIcon class={icon({ size: "xl" })} />
-      <HStack>
-        <Link href={getRelativeLocaleUrl("ja", path)}>日本語</Link>
-        /
-        <Link href={getRelativeLocaleUrl("en", path)}>English</Link>
-      </HStack>
-    </HStack>
+    <LanguageLinks path={path} />
     <main class={css({ maxWidth: "4xl" })}>
       <article class={css({ my: "5" })}>
         <slot />

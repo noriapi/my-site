@@ -9,15 +9,18 @@ import { Link } from "~/components/ui/link";
 import NoAltWinMenuLayout from "~/layouts/NoAltWinMenu.astro";
 import Img from "~/components/ui/Img.astro";
 import { getLocale, translator } from "~/lib/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import LanguageLinks from "~/components/ui/LanguageLinks.astro";
 
 import icon from "~/assets/images/no-alt-win-menu.png";
 import heroAltJa from "~/assets/images/no-alt-win-menu-alt-ja.png";
 import heroAltEn from "~/assets/images/no-alt-win-menu-alt-en.png";
 import heroWinJa from "~/assets/images/no-alt-win-menu-win-ja.png";
 import heroWinEn from "~/assets/images/no-alt-win-menu-win-en.png";
-import { getRelativeLocaleUrl } from "astro:i18n";
 
 const t = translator(Astro.currentLocale);
+
+const path = "no-alt-win-menu";
 ---
 
 <NoAltWinMenuLayout>
@@ -43,7 +46,9 @@ const t = translator(Astro.currentLocale);
       src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
   </Fragment>
   <main class={container({ maxWidth: "6xl" })}>
-    <Box mt="10">
+    <LanguageLinks path={path} />
+
+    <Box mt="5">
       <HStack>
         <Img alt="No Alt Win Menu icon" src={icon} width="80" priority />
 
