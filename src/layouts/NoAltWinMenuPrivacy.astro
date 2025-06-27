@@ -5,6 +5,10 @@ import type { MarkdownLayoutProps } from "astro";
 import { Container } from "styled-system/jsx";
 import AlternateLangs from "~/components/meta/AlternateLangs.astro";
 import LanguageLinks from "~/components/ui/LanguageLinks.astro";
+import { center } from "styled-system/patterns";
+import { getLocale, translator } from "~/lib/i18n";
+import { Link } from "~/components/ui/link";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -14,6 +18,7 @@ type Props = MarkdownLayoutProps<{
 const { frontmatter } = Astro.props;
 
 const path = "no-alt-win-menu/privacy";
+const t = translator(Astro.currentLocale);
 ---
 
 <NoAltWinMenuLayout>
@@ -29,5 +34,13 @@ const path = "no-alt-win-menu/privacy";
         <slot />
       </article>
     </main>
+    <footer class={center({ my: "10" })}>
+      <Link
+        href={getRelativeLocaleUrl(
+          getLocale(Astro.currentLocale),
+          "no-alt-win-menu",
+        )}>{t({ ja: "戻る", en: "Back" })}</Link
+      >
+    </footer>
   </Container>
 </NoAltWinMenuLayout>
