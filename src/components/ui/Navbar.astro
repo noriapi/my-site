@@ -3,15 +3,18 @@ import { css } from "styled-system/css";
 import { Container, Divider, HStack } from "styled-system/jsx";
 import { Link } from "./link";
 import { ThemeSelect } from "./theme-select";
-
-import ojisan from "~/assets/images/ojisan.png";
 import Img from "./Img.astro";
 import { circle, visuallyHidden } from "styled-system/patterns";
+import { translator } from "~/lib/i18n";
+
+import ojisan from "~/assets/images/ojisan.png";
 
 const linkProps = {
   textStyle: "xl",
   variant: "navbar",
 } as const;
+
+const t = translator(Astro.currentLocale);
 ---
 
 <nav
@@ -31,7 +34,10 @@ const linkProps = {
           <span class={visuallyHidden()}>About</span>
           <Img
             src={ojisan}
-            alt="Noriapiのアイコン"
+            alt={t({
+              ja: "Noriapiのアイコン",
+              en: "Noriapi's icon",
+            })}
             width="30"
             height="30"
             class={circle()}
