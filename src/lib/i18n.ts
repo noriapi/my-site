@@ -1,8 +1,9 @@
-import type { JSX } from "solid-js/jsx-runtime";
+export const LOCALES = ["ja", "en"];
 
-export type Locale = "ja" | "en";
+export type Locale = (typeof LOCALES)[number];
 
-export const isLocale = (s: string): s is Locale => s === "ja" || s === "en";
+export const isLocale = (s: string): s is Locale =>
+  LOCALES.includes(s as Locale);
 
 export const getLocale = (s?: string): Locale =>
   typeof s === "string" && isLocale(s) ? s : "ja";

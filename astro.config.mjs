@@ -6,6 +6,7 @@ import solidJs from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { LOCALES } from "./src/lib/i18n";
 
 export default defineConfig({
   site: "https://noriapi.com",
@@ -27,7 +28,7 @@ export default defineConfig({
   integrations: [solidJs(), mdx(), sitemap()],
 
   i18n: {
-    locales: ["ja", "en"],
+    locales: LOCALES,
     defaultLocale: "ja",
   },
 
