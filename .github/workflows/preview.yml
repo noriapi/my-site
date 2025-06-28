@@ -89,7 +89,7 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
-      # スクリーンショットを撮る
+      # ヴィジュアルテスト
       - name: Visual tests
         run: pnpm test:visual
         env:
@@ -103,11 +103,52 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Add safe directory
-        run: git config --global --add safe.directory $PWD
-
-      # スクリーンショットの比較管理
-      - uses: reg-viz/reg-actions@v2
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
-          image-directory-path: "./screenshots"
+          name: reg-cli-report
+          path: reg-cli-report/
+          retention-days: 30
+
+      - name: Create comment file
+        if: ${{ !cancelled() }}
+        run: |
+          passed=$(jq '.passedItems | length' reg.json)
+          changed=$(jq '.diffItems | length' reg.json)
+          new=$(jq '.newItems | length' reg.json)
+          deleted=$(jq '.deletedItems | length' reg.json)
+          cat  << EOF > comment.md
+          ## reg-cli
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">✅️ Pass</th>
+                <td>${passed}</td>
+              </tr>
+              <tr>
+                <th scope="row">⚠️ Change</th>
+                <td>${changed}</td>
+              </tr>
+              <tr>
+                <th scope="row">✨ New</th>
+                <td>${new}</td>
+              </tr>
+              <tr>
+                <th scope="row">❓ Delete</th>
+                <td>${deleted}</td>
+              </tr>
+            </tbody>
+          </table>
+          EOF
+
+      - name: Create PR comment
+        if: ${{ !cancelled() }}
+        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}

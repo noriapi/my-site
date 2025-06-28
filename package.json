@@ -13,7 +13,8 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "test:visual": "playwright test"
+    "test:visual": "playwright test && reg-cli actual-screenshots tests/screenshots diff-screenshots -R ./reg-cli-report/report.html --extended-errors",
+    "test:visual-update": "playwright test && reg-cli actual-screenshots screenshots --update"
   },
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",
@@ -39,6 +40,7 @@
     "@types/node": "^24.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
+    "reg-cli": "^0.18.10",
     "sharp": "^0.34.2",
     "textlint": "^15.0.0",
     "textlint-filter-rule-allowlist": "^4.0.0",
