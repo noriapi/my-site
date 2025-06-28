@@ -131,19 +131,19 @@ jobs:
               <tbody>
                 <tr>
                   <th scope="row">✅️ Pass</th>
-                  <td>${reg.passed}</td>
+                  <td>${reg.passedItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">⚠️ Change</th>
-                  <td>${reg.changed}</td>
+                  <td>${reg.changedItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">✨ New</th>
-                  <td>${reg.new}</td>
+                  <td>${reg.newItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">❓ Delete</th>
-                  <td>${reg.deleted}</td>
+                  <td>${reg.deletedItems.length}</td>
                 </tr>
               </tbody>
             </table>
