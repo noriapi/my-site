@@ -149,6 +149,7 @@ jobs:
 
       - name: Create PR comment
         if: ${{ !cancelled() }}
-        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          file-path: ./comment.md
+          github-token: ${{ steps.generate-token.outputs.token }}
