@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import path from "node:path";
 
-const SCREENSHOTS_DIR = "actual-screenshots";
+const SCREENSHOTS_DIR = "tests/screenshots/actual";
 
 test.describe("Take screenshots", () => {
   [

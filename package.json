@@ -13,7 +13,7 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "test:visual": "playwright test && reg-cli actual-screenshots tests/screenshots diff-screenshots -R ./reg-cli-report/report.html --extended-errors",
+    "test:visual": "playwright test && reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
     "test:visual-update": "playwright test && reg-cli actual-screenshots screenshots --update"
   },
   "dependencies": {

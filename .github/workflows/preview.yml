@@ -107,7 +107,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: reg-cli-report
-          path: reg-cli-report/
+          path: tests/screenshots/
           retention-days: 30
 
       - name: Create PR comment
