@@ -110,46 +110,47 @@ jobs:
           path: reg-cli-report/
           retention-days: 30
 
-      - name: Create comment file
-        if: ${{ !cancelled() }}
-        run: |
-          passed=$(jq '.passedItems | length' reg.json)
-          changed=$(jq '.diffItems | length' reg.json)
-          new=$(jq '.newItems | length' reg.json)
-          deleted=$(jq '.deletedItems | length' reg.json)
-          cat  << EOF > comment.md
-          ## reg-cli
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">✅️ Pass</th>
-                <td>${passed}</td>
-              </tr>
-              <tr>
-                <th scope="row">⚠️ Change</th>
-                <td>${changed}</td>
-              </tr>
-              <tr>
-                <th scope="row">✨ New</th>
-                <td>${new}</td>
-              </tr>
-              <tr>
-                <th scope="row">❓ Delete</th>
-                <td>${deleted}</td>
-              </tr>
-            </tbody>
-          </table>
-          EOF
-
       - name: Create PR comment
+        uses: actions/github-script@v7
         if: ${{ !cancelled() }}
-        uses: thollander/actions-comment-pull-request@v3
         with:
-          file-path: ./comment.md
-          github-token: ${{ steps.generate-token.outputs.token }}
+          script: |
+            const fs = require('fs')
+            const jsonString = fs.readFileSync('./reg.json')
+            const reg = JSON.parse(jsonString)
+            const body = `
+            ## reg-cli
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">✅️ Pass</th>
+                  <td>${reg.passed}</td>
+                </tr>
+                <tr>
+                  <th scope="row">⚠️ Change</th>
+                  <td>${reg.changed}</td>
+                </tr>
+                <tr>
+                  <th scope="row">✨ New</th>
+                  <td>${reg.new}</td>
+                </tr>
+                <tr>
+                  <th scope="row">❓ Delete</th>
+                  <td>${reg.deleted}</td>
+                </tr>
+              </tbody>
+            </table>
+            `
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
