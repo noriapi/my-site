@@ -135,7 +135,7 @@ jobs:
                 </tr>
                 <tr>
                   <th scope="row">⚠️ Change</th>
-                  <td>${reg.changedItems.length}</td>
+                  <td>${reg.diffItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">✨ New</th>
