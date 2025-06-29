@@ -158,6 +158,7 @@ jobs:
 
   deploy-reports:
     name: Deploy Reports
+    if: ${{ !cancelled() }}
     needs: visual-tests
     runs-on: ubuntu-latest
     steps:
