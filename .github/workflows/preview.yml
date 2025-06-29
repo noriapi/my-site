@@ -209,7 +209,7 @@ jobs:
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
                 },
-                path: path.join("reports", artifact.workflow_run.id, "reg-cli"),
+                path: path.join("reports", `${artifact.workflow_run.id}`, "reg-cli"),
                 expectedHash: artifact.digest
               }))
             }))
