@@ -183,11 +183,11 @@ jobs:
             const {DefaultArtifactClient} = require('@actions/artifact')
             const path = require('path')
 
-            const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, {
+            const artifacts = (await github.paginate(github.rest.actions.listArtifactsForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               name: "reg-cli-report"
-            }).filter((a) => !a.expired);
+            })).filter((a) => !a.expired);
 
             console.log(`Found artifact IDs: ${JSON.stringify(artifacts.map((a) => a.id))}`)
 
