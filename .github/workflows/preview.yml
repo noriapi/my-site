@@ -200,6 +200,7 @@ jobs:
   deploy-reports:
     name: Deploy reports
     needs: build-reports
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
       pages: write
