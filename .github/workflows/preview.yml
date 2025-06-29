@@ -179,7 +179,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-      - run: npm install @actions/artifact
+      - run: npm install @actions/artifact p-limit
 
       - name: Download reports
         uses: actions/github-script@v7
@@ -188,6 +188,7 @@ jobs:
         with:
           script: |
             const {DefaultArtifactClient} = require('@actions/artifact')
+            const pLimit = require('p-limit')
             const path = require('path')
 
             const artifacts = (await github.paginate(github.rest.actions.listArtifactsForRepo, {
@@ -199,10 +200,10 @@ jobs:
             console.log(`Found artifact IDs: ${JSON.stringify(artifacts.map((a) => a.id))}`)
 
             const artifactClient = new DefaultArtifactClient()
+            const limit = pLimit(5)
 
-            const downloadPromises = artifacts.map((artifact) => ({
-              name: artifact.name,
-              promise: () => (artifactClient.downloadArtifact(artifact.id, {
+            const tasks = artifacts.map((artifact) => async () => {
+              const result = await artifactClient.downloadArtifact(artifact.id, {
                 findBy: {
                   token: process.env['GITHUB_TOKEN'],
                   workflowRunId: artifact.workflow_run.id,
@@ -211,30 +212,15 @@ jobs:
                 },
                 path: path.join("reports", `${artifact.workflow_run.id}`, "reg-cli"),
                 expectedHash: artifact.digest
-              }))
-            }))
-
-            const chunkedPromises = downloadPromises.reduce((acc, cur, i) => {
-              const index = Math.floor(i / 5)
-              acc[index] = [...(acc[index] || []), cur]
-              return acc
-            }, [])
-
-            for (const chunk of chunkedPromises) {
-              const chunkPromises = chunk.map(item => item.promise())
-              const results = await Promise.all(chunkPromises)
-
-              for (let i = 0; i < results.length; i++) {
-                const outcome = results[i]
-                const artifactName = chunk[i].name
-
-                if (outcome.digestMismatch) {
+              })
+              if (result.digestMismatch) {
                   throw new Error(
-                    `Artifact '${artifactName}' digest validation failed. Please verify the integrity of the artifact.`
+                    `Artifact '${artifact.id}' digest validation failed. Please verify the integrity of the artifact.`
                   )
-                }
               }
-            }
+            }).map(limit)
+
+            await Promise.all(tasks);
 
             console.log(`Total of ${artifacts.length} artifact(s) downloaded`)
 
