@@ -211,7 +211,7 @@ jobs:
               const index = Math.floor(i / 5)
               acc[index] = [...(acc[index] || []), cur]
               return acc
-            })
+            }, [])
 
             for (const chunk of chunkedPromises) {
               const chunkPromises = chunk.map(item => item.promise)
