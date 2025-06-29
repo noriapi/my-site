@@ -168,15 +168,15 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const list = github.rest.actions.listArtifactsForRepo({
+            const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               name: "reg-cli-report"
             });
 
-            const ids = list.artifacts.filter((a) => !a.expired).map((a) => `${a.id}`);
+            const ids = artifacts.filter((a) => !a.expired).map((a) => `${a.id}`);
 
-            return ids.join(",")
+            return ids.join(",");
 
       - name: Download reports
         uses: actions/download-artifact@v4
