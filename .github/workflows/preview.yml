@@ -195,7 +195,7 @@ jobs:
 
             const downloadPromises = artifacts.map((artifact) => ({
               name: artifact.name,
-              promise: artifactClient.downloadArtifact(artifact.id, {
+              promise: () => (artifactClient.downloadArtifact(artifact.id, {
                 findBy: {
                   token: process.env['GITHUB_TOKEN'],
                   workflowRunId: artifact.workflow_run.id,
@@ -204,7 +204,7 @@ jobs:
                 },
                 path: path.join("reports", `${artifact.id}`),
                 expectedHash: artifact.digest
-              })
+              }))
             }))
 
             const chunkedPromises = downloadPromises.reduce((acc, cur, i) => {
@@ -214,7 +214,7 @@ jobs:
             }, [])
 
             for (const chunk of chunkedPromises) {
-              const chunkPromises = chunk.map(item => item.promise)
+              const chunkPromises = chunk.map(item => item.promise())
               const results = await Promise.all(chunkPromises)
 
               for (let i = 0; i < results.length; i++) {
