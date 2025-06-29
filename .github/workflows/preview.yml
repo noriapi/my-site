@@ -155,3 +155,38 @@ jobs:
               repo: context.repo.repo,
               body: body
             })
+
+  deploy-reports:
+    name: Deploy Reports
+    needs: visual-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get artifact ids
+        id: artifact-ids
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const list = github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: "reg-cli-report"
+            });
+
+            const ids = list.artifacts.filter((a) => !a.expired).map((a) => `${a.id}`);
+
+            returns ids.join(",")
+
+      - name: Download reports
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.artifact-ids.outputs.result }}
+          path: reports
+
+      - name: Upload pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports/
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
