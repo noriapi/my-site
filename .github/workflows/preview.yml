@@ -169,6 +169,11 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: npm install @actions/artifact
+
       - name: Download reports
         uses: actions/github-script@v7
         env:
@@ -176,6 +181,7 @@ jobs:
         with:
           script: |
             const {DefaultArtifactClient} = require('@actions/artifact')
+            const path = require('path')
 
             const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, {
               owner: context.repo.owner,
@@ -196,7 +202,7 @@ jobs:
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
                 }
-                path: `reports/${artifact.id}`,
+                path: path.join("reports", artifact.id),
                 expectedHash: artifact.digest
               })
             }))
