@@ -274,7 +274,7 @@ jobs:
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           script: |
-            const { body } = await github.rest.issues.getComment({
+            const { data: { body } } = await github.rest.issues.getComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               comment_id: process.env['COMMENT_ID'],
