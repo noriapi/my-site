@@ -224,7 +224,7 @@ jobs:
               return tasks
             }
 
-            const tasks = await Promise.all(["playwright-report", "reg-cli-report"].map(downloadReports)).flat()
+            const tasks = (await Promise.all(["playwright-report", "reg-cli-report"].map(downloadReports))).flat()
 
             await Promise.all(tasks)
 
