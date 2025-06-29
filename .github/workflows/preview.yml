@@ -176,7 +176,6 @@ jobs:
         with:
           script: |
             const {DefaultArtifactClient} = require('@actions/artifact')
-            const path = require('path')
 
             const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, {
               owner: context.repo.owner,
@@ -197,7 +196,7 @@ jobs:
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
                 }
-                path: path.join("reports", artifact.name),
+                path: `reports/${artifact.id}`,
                 expectedHash: artifact.digest
               })
             }))
