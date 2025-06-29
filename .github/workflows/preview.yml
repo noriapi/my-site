@@ -209,7 +209,7 @@ jobs:
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
                 },
-                path: path.join("reports", artifact.workflow_run.head_sha, "reg-cli"),
+                path: path.join("reports", artifact.workflow_run.id, "reg-cli"),
                 expectedHash: artifact.digest
               }))
             }))
@@ -280,7 +280,7 @@ jobs:
               comment_id: process.env['COMMENT_ID'],
             })
 
-            const url = `${process.env['PAGE_URL']}${context.sha}/reg-cli/report.html`
+            const url = `${process.env['PAGE_URL']}${context.runId}/reg-cli/report.html`
 
             const newBody = `${body}
 
