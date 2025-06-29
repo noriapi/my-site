@@ -176,7 +176,7 @@ jobs:
 
             const ids = list.artifacts.filter((a) => !a.expired).map((a) => `${a.id}`);
 
-            returns ids.join(",")
+            return ids.join(",")
 
       - name: Download reports
         uses: actions/download-artifact@v4
