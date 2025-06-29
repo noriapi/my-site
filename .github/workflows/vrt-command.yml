@@ -1,0 +1,50 @@
+name: VRT Command
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  pull-requests: write
+  issues: write
+  checks: read
+  contents: read
+
+jobs:
+  trigger:
+    if: ${{ github.event.issue.pull_request &&
+      (startsWith(github.event.comment.body, '.vrt-')) }}
+    runs-on: ubuntu-latest
+    outputs:
+      update: ${{ steps.vrt-update.outputs.continue }}
+      revert: ${{ steps.vrt-revert.outputs.continue }}
+    steps:
+      - name: .vrt-update
+        id: vrt-update
+        uses: github/command@v2.0.1
+        with:
+          command: .vrt-update
+          allowlist: noriapi
+
+      - name: .vrt-revert
+        id: vrt-revert
+        uses: github/command@v2.0.1
+        with:
+          command: .vrt-revert
+          allowlist: noriapi
+
+  update:
+    needs: trigger
+    if: ${{ needs.trigger.outputs.update == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update vrt
+        run: echo "Update"
+
+  revert:
+    needs: trigger
+    if: ${{ needs.trigger.outputs.revert == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Revert vrt
+        run: echo "Revert"
