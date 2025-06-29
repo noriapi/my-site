@@ -72,6 +72,9 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.53.1-noble
 
+    outputs:
+      comment-id: ${{ steps.create-comment.outputs.result }}
+
     steps:
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
@@ -113,8 +116,10 @@ jobs:
       - name: Create PR comment
         uses: actions/github-script@v7
         if: ${{ !cancelled() }}
+        id: create-comment
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
+          result-encoding: string
           script: |
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
@@ -149,12 +154,14 @@ jobs:
             </table>
             `
 
-            github.rest.issues.createComment({
+            const { id } = await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
             })
+
+            return id
 
   build-reports:
     name: Build reports
@@ -202,7 +209,7 @@ jobs:
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
                 },
-                path: path.join("reports", `${artifact.id}`),
+                path: path.join("reports", artifact.workflow_run.head_sha, "reg-cli"),
                 expectedHash: artifact.digest
               }))
             }))
@@ -238,7 +245,7 @@ jobs:
 
   deploy-reports:
     name: Deploy reports
-    needs: build-reports
+    needs: [visual-tests, build-reports]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
@@ -251,3 +258,30 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Update comment
+        uses: actions/github-script@v7
+        env:
+          COMMENT_ID: ${{ needs.visual-tests.outputs.comment-id }}
+          PAGE_URL: ${{ steps.deployment.outputs.page-url }}
+        with:
+          script: |
+            const { body } = await github.rest.issues.getComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: process.env['COMMENT_ID'],
+            })
+
+            const url = `${process.env['PAGE_URL']}${context.sha}/reg-cli/report.html`
+
+            const newBody = `${body}
+
+            [View reg-cli report](${url})
+            `
+
+            github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: process.env['COMMENT_ID'],
+              body: newBody
+            })
