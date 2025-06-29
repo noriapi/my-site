@@ -188,7 +188,7 @@ jobs:
         with:
           script: |
             const {DefaultArtifactClient} = require('@actions/artifact')
-            const pLimit = require('p-limit')
+            const pLimit = require('p-limit').default
             const path = require('path')
 
             const artifacts = (await github.paginate(github.rest.actions.listArtifactsForRepo, {
