@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    environment:
+      name: Preview
+      url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
     outputs:
       deployment-url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
     steps:
