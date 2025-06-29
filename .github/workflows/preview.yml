@@ -169,11 +169,6 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-      - run: npm install @actions/artifact
-
       - name: Download reports
         uses: actions/github-script@v7
         env:
@@ -201,7 +196,7 @@ jobs:
                   workflowRunId: artifact.workflow_run.id,
                   repositoryOwner: context.repo.owner,
                   repositoryName: context.repo.repo
-                }
+                },
                 path: path.join("reports", artifact.id),
                 expectedHash: artifact.digest
               })
