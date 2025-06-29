@@ -154,14 +154,16 @@ jobs:
             </table>
             `
 
-            const { id } = await github.rest.issues.createComment({
+            const response = await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
             })
 
-            return id
+            console.log(JSON.stringify(response, undefined, 4))
+
+            return response.id
 
   build-reports:
     name: Build reports
