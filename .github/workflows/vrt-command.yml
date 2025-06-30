@@ -80,7 +80,16 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.53.1-noble
     steps:
+      - name: Generate GitHub token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
 
       - uses: actions/setup-node@v4
         with:
@@ -97,7 +106,7 @@ jobs:
 
       - name: Commit & Push
         run: |
-          git config --globa user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git config --global --add safe.directory $PWD
           git add "./tests/screenshots/actual"
