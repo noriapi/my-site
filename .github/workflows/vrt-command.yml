@@ -13,7 +13,9 @@ permissions:
 jobs:
   update-command:
     name: .vrt-update
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '.vrt-update') }}
+    if: ${{ github.event.issue.pull_request
+      && github.event.issue.state == 'open'
+      && startsWith(github.event.comment.body, '.vrt-update') }}
     runs-on: ubuntu-latest
     outputs:
       deployment-url: ${{ steps.get-deployment.outputs.result }}
@@ -33,17 +35,6 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const { data: { state } } = await github.rest.issues.get({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-
-            if (state == "closed") {
-              core.setFailed("PRは閉じています")
-              return
-            }
-
             const deployments = await github.paginate(github.rest.repos.listDeployments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
