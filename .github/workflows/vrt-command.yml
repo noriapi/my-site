@@ -33,6 +33,17 @@ jobs:
         with:
           result-encoding: string
           script: |
+            const { data: { state } } = await github.rest.issues.get({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            if (state == "closed") {
+              core.setFailed("PRは閉じています")
+              return
+            }
+
             const deployments = await github.paginate(github.rest.repos.listDeployments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -88,6 +99,7 @@ jobs:
         run: |
           git config --globa user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git config --global --add safe.directory $PWD
           git add "./tests/screenshots/actual"
           git commit -m "Update screenshots"
           git push
