@@ -11,40 +11,99 @@ permissions:
   contents: read
 
 jobs:
-  trigger:
-    if: ${{ github.event.issue.pull_request &&
-      (startsWith(github.event.comment.body, '.vrt-')) }}
+  update-command:
+    name: .vrt-update
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '.vrt-update') }}
     runs-on: ubuntu-latest
     outputs:
-      update: ${{ steps.vrt-update.outputs.continue }}
-      revert: ${{ steps.vrt-revert.outputs.continue }}
+      deployment-url: ${{ steps.get-deployment.outputs.result }}
     steps:
       - name: .vrt-update
-        id: vrt-update
+        id: command
         uses: github/command@v2.0.1
         with:
           command: .vrt-update
+          skip_ci: true
           allowlist: noriapi
 
+      - name: Get deployment url
+        id: get-deployment
+        if: ${{ steps.command.outputs.continue == 'true' }}
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const deployments = await github.paginate(github.rest.repos.listDeployments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+            })
+
+            core.debug(`deployments:
+            ${JSON.stringify(deployments, undefined, 4)}`)
+
+            function getLatest(arr) {
+              if (!arr || arr.length === 0) return
+
+              return arr.reduce((latest, current) => {
+                return new Date(current.updated_at) > new Date(latest.updated_at)
+                  ? current
+                  : latest
+              })
+            }
+
+            // 最新のデプロイを見つける
+            const newest = getLatest(deployments)
+
+            if (newest == null) {
+              core.setFailed("デプロイが見つかりませんでした")
+              return
+            } else {
+              return newest.url
+            }
+
+  update:
+    name: Update VRT
+    needs: [update-command]
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.53.1-noble
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Update screenshots
+        run: pnpm test:visual-update
+        env:
+          BASE_URL: ${{ needs.update-command.outputs.deployment-url }}
+          HOME: /root
+
+      - name: Commit & Push
+        run: |
+          git config --globa user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add "./tests/screenshots/actual"
+          git commit -m "Update screenshots"
+          git push
+
+  revert:
+    name: .vrt-revert
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '.vrt-revert') }}
+    runs-on: ubuntu-latest
+    steps:
       - name: .vrt-revert
-        id: vrt-revert
+        id: command
         uses: github/command@v2.0.1
         with:
           command: .vrt-revert
           allowlist: noriapi
 
-  update:
-    needs: trigger
-    if: ${{ needs.trigger.outputs.update == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update vrt
-        run: echo "Update"
-
-  revert:
-    needs: trigger
-    if: ${{ needs.trigger.outputs.revert == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Revert vrt
+        if: ${{ steps.command.outputs.continue == 'true' }}
         run: echo "Revert"
