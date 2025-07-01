@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.53.1-noble
+FROM mcr.microsoft.com/playwright:v1.53.2-noble
 WORKDIR /app
 RUN npm install -g pnpm
 RUN --mount=src=package.json,target=package.json \
