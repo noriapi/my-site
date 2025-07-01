@@ -42,7 +42,7 @@ jobs:
         if: ${{ steps.command.outputs.continue == 'true' }}
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          ref: ${{ needs.update-command.outputs.ref }}
+          ref: ${{ steps.command.outputs.ref }}
 
       - uses: actions/setup-node@v4
         if: ${{ steps.command.outputs.continue == 'true' }}
