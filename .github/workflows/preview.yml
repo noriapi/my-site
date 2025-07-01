@@ -183,9 +183,6 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
       - run: npm install @actions/artifact p-limit
 
       - name: Download reports
