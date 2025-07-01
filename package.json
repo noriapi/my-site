@@ -15,6 +15,7 @@
     "lint:text": "textlint src",
     "test:visual": "reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
     "test:visual-update": "reg-cli actual-screenshots screenshots --update",
+    "test:playwright": "playwright test",
     "docker:test": "docker compose up --abort-on-container-exit --build"
   },
   "dependencies": {
