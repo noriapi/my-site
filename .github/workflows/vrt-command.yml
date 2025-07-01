@@ -44,14 +44,20 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.command.outputs.ref }}
 
-      - uses: actions/setup-node@v4
+      - name: Install pnpm
         if: ${{ steps.command.outputs.continue == 'true' }}
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        if: ${{ steps.command.outputs.continue == 'true' }}
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: "pnpm"
 
       - name: Install partial dependencies
         if: ${{ steps.command.outputs.continue == 'true' }}
-        run: npm install -g pnpm && pnpm install reg-cli
+        run: pnpm install reg-cli
 
       - name: Take screenshots
         run: pnpm docker:test
