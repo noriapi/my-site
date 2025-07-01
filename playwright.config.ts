@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    baseURL: process.env.CI ? process.env.BASE_URL : "http://localhost:8787",
+    baseURL: "http://localhost:8787",
     trace: "on-first-retry",
   },
   projects: [
@@ -18,11 +18,10 @@ export default defineConfig({
     { name: "Mobile Chrome", use: { ...devices["Pixel 5"] } },
     { name: "Mobile Safari", use: { ...devices["iPhone 12"] } },
   ],
-  webServer: !process.env.CI
-    ? {
-        command: "pnpm preview",
-        url: "http://localhost:8787",
-        reuseExistingServer: !process.env.CI,
-      }
-    : undefined,
+  webServer: {
+    command: "wrangler dev --ip=127.0.0.1",
+    url: "http://localhost:8787",
+    stdout: process.env.CI ? "ignore" : "pipe",
+    reuseExistingServer: !process.env.CI,
+  },
 });

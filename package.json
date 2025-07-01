@@ -13,8 +13,10 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "test:visual": "playwright test && reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
-    "test:visual-update": "playwright test && reg-cli actual-screenshots screenshots --update"
+    "test:visual": "reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
+    "test:visual-update": "reg-cli actual-screenshots screenshots --update",
+    "test:playwright": "playwright test",
+    "docker:test": "docker compose up --abort-on-container-exit --build"
   },
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",
