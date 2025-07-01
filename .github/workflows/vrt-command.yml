@@ -52,7 +52,7 @@ jobs:
         if: ${{ steps.command.outputs.continue == 'true' }}
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version-file: package.json
           cache: "pnpm"
 
       - name: Install partial dependencies
