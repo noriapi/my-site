@@ -99,9 +99,6 @@ jobs:
       - name: Install partial dependencies
         run: pnpm install reg-cli
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Take screenshots
         env:
           COMPOSE_BAKE: true
