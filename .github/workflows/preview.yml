@@ -99,6 +99,17 @@ jobs:
       - name: Install partial dependencies
         run: pnpm install reg-cli
 
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v1
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Take screenshots
         run: pnpm docker:test
 
