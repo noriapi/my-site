@@ -3,6 +3,7 @@ import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
+import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
 import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -25,7 +26,7 @@ export default defineConfig({
     },
   }),
 
-  integrations: [solidJs(), mdx(), sitemap()],
+  integrations: [solidJs(), expressiveCode(), mdx(), sitemap()],
 
   i18n: {
     locales: [...LOCALES],
