@@ -42,3 +42,4 @@ third-party-licenses.txt
 
 # reg-cli
 reg.json
+/tests/screenshots/report.html

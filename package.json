@@ -14,7 +14,7 @@
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
     "test:visual": "reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
-    "test:visual-update": "reg-cli tests/screenshots/actual tests/screenshots/expected --update",
+    "test:visual-update": "pnpm test:visual --update",
     "test:playwright": "playwright test",
     "docker:test": "docker compose up --abort-on-container-exit --build"
   },
