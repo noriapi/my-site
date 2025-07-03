@@ -6,7 +6,7 @@ import Noriapi from "~/layouts/Noriapi.astro";
 import { Heading } from "~/components/ui/heading";
 import { Text } from "~/components/ui/text";
 import { Link } from "~/components/ui/link";
-import { components } from "~/components/ui/markdown";
+import { components, MdContainer } from "~/components/ui/markdown";
 import { displayDate } from "~/lib/display-date";
 import TagsList from "~/components/ui/TagsList.astro";
 
@@ -45,7 +45,9 @@ const published = displayDate(entry.data.publishDate);
     <Flex gap="2" my="6">
       <TagsList tags={entry.data.tags} />
     </Flex>
-    <Content components={components} />
+    <MdContainer>
+      <Content components={components} />
+    </MdContainer>
 
     <footer class={center({ mt: "20" })}>
       <Link href="/blog/">記事一覧へ戻る</Link>
