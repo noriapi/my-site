@@ -182,7 +182,7 @@ jobs:
 
       - name: Create PR comment (no checkbox)
         if: ${{ !cancelled() && steps.visual-test.outcome == 'success' }}
-        run: gh pr comment ${{ github.event.number }} --body ${{ steps.comment-body.outputs.body }}
+        run: echo ${{ steps.comment-body.outputs.body }} | gh pr comment ${{ github.event.number }} --body-file=-
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
