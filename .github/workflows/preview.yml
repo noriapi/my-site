@@ -130,7 +130,6 @@ jobs:
         env:
           FAILED: ${{ steps.visual-test.outcome == 'failure' }}
         with:
-          result-encoding: string
           script: |
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
@@ -168,7 +167,7 @@ jobs:
 
             ${failed ? "{{body}}" : ""}
             `
-            return body
+            core.setOutput("body", body)
 
       - name: Create PR comment
         uses: wadackel/checkbox-workflow-action@v1
@@ -177,13 +176,13 @@ jobs:
           id: vrt-command
           number: ${{ github.event.pull_request.number }}
           token: ${{ steps.generate-token.outputs.token }}
-          message: ${{ steps.comment-body.outputs.result }}
+          message: ${{ steps.comment-body.outputs.body }}
           config: |
             [ {"update-screenshots": "Update screenshots"} ]
 
       - name: Create PR comment (no checkbox)
         if: ${{ !cancelled() && steps.visual-test.outcome == 'success' }}
-        run: gh pr comment ${{ github.event.number }} --body ${{ steps.comment-body.outputs.result }}
+        run: gh pr comment ${{ github.event.number }} --body ${{ steps.comment-body.outputs.body }}
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
