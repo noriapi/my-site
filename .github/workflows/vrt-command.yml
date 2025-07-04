@@ -60,6 +60,7 @@ jobs:
         run: pnpm install reg-cli
 
       - name: Take screenshots
+        if: ${{ steps.command.outputs.continue == 'true' }}
         run: pnpm docker:test
 
       - name: Update screenshots
