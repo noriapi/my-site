@@ -16,7 +16,6 @@ jobs:
     outputs:
       continue: ${{ steps.check-checkbox.outputs.changed == 'true' && fromJSON(steps.check-checkbox.outputs.state).update-screenshots }}
       comment-id: ${{ steps.check-checkbox.outputs.comment-id }}
-      ref: ${{ steps.data.outputs.ref }}
     steps:
       - name: Detect changes
         id: check-checkbox
