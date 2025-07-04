@@ -140,7 +140,7 @@ jobs:
               change: reg.diffItems.length,
               new: reg.newItems.length,
               delete: reg.deletedItems.length,
-              config: failed ? [ {"update-screenshots": "Update screenshots"} ] : [],
+              config: JSON.stringify(failed ? [ {"update-screenshots": "Update screenshots"} ] : []),
             }
 
       - name: Create PR comment
