@@ -163,25 +163,25 @@ jobs:
               <tbody>
                 <tr>
                   <th scope="row">✅️ Pass</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).pass }}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.result).pass }}</td>
                 </tr>
                 <tr>
                   <th scope="row">⚠️ Change</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).change }}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.result).change }}</td>
                 </tr>
                 <tr>
                   <th scope="row">✨ New</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).new }}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.result).new }}</td>
                 </tr>
                 <tr>
                   <th scope="row">❓ Delete</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).delete }}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.result).delete }}</td>
                 </tr>
               </tbody>
             </table>
 
             {{body}}
-          config: ${{ fromJSON(steps.parse-output.outputs.rusult).config }}
+          config: ${{ fromJSON(steps.parse-output.outputs.result).config }}
 
   build-reports:
     name: Build reports
