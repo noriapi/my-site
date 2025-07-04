@@ -123,34 +123,20 @@ jobs:
           path: tests/screenshots/
           retention-days: 30
 
-      - name: Parse output
+      - name: Create PR comment body
         uses: actions/github-script@v7
         if: ${{ !cancelled() }}
-        id: parse-output
+        id: comment-body
         env:
           FAILED: ${{ steps.visual-test.outcome == 'failure' }}
         with:
+          result-encoding: string
           script: |
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
             const reg = JSON.parse(jsonString)
             const failed = process.env.FAILED === 'true'
-            return {
-              pass: reg.passedItems.length,
-              change: reg.diffItems.length,
-              new: reg.newItems.length,
-              delete: reg.deletedItems.length,
-              config: JSON.stringify(failed ? [ {"update-screenshots": "Update screenshots"} ] : []),
-            }
-
-      - name: Create PR comment
-        uses: wadackel/checkbox-workflow-action@v1
-        id: create-comment
-        with:
-          id: vrt-command
-          number: ${{ github.event.pull_request.number }}
-          token: ${{ steps.generate-token.outputs.token }}
-          message: |
+            const body = `
             ## reg-cli
 
             <table>
@@ -163,25 +149,43 @@ jobs:
               <tbody>
                 <tr>
                   <th scope="row">✅️ Pass</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.result).pass }}</td>
+                  <td>${reg.passedItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">⚠️ Change</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.result).change }}</td>
+                  <td>${reg.diffItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">✨ New</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.result).new }}</td>
+                  <td>${reg.newItems.length}</td>
                 </tr>
                 <tr>
                   <th scope="row">❓ Delete</th>
-                  <td>${{ fromJSON(steps.parse-output.outputs.result).delete }}</td>
+                  <td>${reg.deletedItems.length}</td>
                 </tr>
               </tbody>
             </table>
 
-            {{body}}
-          config: ${{ fromJSON(steps.parse-output.outputs.result).config }}
+            ${failed ? "{{body}}" : ""}
+            `
+            return body
+
+      - name: Create PR comment
+        uses: wadackel/checkbox-workflow-action@v1
+        if: ${{ steps.visual-test.outcome == 'failure' }}
+        with:
+          id: vrt-command
+          number: ${{ github.event.pull_request.number }}
+          token: ${{ steps.generate-token.outputs.token }}
+          message: ${{ steps.comment-body.outputs.result }}
+          config: |
+            [ {"update-screenshots": "Update screenshots"} ]
+
+      - name: Create PR comment (no checkbox)
+        if: ${{ steps.visual-test.outcome == 'success' }}
+        run: gh pr comment ${{ github.event.number }} --body ${{ steps.comment-body.outputs.result }}
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
   build-reports:
     name: Build reports
