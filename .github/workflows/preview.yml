@@ -134,12 +134,13 @@ jobs:
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
             const reg = JSON.parse(jsonString)
+            const failed = process.env.FAILED === 'true'
             return {
               pass: reg.passedItems.length,
               change: reg.diffItems.length,
               new: reg.newItems.length,
               delete: reg.deletedItems.length,
-              config: $FAILED ? [ {"update-screenshots": "Update screenshots"} ] : [],
+              config: failed ? [ {"update-screenshots": "Update screenshots"} ] : [],
             }
 
       - name: Create PR comment
