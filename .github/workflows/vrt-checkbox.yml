@@ -33,7 +33,7 @@ jobs:
             const { data } = await github.rest.issues.listComments({
               owner,
               repo,
-              issue_number: ${ISSUE_NUMBER},
+              issue_number: $ISSUE_NUMBER,
             })
 
             core.debug(JSON.stringify(data, undefined, 4))
