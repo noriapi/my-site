@@ -74,7 +74,7 @@ jobs:
     permissions:
       contents: read
     outputs:
-      comment-id: ${{ steps.create-comment.outputs.result }}
+      comment-id: ${{ steps.create-comment.outputs.comment-id }}
     steps:
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
@@ -113,6 +113,7 @@ jobs:
 
       - name: Visual tests
         if: ${{ !cancelled() }}
+        id: visual-test
         run: pnpm test:visual
 
       - uses: actions/upload-artifact@v4
@@ -122,19 +123,35 @@ jobs:
           path: tests/screenshots/
           retention-days: 30
 
-      - name: Create PR comment
+      - name: Parse output
         uses: actions/github-script@v7
         if: ${{ !cancelled() }}
-        id: create-comment
+        id: parse-output
+        env:
+          FAILED: ${{ steps.visual-test.outcome == 'failure' }}
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
-          result-encoding: string
           script: |
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
             const reg = JSON.parse(jsonString)
-            const body = `
+            return {
+              pass: reg.passedItems.length,
+              change: reg.diffItems.length,
+              new: reg.newItems.length,
+              delete: reg.deletedItems.length,
+              config: $FAILED ? [ {"update-screenshots": "Update screenshots"} ] : [],
+            }
+
+      - name: Create PR comment
+        uses: wadackel/checkbox-workflow-action@v1
+        id: create-comment
+        with:
+          id: vrt-command
+          number: ${{ github.event.pull_request.number }}
+          token: ${{ steps.generate-token.outputs.token }}
+          message: |
             ## reg-cli
+
             <table>
               <thead>
                 <tr>
@@ -145,32 +162,25 @@ jobs:
               <tbody>
                 <tr>
                   <th scope="row">✅️ Pass</th>
-                  <td>${reg.passedItems.length}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).pass }}</td>
                 </tr>
                 <tr>
                   <th scope="row">⚠️ Change</th>
-                  <td>${reg.diffItems.length}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).change }}</td>
                 </tr>
                 <tr>
                   <th scope="row">✨ New</th>
-                  <td>${reg.newItems.length}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).new }}</td>
                 </tr>
                 <tr>
                   <th scope="row">❓ Delete</th>
-                  <td>${reg.deletedItems.length}</td>
+                  <td>${{ fromJSON(steps.parse-output.outputs.rusult).delete }}</td>
                 </tr>
               </tbody>
             </table>
-            `
 
-            const { data: { id } } = await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            })
-
-            return id
+            {{body}}
+          config: ${{ fromJSON(steps.parse-output.outputs.rusult).config }}
 
   build-reports:
     name: Build reports
