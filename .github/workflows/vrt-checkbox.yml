@@ -16,7 +16,6 @@ jobs:
     outputs:
       continue: ${{ steps.check-checkbox.outputs.changed == 'true' && fromJSON(steps.check-checkbox.outputs.state).update-screenshots }}
       comment-id: ${{ steps.check-checkbox.outputs.comment-id }}
-      ref: ${{ steps.data.outputs.ref }}
     steps:
       - name: Detect changes
         id: check-checkbox
@@ -24,6 +23,20 @@ jobs:
         with:
           id: vrt-command
           number: ${{ github.event.issue.number }}
+
+      - name: Get comments
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        with:
+          script: |
+            const { data } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: ${ISSUE_NUMBER},
+            })
+
+            core.debug(JSON.stringify(data, undefined, 4))
 
   main:
     needs: precheck
