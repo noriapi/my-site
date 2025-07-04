@@ -4,7 +4,7 @@ services:
       context: ./
     tty: true
     environment:
-      - CI=${CI}
+      - CI
     volumes:
       - ./playwright-report:/app/playwright-report
       - ./tests/screenshots/actual:/app/tests/screenshots/actual
