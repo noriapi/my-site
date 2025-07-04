@@ -31,8 +31,7 @@ jobs:
         with:
           script: |
             const { data } = await github.rest.issues.listComments({
-              owner,
-              repo,
+              ...context.repo,
               issue_number: $ISSUE_NUMBER,
             })
 
