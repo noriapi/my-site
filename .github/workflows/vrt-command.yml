@@ -4,12 +4,6 @@ on:
   issue_comment:
     types: [created]
 
-permissions:
-  pull-requests: write
-  issues: write
-  checks: read
-  contents: read
-
 jobs:
   update-command:
     name: .vrt-update
@@ -21,6 +15,9 @@ jobs:
       deployment-url: ${{ steps.get-deployment.outputs.result }}
       sha: ${{ steps.command.outputs.sha }}
       ref: ${{ steps.command.outputs.ref }}
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
@@ -34,18 +31,9 @@ jobs:
           skip_ci: true
           allowlist: noriapi
 
-      - name: Generate GitHub token
-        uses: actions/create-github-app-token@v2
-        id: generate-token
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
       - uses: actions/checkout@v4
         if: ${{ steps.command.outputs.continue == 'true' }}
         with:
-          token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.command.outputs.ref }}
 
       - name: Install pnpm
@@ -80,23 +68,3 @@ jobs:
           git add "./tests/screenshots/expected"
           git commit -m "Update screenshots"
           git push
-
-  revert:
-    name: .vrt-revert
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '.vrt-revert') }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
-        with:
-          config: ${{ vars.PERMISSIONS_CONFIG }}
-
-      - name: .vrt-revert
-        id: command
-        uses: github/command@v2.0.1
-        with:
-          command: .vrt-revert
-          allowlist: noriapi
-
-      - name: Revert vrt
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        run: echo "Revert"

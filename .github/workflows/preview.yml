@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write
+      deployments: write
     environment:
       name: Preview
       url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
@@ -17,13 +19,6 @@ jobs:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
-
-      - name: Generate GitHub token
-        uses: actions/create-github-app-token@v2
-        id: generate-token
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v4
 
@@ -67,15 +62,16 @@ jobs:
 
       - name: Create PR comment
         if: ${{ steps.deploy-workers-preview.outcome == 'success' }}
-        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: "gh pr comment ${{ github.event.number }} --body-file comment.md"
 
   visual-tests:
     name: Visual Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
+      pull-requests: write
       contents: read
     outputs:
       comment-id: ${{ steps.comment-body.outputs.comment-id || steps.create-comment.outputs.comment-id }}
@@ -84,16 +80,7 @@ jobs:
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
 
-      - name: Generate GitHub token
-        uses: actions/create-github-app-token@v2
-        id: generate-token
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
       - uses: actions/checkout@v4
-        with:
-          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -138,7 +125,6 @@ jobs:
         env:
           FAILED: ${{ steps.visual-test.outcome == 'failure' }}
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
           script: |
             const fs = require('fs')
             const jsonString = fs.readFileSync('./reg.json')
@@ -195,7 +181,6 @@ jobs:
         with:
           id: vrt-command
           number: ${{ github.event.pull_request.number }}
-          token: ${{ steps.generate-token.outputs.token }}
           message: ${{ steps.comment-body.outputs.body }}
           config: |
             [ {"update-screenshots": "Update screenshots"} ]
@@ -205,24 +190,18 @@ jobs:
     if: ${{ !cancelled() }}
     needs: visual-tests
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
-
-      - name: Generate GitHub token
-        uses: actions/create-github-app-token@v2
-        id: generate-token
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - run: npm install @actions/artifact p-limit
 
       - name: Download reports
         uses: actions/github-script@v7
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           script: |
             const {DefaultArtifactClient} = require('@actions/artifact')
@@ -281,6 +260,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      pull-requests: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -288,13 +268,6 @@ jobs:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
-
-      - name: Generate GitHub token
-        uses: actions/create-github-app-token@v2
-        id: generate-token
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Deploy to GitHub Pages
         id: deployment
@@ -306,7 +279,6 @@ jobs:
           COMMENT_ID: ${{ needs.visual-tests.outputs.comment-id }}
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
           script: |
             const { data: { body } } = await github.rest.issues.getComment({
               owner: context.repo.owner,
