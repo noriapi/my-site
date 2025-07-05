@@ -14,6 +14,10 @@ jobs:
     outputs:
       deployment-url: ${{ steps.deploy-workers-preview.outputs.deployment-url }}
     steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+        with:
+          config: ${{ vars.PERMISSIONS_CONFIG }}
+
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
         id: generate-token
@@ -76,6 +80,10 @@ jobs:
     outputs:
       comment-id: ${{ steps.comment-body.outputs.comment-id || steps.create-comment.outputs.comment-id }}
     steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+        with:
+          config: ${{ vars.PERMISSIONS_CONFIG }}
+
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
         id: generate-token
@@ -198,6 +206,10 @@ jobs:
     needs: visual-tests
     runs-on: ubuntu-latest
     steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+        with:
+          config: ${{ vars.PERMISSIONS_CONFIG }}
+
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
         id: generate-token
@@ -273,6 +285,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+        with:
+          config: ${{ vars.PERMISSIONS_CONFIG }}
+
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
         id: generate-token
