@@ -52,7 +52,7 @@ jobs:
           script: |
             github.rest.reactions.createForIssueComment({
               ...context.repo,
-              comment_id: procces.env.COMMENT_ID,
+              comment_id: process.env.COMMENT_ID,
               content: "eyes"
             })
 
