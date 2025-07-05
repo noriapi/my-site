@@ -45,7 +45,7 @@ jobs:
     if: needs.precheck.outputs.continue == 'true'
     permissions:
       issues: write
-      pull-requests: read
+      pull-requests: write
       contents: write
     steps:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
