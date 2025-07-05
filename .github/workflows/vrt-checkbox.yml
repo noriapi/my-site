@@ -44,7 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     if: needs.precheck.outputs.continue == 'true'
     permissions:
-      issues: write
       pull-requests: write
       contents: write
     steps:
