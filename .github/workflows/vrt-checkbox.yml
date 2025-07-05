@@ -6,7 +6,7 @@ on:
 jobs:
   precheck:
     permissions:
-      pull-requests: read
+      pull-requests: write
     runs-on: ubuntu-latest
     if: |
       github.event.issue.pull_request
