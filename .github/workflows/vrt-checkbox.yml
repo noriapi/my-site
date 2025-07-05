@@ -73,7 +73,7 @@ jobs:
               ...context.repo,
               pull_number: context.issue.number
             })
-            setOutput("ref", pr.data.head.ref)
+            core.setOutput("ref", pr.data.head.ref)
 
       - uses: actions/checkout@v4
         with:
