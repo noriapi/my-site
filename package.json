@@ -35,12 +35,16 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@actions/artifact": "^2.3.2",
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
     "@iconify-json/lucide": "^1.2.48",
     "@pandacss/dev": "^0.54.0",
     "@park-ui/panda-preset": "^0.43.1",
     "@playwright/test": "^1.53.1",
     "@textlint/textlint-plugin-markdown": "^15.0.0",
     "@types/node": "^24.0.0",
+    "p-limit": "^6.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "reg-cli": "^0.18.10",
