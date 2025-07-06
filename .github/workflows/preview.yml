@@ -220,7 +220,23 @@ jobs:
 
               console.log(`Found artifact ${artifactName} IDs: ${JSON.stringify(artifacts.map((a) => a.id))}`)
 
-              const tasks = artifacts.map((artifact) => async () => {
+              // id でソート（降順）
+              artifacts.sort((a, b) => b.id - a.id)
+
+              // ダウンロードするアーティファクトを制限
+              const MAX_SIZE_BYTES = 500 * 1024 * 1024; // 500MB
+              const MAX_ARTIFACTS = 30;
+              const { targetArtifacts } = artifacts.reduce((acc, artifact) => {
+                if (acc.targetArtifacts.length < MAX_ARTIFACTS && acc.currentSize + artifact.size_in_bytes <= MAX_SIZE_BYTES) {
+                  acc.targetArtifacts.push(artifact);
+                  acc.currentSize += artifact.size_in_bytes;
+                }
+                return acc;
+              }, { targetArtifacts: [], currentSize: 0 });
+
+              console.log(`Download artifacts IDs: ${JSON.stringify(targetArtifacts.map((a) => a.id))}`)
+
+              const tasks = targetArtifacts.map((artifact) => async () => {
                 const result = await artifactClient.downloadArtifact(artifact.id, {
                   findBy: {
                     token: process.env['GITHUB_TOKEN'],
