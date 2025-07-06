@@ -203,6 +203,7 @@ jobs:
             package.json
             pnpm-lock.yaml
             pnpm-workspace.yaml
+            panda.config.ts
           sparse-checkout-cone-mode: false
 
       - name: Install pnpm
