@@ -126,53 +126,8 @@ jobs:
           FAILED: ${{ steps.visual-test.outcome == 'failure' }}
         with:
           script: |
-            const fs = require('fs')
-            const jsonString = fs.readFileSync('./reg.json')
-            const reg = JSON.parse(jsonString)
-            const failed = process.env.FAILED === 'true'
-            const body = `
-            ## reg-cli
-
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Item</th>
-                  <th scope="col">Count</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">✅️ Pass</th>
-                  <td>${reg.passedItems.length}</td>
-                </tr>
-                <tr>
-                  <th scope="row">⚠️ Change</th>
-                  <td>${reg.diffItems.length}</td>
-                </tr>
-                <tr>
-                  <th scope="row">✨ New</th>
-                  <td>${reg.newItems.length}</td>
-                </tr>
-                <tr>
-                  <th scope="row">❓ Delete</th>
-                  <td>${reg.deletedItems.length}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            ${failed ? "{{body}}" : ""}
-            `
-            core.setOutput("body", body)
-
-            if (!failed) {
-              const { data: { id } } = await github.rest.issues.createComment({
-                ...context.repo,
-                issue_number: context.issue.number,
-                body: body
-              })
-
-              core.setOutput("comment-id", parseInt(id))
-            }
+            const script = require('./.github/scripts/reg-cli-comment-body.cjs')
+            await script({github, context, core})
 
       - name: Create PR comment
         uses: wadackel/checkbox-workflow-action@v1
