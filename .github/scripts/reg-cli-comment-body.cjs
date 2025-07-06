@@ -22,7 +22,7 @@
 module.exports = async ({ github, context, core }) => {
   /** @type {RegReport} */
   // @ts-ignore
-  const reg = require("./reg.json");
+  const reg = require("../../reg.json");
   const failed = process.env.FAILED === "true";
   const body = `
 ## reg-cli
