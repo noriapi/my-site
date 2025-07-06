@@ -196,7 +196,19 @@ jobs:
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
 
-      - run: npm install @actions/artifact p-limit
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Download reports
         uses: actions/github-script@v7
@@ -204,64 +216,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           script: |
-            const {DefaultArtifactClient} = require('@actions/artifact')
-            const pLimit = require('p-limit').default
-            const path = require('path')
-
-            const artifactClient = new DefaultArtifactClient()
-            const limit = pLimit(5)
-
-            const downloadReports = async (artifactName) => {
-              const artifacts = (await github.paginate(github.rest.actions.listArtifactsForRepo, {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: artifactName,
-              })).filter((a) => !a.expired);
-
-              console.log(`Found artifact ${artifactName} IDs: ${JSON.stringify(artifacts.map((a) => a.id))}`)
-
-              // id でソート（降順）
-              artifacts.sort((a, b) => b.id - a.id)
-
-              // ダウンロードするアーティファクトを制限
-              const MAX_SIZE_BYTES = 500 * 1024 * 1024; // 500MB
-              const MAX_ARTIFACTS = 30;
-              const { targetArtifacts } = artifacts.reduce((acc, artifact) => {
-                if (acc.targetArtifacts.length < MAX_ARTIFACTS && acc.currentSize + artifact.size_in_bytes <= MAX_SIZE_BYTES) {
-                  acc.targetArtifacts.push(artifact);
-                  acc.currentSize += artifact.size_in_bytes;
-                }
-                return acc;
-              }, { targetArtifacts: [], currentSize: 0 });
-
-              console.log(`Download artifacts IDs: ${JSON.stringify(targetArtifacts.map((a) => a.id))}`)
-
-              const tasks = targetArtifacts.map((artifact) => async () => {
-                const result = await artifactClient.downloadArtifact(artifact.id, {
-                  findBy: {
-                    token: process.env['GITHUB_TOKEN'],
-                    workflowRunId: artifact.workflow_run.id,
-                    repositoryOwner: context.repo.owner,
-                    repositoryName: context.repo.repo
-                  },
-                  path: path.join("reports", `${artifact.workflow_run.id}`, artifactName),
-                  expectedHash: artifact.digest
-                })
-                if (result.digestMismatch) {
-                    throw new Error(
-                      `Artifact '${artifact.id}' digest validation failed. Please verify the integrity of the artifact.`
-                    )
-                }
-              }).map(limit)
-
-              return tasks
-            }
-
-            const tasks = (await Promise.all(["playwright-report", "reg-cli-report"].map(downloadReports))).flat()
-
-            await Promise.all(tasks)
-
-            console.log(`Total of ${tasks.length} artifact(s) downloaded`)
+            const script = require('./.github/scripts/download-reports.cjs')
+            await script({github, context, core})
 
       - name: Upload pages
         uses: actions/upload-pages-artifact@v3
