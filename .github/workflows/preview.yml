@@ -94,10 +94,20 @@ jobs:
       - name: Install partial dependencies
         run: pnpm install reg-cli
 
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build the backend image with cache
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Take screenshots
         env:
           COMPOSE_BAKE: true
-        run: pnpm docker:test
+        run: docker compose up --abort-on-container-exit --build
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
