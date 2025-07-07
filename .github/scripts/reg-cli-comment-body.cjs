@@ -58,6 +58,9 @@ ${failed ? "{{body}}" : ""}
 `;
   core.setOutput("body", body);
 
+  // サマリー作成
+  await core.summary.addRaw(body).write();
+
   // reg-cli が失敗していたらここでコメントを作成
   if (!failed) {
     const {
