@@ -87,8 +87,8 @@ jobs:
           node-version-file: .node-version
           cache: "pnpm"
 
-      - name: Install partial dependencies
-        run: pnpm install reg-cli
+      - name: Install dev dependencies
+        run: pnpm install --dev --ignore-scripts
 
       - name: Take screenshots
         run: pnpm docker:test
