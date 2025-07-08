@@ -107,7 +107,7 @@ jobs:
       - name: Take screenshots
         env:
           COMPOSE_BAKE: true
-        run: docker compose up --abort-on-container-exit --build
+        run: docker compose up --abort-on-container-exit
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
