@@ -47,9 +47,9 @@ jobs:
           node-version-file: .node-version
           cache: "pnpm"
 
-      - name: Install partial dependencies
+      - name: Install dev dependencies
         if: ${{ steps.command.outputs.continue == 'true' }}
-        run: pnpm install reg-cli
+        run: pnpm install --dev
 
       - name: Take screenshots
         if: ${{ steps.command.outputs.continue == 'true' }}
