@@ -92,7 +92,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dev dependencies
-        run: pnpm install --dev
+        run: pnpm install --dev --ignore-scripts
 
       - name: Take screenshots
         env:
@@ -163,7 +163,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dev dependencies
-        run: pnpm install --dev
+        run: pnpm install --dev --ignore-scripts
 
       - name: Download reports
         uses: actions/github-script@v7

@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dev dependencies
         if: ${{ steps.command.outputs.continue == 'true' }}
-        run: pnpm install --dev
+        run: pnpm install --dev --ignore-scripts
 
       - name: Take screenshots
         if: ${{ steps.command.outputs.continue == 'true' }}

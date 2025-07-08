@@ -88,7 +88,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dev dependencies
-        run: pnpm install --dev
+        run: pnpm install --dev --ignore-scripts
 
       - name: Take screenshots
         run: pnpm docker:test
