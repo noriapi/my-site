@@ -1,7 +1,11 @@
 import { defineConfig } from "@pandacss/dev";
 import { createPreset } from "@park-ui/panda-preset";
+import blue from "@park-ui/panda-preset/colors/blue";
+import green from "@park-ui/panda-preset/colors/green";
 import indigo from "@park-ui/panda-preset/colors/indigo";
 import neutral from "@park-ui/panda-preset/colors/neutral";
+import purple from "@park-ui/panda-preset/colors/purple";
+import orange from "@park-ui/panda-preset/colors/orange";
 
 export default defineConfig({
   preflight: true,
@@ -19,14 +23,42 @@ export default defineConfig({
   },
   theme: {
     extend: {
+      tokens: {
+        colors: {
+          blue: blue.tokens,
+          green: green.tokens,
+          orange: orange.tokens,
+          purple: purple.tokens,
+        },
+      },
       semanticTokens: {
         colors: {
+          blue: blue.semanticTokens,
+          green: green.semanticTokens,
+          orange: orange.semanticTokens,
+          purple: purple.semanticTokens,
           fg: {
             link: {
               value: {
                 _light: indigo.tokens.light["10"].value,
                 _dark: indigo.tokens.dark["11"].value,
               },
+            },
+          },
+        },
+      },
+      slotRecipes: {
+        alert: {
+          base: {
+            root: {
+              background: "colorPalette.a2",
+              borderColor: "colorPalette.5",
+            },
+            icon: {
+              color: "colorPalette.emphasized",
+            },
+            title: {
+              color: "colorPalette.emphasized",
             },
           },
         },

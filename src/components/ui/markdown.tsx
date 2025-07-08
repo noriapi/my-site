@@ -1,6 +1,12 @@
 import type { ComponentProps } from "solid-js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
+import {
+  Callout,
+  CalloutBody,
+  CalloutTitle,
+  type CalloutProps,
+} from "./callout";
 import { Heading, type HeadingProps } from "./heading";
 import { Link } from "./link";
 import { Text, type TextProps } from "./text";
@@ -39,6 +45,10 @@ export function Li(props: ComponentProps<typeof styled.li>) {
   return <styled.li {...props} my="1" />;
 }
 
+function StyledCallout(props: CalloutProps) {
+  return <Callout css={{ my: "1rem" }} {...props} />;
+}
+
 export const components = {
   a: A,
   h1: H1,
@@ -46,6 +56,9 @@ export const components = {
   p: P,
   ul: Ul,
   li: Li,
+  callout: StyledCallout,
+  "callout-title": CalloutTitle,
+  "callout-body": CalloutBody,
 };
 
 const mdContainerRecipe = cva({
