@@ -56,6 +56,9 @@ importers:
       is-absolute-url:
         specifier: ^4.0.1
         version: 4.0.1
+      simple-scrollspy:
+        specifier: ^2.5.3
+        version: 2.5.3
       solid-js:
         specifier: ^1.9.7
         version: 1.9.7
@@ -3809,6 +3812,9 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
+  jump.js@1.0.2:
+    resolution: {integrity: sha512-oUkJJ/Y4ATU5qjkXBntCZSKctbSyS3ewe2jrLaUu/cc9jsQiAn0fnTUxQnZz3mJdDdem1Q279zrD6h3n+Cgxtg==}
+
   jwt-decode@3.1.2:
     resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
 
@@ -5092,6 +5098,9 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-scrollspy@2.5.3:
+    resolution: {integrity: sha512-1OXK3oxuNfHvdtLCn1RaYygmHR0uRVCn+AZB3WHTYcmz73GOIy/3G2V9zTHQKmyQotYaONCW3Yo0VNsuFSeM+A==}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -11180,6 +11189,9 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
+  jump.js@1.0.2:
+    optional: true
+
   jwt-decode@3.1.2: {}
 
   keyv@5.3.4:
@@ -13014,6 +13026,10 @@ snapshots:
       side-channel-weakmap: 1.0.2
 
   signal-exit@4.1.0: {}
+
+  simple-scrollspy@2.5.3:
+    optionalDependencies:
+      jump.js: 1.0.2
 
   simple-swizzle@0.2.2:
     dependencies:
