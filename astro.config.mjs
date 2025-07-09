@@ -28,7 +28,7 @@ export default defineConfig({
   integrations: [solidJs(), mdx(), sitemap()],
 
   i18n: {
-    locales: LOCALES,
+    locales: [...LOCALES],
     defaultLocale: "ja",
   },
 
