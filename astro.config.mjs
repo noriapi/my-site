@@ -6,10 +6,11 @@ import solidJs from "@astrojs/solid-js";
 import remarkCallout from "@r4ai/remark-callout";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
-import sectionize from "remark-sectionize";
+import sectionize from "@hbsnow/rehype-sectionize";
 import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { LOCALES } from "./src/lib/i18n";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
   site: "https://noriapi.com",
@@ -43,13 +44,24 @@ export default defineConfig({
 
   markdown: {
     remarkPlugins: [
-      sectionize,
       [
         remarkCallout,
         {
           root: calloutFn("callout"),
           title: calloutFn("callout-title"),
           body: calloutFn("callout-body"),
+        },
+      ],
+    ],
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [
+        sectionize,
+        {
+          properties: {
+            // デフォルトで付与される `heading` クラスを上書き
+            className: undefined,
+          },
         },
       ],
     ],
