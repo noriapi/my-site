@@ -14,13 +14,14 @@ import { Text, type TextProps } from "./text";
 export const A = Link;
 
 export function H1(props: HeadingProps) {
-  return <Heading {...props} size="3xl" my="3" />;
+  return <Heading {...props} as="h1" size="3xl" my="3" />;
 }
 
 export function H2(props: HeadingProps) {
   return (
     <Heading
       {...props}
+      as="h2"
       size="2xl"
       mt="14"
       mb="2"
