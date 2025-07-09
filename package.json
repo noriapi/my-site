@@ -29,6 +29,7 @@
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/solid-js": "^5.1.0",
     "@expressive-code/plugin-collapsible-sections": "^0.41.2",
+    "@r4ai/remark-callout": "^0.6.2",
     "@solid-primitives/media": "^2.3.1",
     "@solid-primitives/storage": "^4.3.2",
     "astro": "^5.9.2",
