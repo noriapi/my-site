@@ -36,6 +36,7 @@
     "astro-expressive-code": "^0.41.2",
     "dayjs": "^1.11.13",
     "is-absolute-url": "^4.0.1",
+    "remark-sectionize": "^2.1.0",
     "solid-js": "^1.9.7",
     "typescript": "^5.8.3"
   },

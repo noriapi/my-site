@@ -6,6 +6,7 @@ import solidJs from "@astrojs/solid-js";
 import remarkCallout from "@r4ai/remark-callout";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
+import sectionize from "remark-sectionize";
 import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { LOCALES } from "./src/lib/i18n";
@@ -42,6 +43,7 @@ export default defineConfig({
 
   markdown: {
     remarkPlugins: [
+      sectionize,
       [
         remarkCallout,
         {
