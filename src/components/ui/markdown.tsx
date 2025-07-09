@@ -1,8 +1,9 @@
+import type { ComponentProps } from "solid-js";
+import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { Heading, type HeadingProps } from "./heading";
 import { Link } from "./link";
 import { Text, type TextProps } from "./text";
-import type { ComponentProps } from "solid-js";
 
 export const A = Link;
 
@@ -46,3 +47,29 @@ export const components = {
   ul: Ul,
   li: Li,
 };
+
+const mdContainerRecipe = cva({
+  base: {
+    "& code:not(pre > code)": {
+      alignItems: "center",
+      bg: "bg.subtle",
+      borderRadius: "l2",
+      color: "fg.default",
+      display: "inline-flex",
+      fontWeight: "medium!",
+      fontFamily: "var(--fonts-code)",
+      whiteSpace: "pre",
+
+      // outline
+      borderWidth: "1px",
+
+      // md
+      minHeight: "6",
+      textStyle: "sm",
+      px: "1",
+      py: "1px",
+    },
+  },
+});
+
+export const MdContainer = styled("div", mdContainerRecipe);
