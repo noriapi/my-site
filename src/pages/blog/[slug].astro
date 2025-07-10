@@ -27,10 +27,11 @@ const { Content, headings } = await entry.render();
 
 const published = displayDate(entry.data.publishDate);
 
+const minDepth = Math.min(...headings.map((entry) => entry.depth));
 const entries = headings.map((entry) => ({
   title: entry.text,
   url: `#${entry.slug}`,
-  depth: entry.depth,
+  depth: entry.depth - minDepth, // 最低値を 0 に揃える
 }));
 ---
 
