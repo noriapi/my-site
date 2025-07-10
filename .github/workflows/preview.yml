@@ -34,7 +34,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Astro Check
+      - name: Biome
+        run: pnpm lint:biome
+
+      - name: Textlint
+        run: pnpm lint:text
+
+      - name: Astro
         run: pnpm astro check
 
       - name: Build
