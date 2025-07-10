@@ -70,6 +70,7 @@ export default defineConfig({
       html: {
         "--global-font-body":
           "Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans, BIZ UDPGothic, Meiryo, sans-serif",
+        scrollBehavior: "smooth",
       },
       "*::selection": {
         bg: "colorPalette.a4",
