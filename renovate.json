@@ -5,6 +5,10 @@
   "prConcurrentLimit": 2,
   "packageRules": [
     {
+      "matchSourceUrls": ["https://github.com/expressive-code/expressive-code"],
+      "groupName": "expressive-code monorepo"
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
