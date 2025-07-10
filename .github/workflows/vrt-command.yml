@@ -17,7 +17,6 @@ jobs:
       ref: ${{ steps.command.outputs.ref }}
     permissions:
       pull-requests: write
-      contents: write
     steps:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
@@ -31,9 +30,17 @@ jobs:
           skip_ci: true
           allowlist: noriapi
 
+      - name: Generate GitHub token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         if: ${{ steps.command.outputs.continue == 'true' }}
         with:
+          token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.command.outputs.ref }}
 
       - name: Install pnpm
