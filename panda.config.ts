@@ -76,6 +76,9 @@ export default defineConfig({
       "*::selection": {
         bg: "colorPalette.a4",
       },
+      ".expressive-code": {
+        my: "5",
+      },
     },
   },
   outdir: "styled-system",
