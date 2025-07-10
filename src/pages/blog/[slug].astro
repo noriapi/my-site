@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { center, container } from "styled-system/patterns";
-import { Box, Flex } from "styled-system/jsx";
+import { Box, Container, Flex, Stack } from "styled-system/jsx";
 import Noriapi from "~/layouts/Noriapi.astro";
 import { Heading } from "~/components/ui/heading";
 import { Text } from "~/components/ui/text";
@@ -9,6 +9,7 @@ import { Link } from "~/components/ui/link";
 import { components, MdContainer } from "~/components/ui/markdown";
 import { displayDate } from "~/lib/display-date";
 import TagsList from "~/components/ui/TagsList.astro";
+import { TableOfContent } from "~/components/ui/table-of-content";
 
 export async function getStaticPaths() {
   const entries = await getCollection("blog");
@@ -22,9 +23,15 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 const published = displayDate(entry.data.publishDate);
+
+const entries = headings.map((entry) => ({
+  title: entry.text,
+  url: `#${entry.slug}`,
+  depth: entry.depth,
+}));
 ---
 
 <Noriapi>
@@ -42,12 +49,35 @@ const published = displayDate(entry.data.publishDate);
       <Text color="fg.muted" mt="7">{published}に公開</Text>
     </Box>
 
-    <Flex gap="2" my="6">
-      <TagsList tags={entry.data.tags} />
+    <Flex gap="8" justifyContent="center">
+      <Stack width="full">
+        <Flex gap="2">
+          <TagsList tags={entry.data.tags} />
+        </Flex>
+        <MdContainer>
+          <Content components={components} />
+        </MdContainer>
+      </Stack>
+
+      {
+        entries.length > 1 && (
+          <Box
+            flexGrow="1"
+            width="full"
+            maxW="14rem"
+            display={{ base: "none", xl: "block" }}
+          >
+            <Box position="fixed">
+              <TableOfContent
+                client:load
+                entries={entries}
+                locale={Astro.currentLocale}
+              />
+            </Box>
+          </Box>
+        )
+      }
     </Flex>
-    <MdContainer>
-      <Content components={components} />
-    </MdContainer>
 
     <footer class={center({ mt: "20" })}>
       <Link href="/blog/">記事一覧へ戻る</Link>
