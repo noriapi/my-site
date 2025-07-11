@@ -67,7 +67,11 @@ export function TableOfContent(props: TocProps) {
                 display: "flex",
                 width: "fit-content",
                 scrollMarginTop: "10",
+                // 深いものは表示しない
+                '&:not(:is([data-heading-depth="0"], [data-heading-depth="1"]))':
+                  { display: "none" },
               })}
+              data-heading-depth={entry.depth}
             >
               <SegmentGroup.Item
                 value={entry.url}
@@ -76,7 +80,8 @@ export function TableOfContent(props: TocProps) {
                   segmentStyles.item,
                   css({
                     fontWeight: "normal",
-                    ps: entry.depth === 0 ? "4" : "8",
+                    ps: "4",
+                    '[data-heading-depth="1"] > &': { ps: "8" },
                     pe: "4",
                   }),
                 )}
