@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 
 test.describe("Take screenshots", () => {
   [
@@ -7,7 +7,7 @@ test.describe("Take screenshots", () => {
     { name: "About", path: "/about" },
     { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
   ].forEach((targetPage) => {
-    test(targetPage.name, async ({ page }, info) => {
+    test(targetPage.name, async ({ page }, _info) => {
       await page.goto(targetPage.path, { waitUntil: "networkidle" });
       await seeFullPage(page);
       await waitForAllImages(page);

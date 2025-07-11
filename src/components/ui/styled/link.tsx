@@ -41,7 +41,7 @@ export const link = cva({
         _hover: {
           backgroundColor: "gray.a3",
         },
-        ["&.active"]: {
+        "&.active": {
           borderBottomColor: "colorPalette.default",
         },
       },

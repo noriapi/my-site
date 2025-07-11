@@ -4,8 +4,8 @@ import blue from "@park-ui/panda-preset/colors/blue";
 import green from "@park-ui/panda-preset/colors/green";
 import indigo from "@park-ui/panda-preset/colors/indigo";
 import neutral from "@park-ui/panda-preset/colors/neutral";
-import purple from "@park-ui/panda-preset/colors/purple";
 import orange from "@park-ui/panda-preset/colors/orange";
+import purple from "@park-ui/panda-preset/colors/purple";
 
 export default defineConfig({
   preflight: true,

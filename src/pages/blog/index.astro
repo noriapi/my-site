@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { container } from "styled-system/patterns";
-import Noriapi from "~/layouts/Noriapi.astro";
-import { Heading } from "~/components/ui/heading";
-import { Text } from "~/components/ui/text";
-import BlogCardList from "~/components/ui/BlogCardList.astro";
 import { Box } from "styled-system/jsx";
+import { container } from "styled-system/patterns";
+import BlogCardList from "~/components/ui/BlogCardList.astro";
+import { Heading } from "~/components/ui/heading";
 import OjisanContainer from "~/components/ui/OjisanContainer.astro";
+import { Text } from "~/components/ui/text";
+import Noriapi from "~/layouts/Noriapi.astro";
 import { fancyTextStyles } from "~/styles/fancy-text";
 
 const entries = await getCollection("blog");

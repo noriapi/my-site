@@ -1,11 +1,11 @@
+import isAbsoluteUrl from "is-absolute-url";
+import { Show, splitProps } from "solid-js";
+import { type IconVariantProps, icon } from "styled-system/recipes";
+import ExternalLinkIcon from "~icons/lucide/external-link";
 import {
   Link as StyledLink,
   type LinkProps as StyledLinkProps,
 } from "./styled/link";
-import ExternalLinkIcon from "~icons/lucide/external-link";
-import { icon, type IconVariantProps } from "styled-system/recipes";
-import { Show, splitProps } from "solid-js";
-import isAbsoluteUrl from "is-absolute-url";
 
 export interface LinkProps extends StyledLinkProps {
   icon?: IconVariantProps;

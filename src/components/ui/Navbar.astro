@@ -1,13 +1,12 @@
 ---
 import { css } from "styled-system/css";
 import { Container, Divider, HStack } from "styled-system/jsx";
+import { circle, visuallyHidden } from "styled-system/patterns";
+import ojisan from "~/assets/images/ojisan.png";
+import { translator } from "~/lib/i18n";
+import Img from "./Img.astro";
 import { Link } from "./link";
 import { ThemeSelect } from "./theme-select";
-import Img from "./Img.astro";
-import { circle, visuallyHidden } from "styled-system/patterns";
-import { translator } from "~/lib/i18n";
-
-import ojisan from "~/assets/images/ojisan.png";
 
 const linkProps = {
   textStyle: "xl",

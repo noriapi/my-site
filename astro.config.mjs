@@ -1,16 +1,16 @@
 // @ts-check
 import cloudflare from "@astrojs/cloudflare";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import remarkCallout from "@r4ai/remark-callout";
-import expressiveCode from "astro-expressive-code";
-import { defineConfig } from "astro/config";
 import sectionize from "@hbsnow/rehype-sectionize";
+import remarkCallout from "@r4ai/remark-callout";
+import { defineConfig } from "astro/config";
+import expressiveCode from "astro-expressive-code";
 import Icons from "unplugin-icons/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { LOCALES } from "./src/lib/i18n";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
   site: "https://noriapi.com",
