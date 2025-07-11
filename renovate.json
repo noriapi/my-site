@@ -5,6 +5,10 @@
   "prConcurrentLimit": 2,
   "packageRules": [
     {
+      "matchPackageNames": ["/playwright/i"],
+      "groupName": "Playwright"
+    },
+    {
       "matchSourceUrls": ["https://github.com/expressive-code/expressive-code"],
       "groupName": "expressive-code monorepo"
     },
