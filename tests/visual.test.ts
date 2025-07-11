@@ -1,7 +1,4 @@
 import { expect, test, type Page } from "@playwright/test";
-import path from "node:path";
-
-const SCREENSHOTS_DIR = "tests/screenshots/actual";
 
 test.describe("Take screenshots", () => {
   [
@@ -15,15 +12,7 @@ test.describe("Take screenshots", () => {
       await seeFullPage(page);
       await waitForAllImages(page);
 
-      const ss = path.normalize(
-        path.format({
-          dir: path.join(SCREENSHOTS_DIR, targetPage.path),
-          name: info.project.name,
-          ext: "png",
-        }),
-      );
-
-      await page.screenshot({ path: ss, fullPage: true });
+      await expect(page).toHaveScreenshot({ fullPage: true });
     });
   });
 });

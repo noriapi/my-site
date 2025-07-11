@@ -105,9 +105,7 @@ module.exports = async ({ github, context, core }) => {
   };
 
   const tasks = (
-    await Promise.all(
-      ["playwright-report", "reg-cli-report"].map(downloadReports),
-    )
+    await Promise.all(["playwright-report"].map(downloadReports))
   ).flat();
 
   await Promise.all(tasks);

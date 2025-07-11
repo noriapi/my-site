@@ -2,9 +2,11 @@ services:
   tests:
     build:
       context: ./
-    tty: true
     environment:
       - CI
     volumes:
-      - ./playwright-report:/app/playwright-report
-      - ./tests/screenshots/actual:/app/tests/screenshots/actual
+      - ./playwright-output:/app/playwright-output
+      - ./tests:/app/tests
+    ports:
+      - 9323:9323
+    ipc: host

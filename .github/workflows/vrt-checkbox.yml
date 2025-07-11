@@ -85,30 +85,15 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.data.outputs.ref }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: "pnpm"
-
-      - name: Install dev dependencies
-        run: pnpm install --dev --ignore-scripts
-
-      - name: Take screenshots
-        run: pnpm docker:test
-
       - name: Update screenshots
-        run: pnpm test:visual-update
+        run: docker compose run --rm --build -P tests pnpm playwright test --update-snapshots
 
       - name: Commit & Push
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git config --global --add safe.directory $PWD
-          git add "./tests/screenshots/expected"
+          git add "./tests"
           git commit -m "Update screenshots"
           git push
 

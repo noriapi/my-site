@@ -36,8 +36,10 @@ third-party-licenses.txt
 
 # Playwright
 /test-results/
+/playwright-output/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 
 /.github/
+/tests/
