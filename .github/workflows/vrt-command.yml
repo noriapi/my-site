@@ -33,6 +33,7 @@ jobs:
       - name: Generate GitHub token
         uses: actions/create-github-app-token@v2
         id: generate-token
+        if: ${{ steps.command.outputs.continue == 'true' }}
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -43,28 +44,9 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.command.outputs.ref }}
 
-      - name: Install pnpm
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        uses: pnpm/action-setup@v4
-
-      - name: Use Node.js
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: "pnpm"
-
-      - name: Install dev dependencies
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        run: pnpm install --dev --ignore-scripts
-
-      - name: Take screenshots
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        run: pnpm docker:test
-
       - name: Update screenshots
         if: ${{ steps.command.outputs.continue == 'true' }}
-        run: pnpm test:visual-update
+        run: docker compose run --rm --build -P tests pnpm playwright test --update-snapshots
 
       - name: Commit & Push
         if: ${{ steps.command.outputs.continue == 'true' }}
@@ -72,6 +54,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git config --global --add safe.directory $PWD
-          git add "./tests/screenshots/expected"
+          git add "./tests"
           git commit -m "Update screenshots"
           git push

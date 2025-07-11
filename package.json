@@ -15,12 +15,10 @@
     "park": "pnpx @park-ui/cli components add",
     "lint": "pnpm lint:text",
     "lint:text": "textlint src",
-    "test:visual": "reg-cli tests/screenshots/actual tests/screenshots/expected tests/screenshots/diff -R tests/screenshots/report.html --extended-errors",
-    "test:visual-update": "pnpm test:visual --update",
-    "test:playwright": "playwright test",
-    "docker:test": "docker compose up --abort-on-container-exit --build"
+    "test:visual": "docker compose run --rm --build -P tests pnpm playwright test",
+    "test:visual-update": "docker compose run --rm --build -P tests pnpm playwright test --update-snapshots"
   },
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.12.1",
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",
     "@astrojs/check": "^0.9.4",
@@ -55,7 +53,6 @@
     "p-limit": "^6.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
-    "reg-cli": "^0.18.10",
     "sharp": "^0.34.2",
     "textlint": "^15.0.0",
     "textlint-filter-rule-allowlist": "^4.0.0",
