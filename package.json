@@ -20,7 +20,7 @@
     "test:visual": "docker compose run --rm --build -P tests pnpm playwright test",
     "test:visual-update": "docker compose run --rm --build -P tests pnpm playwright test --update-snapshots"
   },
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.13.1",
   "dependencies": {
     "@ark-ui/solid": "^5.14.0",
     "@astrojs/check": "^0.9.4",
