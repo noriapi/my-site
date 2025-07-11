@@ -6,7 +6,17 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: "html",
+  reporter: [
+    [
+      "html",
+      {
+        host: "0.0.0.0",
+        port: "9323",
+        outputFolder: "playwright-output/playwright-report",
+      },
+    ],
+    ["json", { outputFile: "playwright-output/results.json" }],
+  ],
   use: {
     baseURL: "http://localhost:8787",
     trace: "on-first-retry",

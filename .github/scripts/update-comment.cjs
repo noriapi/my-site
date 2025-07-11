@@ -25,12 +25,10 @@ module.exports = async ({ github, context, core }) => {
     comment_id: commentId,
   });
 
-  const regCliUrl = `${process.env["PAGE_URL"]}${context.runId}/reg-cli-report/report.html`;
   const playwrightUrl = `${process.env["PAGE_URL"]}${context.runId}/playwright-report/index.html`;
 
   const newBody = `${body}
 
-- [View reg-cli report](${regCliUrl})
 - [View playwright report](${playwrightUrl})
 `;
 
