@@ -71,6 +71,7 @@ export default defineConfig({
         "--global-font-body":
           "Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans, BIZ UDPGothic, Meiryo, sans-serif",
         scrollBehavior: "smooth",
+        lineHeight: "1.9",
       },
       "*::selection": {
         bg: "colorPalette.a4",
