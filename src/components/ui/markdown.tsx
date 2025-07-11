@@ -114,7 +114,7 @@ export function P(props: TextProps) {
   return (
     <Text
       {...props}
-      mt="6"
+      my="6"
       css={{
         "h1 + &, h2 + &, h3 + &, h4 + &, h5 + &, h6 + &": {
           mt: "0",
