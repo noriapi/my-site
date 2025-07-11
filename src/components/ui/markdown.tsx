@@ -24,17 +24,104 @@ export function H2(props: HeadingProps) {
       as="h2"
       size="2xl"
       mt="14"
-      mb="2"
+      mb="4"
       borderBottomWidth="1px"
       borderColor="border.default"
       pb="2"
       scrollMarginTop="6"
+      css={{
+        "h1 + section > &": {
+          mt: "0.5",
+        },
+      }}
+    />
+  );
+}
+
+export function H3(props: HeadingProps) {
+  return (
+    <Heading
+      {...props}
+      as="h3"
+      size="xl"
+      mt="11"
+      mb="3"
+      scrollMarginTop="6"
+      css={{
+        "h2 + section > &": {
+          mt: "1",
+        },
+      }}
+    />
+  );
+}
+
+export function H4(props: HeadingProps) {
+  return (
+    <Heading
+      {...props}
+      as="h4"
+      size="lg"
+      mt="11"
+      mb="2"
+      scrollMarginTop="6"
+      css={{
+        "h3 + section > &": {
+          mt: "1",
+        },
+      }}
+    />
+  );
+}
+
+export function H5(props: HeadingProps) {
+  return (
+    <Heading
+      {...props}
+      as="h5"
+      size="md"
+      mt="11"
+      mb="2"
+      scrollMarginTop="6"
+      css={{
+        "h4 + section > &": {
+          mt: "1",
+        },
+      }}
+    />
+  );
+}
+
+export function H6(props: HeadingProps) {
+  return (
+    <Heading
+      {...props}
+      as="h6"
+      size="sm"
+      mt="8"
+      mb="2"
+      scrollMarginTop="6"
+      css={{
+        "h5 + section > &": {
+          mt: "1",
+        },
+      }}
     />
   );
 }
 
 export function P(props: TextProps) {
-  return <Text {...props} my="1rem" />;
+  return (
+    <Text
+      {...props}
+      my="6"
+      css={{
+        "h1 + &, h2 + &, h3 + &, h4 + &, h5 + &, h6 + &": {
+          mt: "0",
+        },
+      }}
+    />
+  );
 }
 
 export function Ul(props: ComponentProps<typeof styled.ul>) {
@@ -48,13 +135,17 @@ export function Li(props: ComponentProps<typeof styled.li>) {
 }
 
 function StyledCallout(props: CalloutProps) {
-  return <Callout css={{ my: "1rem" }} {...props} />;
+  return <Callout css={{ my: "6" }} {...props} />;
 }
 
 export const components = {
   a: A,
   h1: H1,
   h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
   p: P,
   ul: Ul,
   li: Li,
