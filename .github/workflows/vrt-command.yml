@@ -44,9 +44,21 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.command.outputs.ref }}
 
+      - uses: docker/setup-buildx-action@v3
+        if: ${{ steps.command.outputs.continue == 'true' }}
+
+      - name: Build the backend image with cache
+        uses: docker/build-push-action@v6
+        if: ${{ steps.command.outputs.continue == 'true' }}
+        with:
+          load: true
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Update screenshots
         if: ${{ steps.command.outputs.continue == 'true' }}
-        run: docker compose run --rm --build -P tests pnpm playwright test --update-snapshots
+        run: docker compose run --rm -P tests pnpm playwright test --update-snapshots
 
       - name: Commit & Push
         if: ${{ steps.command.outputs.continue == 'true' }}
