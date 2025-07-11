@@ -22,7 +22,7 @@ type CalloutType = keyof typeof icons;
 
 function getCalloutType(type: string) {
   const lowerCaseType = type.toLocaleLowerCase();
-  if (Object.prototype.hasOwnProperty.call(icons, lowerCaseType)) {
+  if (Object.hasOwn(icons, lowerCaseType)) {
     return lowerCaseType as CalloutType;
   }
   return undefined;

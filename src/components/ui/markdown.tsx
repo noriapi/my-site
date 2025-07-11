@@ -4,8 +4,8 @@ import { styled } from "styled-system/jsx";
 import {
   Callout,
   CalloutBody,
-  CalloutTitle,
   type CalloutProps,
+  CalloutTitle,
 } from "./callout";
 import { Heading, type HeadingProps } from "./heading";
 import { Link } from "./link";

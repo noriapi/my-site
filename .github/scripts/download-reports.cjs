@@ -20,15 +20,15 @@
  * @param {Context} options.context - The context object.
  * @param {Core} options.core - The core object.
  */
-module.exports = async ({ github, context, core }) => {
-  const githubToken = process.env["GITHUB_TOKEN"];
+module.exports = async ({ github, context }) => {
+  const githubToken = process.env.GITHUB_TOKEN;
   if (!githubToken) {
     throw new Error("GITHUB_TOKEN environment variable is not set.");
   }
 
   const { DefaultArtifactClient } = require("@actions/artifact");
   const pLimit = require("p-limit").default;
-  const path = require("path");
+  const path = require("node:path");
 
   const artifactClient = new DefaultArtifactClient();
   const limit = pLimit(5);

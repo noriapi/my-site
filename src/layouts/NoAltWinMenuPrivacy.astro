@@ -1,14 +1,14 @@
 ---
-import { css } from "styled-system/css";
-import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { MarkdownLayoutProps } from "astro";
+import { css } from "styled-system/css";
 import { Container } from "styled-system/jsx";
+import { center } from "styled-system/patterns";
 import AlternateLangs from "~/components/meta/AlternateLangs.astro";
 import LanguageLinks from "~/components/ui/LanguageLinks.astro";
-import { center } from "styled-system/patterns";
-import { getLocale, translator } from "~/lib/i18n";
 import { Link } from "~/components/ui/link";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, translator } from "~/lib/i18n";
+import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;

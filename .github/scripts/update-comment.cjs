@@ -11,8 +11,8 @@
  * @param {Context} options.context - The context object.
  * @param {Core} options.core - The core object.
  */
-module.exports = async ({ github, context, core }) => {
-  const commentIdStr = process.env["COMMENT_ID"];
+module.exports = async ({ github, context }) => {
+  const commentIdStr = process.env.COMMENT_ID;
   if (!commentIdStr) {
     throw new Error("COMMENT_ID environment variable is not set.");
   }
@@ -25,7 +25,7 @@ module.exports = async ({ github, context, core }) => {
     comment_id: commentId,
   });
 
-  const playwrightUrl = `${process.env["PAGE_URL"]}${context.runId}/playwright-report/index.html`;
+  const playwrightUrl = `${process.env.PAGE_URL}${context.runId}/playwright-report/index.html`;
 
   const newBody = `${body}
 

@@ -6,8 +6,8 @@ import {
   createSignal,
   For,
   onMount,
-  splitProps,
   type Signal,
+  splitProps,
 } from "solid-js";
 import { Dynamic, Portal } from "solid-js/web";
 import { css, cx } from "styled-system/css";
