@@ -126,12 +126,43 @@ export function P(props: TextProps) {
 
 export function Ul(props: ComponentProps<typeof styled.ul>) {
   return (
-    <styled.ul {...props} listStyleType="disc" listStylePosition="inside" />
+    <styled.ul
+      {...props}
+      listStyleType="disc"
+      listStylePosition="inside"
+      my="5"
+      ps="1"
+      lineHeight="1.7"
+    />
+  );
+}
+
+export function Ol(props: ComponentProps<typeof styled.ol>) {
+  return (
+    <styled.ol
+      {...props}
+      listStyleType="decimal"
+      listStylePosition="inside"
+      my="5"
+      ps="1"
+      lineHeight="1.7"
+    />
   );
 }
 
 export function Li(props: ComponentProps<typeof styled.li>) {
-  return <styled.li {...props} my="1" />;
+  return (
+    <styled.li
+      {...props}
+      my="1"
+      css={{
+        "&::marker": {
+          color: "fg.muted",
+          fontWeight: "semibold",
+        },
+      }}
+    />
+  );
 }
 
 function StyledCallout(props: CalloutProps) {
@@ -148,6 +179,7 @@ export const components = {
   h6: H6,
   p: P,
   ul: Ul,
+  ol: Ol,
   li: Li,
   callout: StyledCallout,
   "callout-title": CalloutTitle,
