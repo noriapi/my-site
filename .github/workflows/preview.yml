@@ -37,6 +37,9 @@ jobs:
       - name: Biome
         run: pnpm lint:biome
 
+      - name: Prettier
+        run: pnpm lint:format
+
       - name: Textlint
         run: pnpm lint:text
 

@@ -1,7 +1,7 @@
 packages:
   - packages/*
 onlyBuiltDependencies:
-  - '@percy/core'
+  - "@percy/core"
   - esbuild
   - sharp
   - workerd
