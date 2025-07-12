@@ -1,4 +1,6 @@
 ---
+import "photoswipe/style.css";
+
 import { getCollection } from "astro:content";
 import { Box, Flex, Stack } from "styled-system/jsx";
 import { center, container } from "styled-system/patterns";
@@ -56,7 +58,7 @@ const entries = headings.map((entry) => ({
         <Flex gap="2">
           <TagsList tags={entry.data.tags} />
         </Flex>
-        <MdContainer>
+        <MdContainer id="markdown">
           <Content components={components} />
         </MdContainer>
       </Stack>
@@ -86,3 +88,12 @@ const entries = headings.map((entry) => ({
     </footer>
   </main>
 </Noriapi>
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#markdown",
+    children: "a.lightbox",
+    pswpModule: () => import("photoswipe"),
+  });
+  lightbox.init();
+</script>

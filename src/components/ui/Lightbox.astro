@@ -1,0 +1,19 @@
+---
+import { type ImageMetadata } from "astro";
+
+import Img, { type Props as ImgProps } from "./Img.astro";
+
+export type Props = ImgProps & { src: ImageMetadata };
+
+const { src } = Astro.props;
+---
+
+<a
+  href={src.src}
+  class="lightbox"
+  data-pswp-width={src.width}
+  data-pswp-height={src.height}
+  target="_blank"
+>
+  <Img {...Astro.props} />
+</a>
