@@ -2,8 +2,8 @@
 import "photoswipe/style.css";
 
 import { getCollection } from "astro:content";
-import { Box, Flex, Stack } from "styled-system/jsx";
-import { center, container } from "styled-system/patterns";
+import { Box, Container, Flex, Stack } from "styled-system/jsx";
+import { center } from "styled-system/patterns";
 
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
@@ -44,17 +44,17 @@ const entries = headings.map((entry) => ({
     <meta name="description" content={entry.data.description} />
   </Fragment>
 
-  <main class={container({ maxWidth: "4xl" })}>
-    <Box textAlign="center" mt="16" mb="10">
-      <Heading as="h1" size="2xl">
+  <main>
+    <Container maxWidth="4xl" textAlign="center" mt="16" mb="10">
+      <Heading as="h1" size="3xl">
         {entry.data.title}
       </Heading>
 
       <Text color="fg.muted" mt="7">{published}に公開</Text>
-    </Box>
+    </Container>
 
-    <Flex gap="8" justifyContent="center">
-      <Stack width="full">
+    <Container display="flex" gap="8" justifyContent="center">
+      <Stack maxWidth="3xl" width="full">
         <Flex gap="2">
           <TagsList tags={entry.data.tags} />
         </Flex>
@@ -81,7 +81,7 @@ const entries = headings.map((entry) => ({
           </Box>
         )
       }
-    </Flex>
+    </Container>
 
     <footer class={center({ mt: "20" })}>
       <Link href="/blog/">記事一覧へ戻る</Link>
