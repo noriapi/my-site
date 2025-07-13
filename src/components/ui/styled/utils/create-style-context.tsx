@@ -24,7 +24,7 @@ const shouldForwardProp = (
 export const createStyleContext = <R extends Recipe>(recipe: R) => {
   const StyleContext = createContext<Record<Slot<R>, string> | null>(null);
 
-  const withRootProvider = <P extends object>(
+  const withRootProvider = <P extends Props>(
     Component: ElementType,
   ): ((props: P) => JSX.Element) => {
     const StyledComponent = (props: P) => {
