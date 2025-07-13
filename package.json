@@ -13,7 +13,7 @@
     "deploy": "astro build && wrangler deploy",
     "cf-typegen": "wrangler types",
     "park": "pnpx @park-ui/cli components add",
-    "lint": "pnpm lint:eslint && lint:format && pnpm lint:text",
+    "lint": "pnpm lint:eslint && pnpm lint:format && pnpm lint:text",
     "lint:text": "textlint src",
     "lint:eslint": "eslint",
     "lint:format": "prettier . --check",
