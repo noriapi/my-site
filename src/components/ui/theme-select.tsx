@@ -99,7 +99,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
         display: "flex",
         flexDir: "row",
         alignItems: "center",
-        gap: "3",
+        gap: "0",
       })}
     >
       <Select.Label>
