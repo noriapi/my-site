@@ -31,11 +31,17 @@ const { Content, headings } = await entry.render();
 const published = displayDate(entry.data.publishDate);
 
 const minDepth = Math.min(...headings.map((entry) => entry.depth));
-const entries = headings.map((entry) => ({
+const titleHeading = {
+  title: "タイトル",
+  url: `#article-title`,
+  depth: 0,
+};
+const contentEntries = headings.map((entry) => ({
   title: entry.text,
   url: `#${entry.slug}`,
   depth: entry.depth - minDepth, // 最低値を 0 に揃える
 }));
+const entries = [titleHeading, ...contentEntries];
 ---
 
 <Noriapi>
@@ -46,7 +52,7 @@ const entries = headings.map((entry) => ({
 
   <main>
     <Container maxWidth="4xl" textAlign="center" mt="16" mb="10">
-      <Heading as="h1" size="3xl">
+      <Heading id="article-title" as="h1" size="3xl" scrollMarginTop="200px">
         {entry.data.title}
       </Heading>
 
@@ -64,7 +70,7 @@ const entries = headings.map((entry) => ({
       </Stack>
 
       {
-        entries.length > 1 && (
+        contentEntries.length > 0 && (
           <Box
             flexGrow="1"
             width="full"
