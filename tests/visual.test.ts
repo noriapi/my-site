@@ -7,7 +7,7 @@ test.describe("Take screenshots", () => {
     { name: "About", path: "/about" },
     { name: "No Alt Win Menu", path: "/no-alt-win-menu" },
   ].forEach((targetPage) => {
-    test(targetPage.name, async ({ page }, _info) => {
+    test(targetPage.name, async ({ page }) => {
       await page.goto(targetPage.path, { waitUntil: "networkidle" });
       await seeFullPage(page);
       await waitForAllImages(page);

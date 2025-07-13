@@ -35,7 +35,7 @@ module.exports = async ({ github, context }) => {
 
   const downloadReports = async (/** @type {string} */ artifactName) => {
     /** @type {ArtifactItem[]} */
-    // @ts-ignore
+    // @ts-expect-error `listArtifactsForRepo` の型は少し緩い
     const artifacts = (
       await github.paginate(github.rest.actions.listArtifactsForRepo, {
         owner: context.repo.owner,

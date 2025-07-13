@@ -3,6 +3,7 @@ import scrollSpy from "simple-scrollspy";
 import { createSignal, For, onMount } from "solid-js";
 import { css, cx } from "styled-system/css";
 import { segmentGroup, text } from "styled-system/recipes";
+
 import { translator } from "~/lib/i18n";
 
 interface TocProps {

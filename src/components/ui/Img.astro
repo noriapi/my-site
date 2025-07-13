@@ -1,8 +1,19 @@
 ---
+import type { LocalImageProps, RemoteImageProps } from "astro:assets";
 import { Image } from "astro:assets";
-import { type ComponentProps } from "astro/types";
+import type { SetNonNullable, SetOptional } from "type-fest";
 
-export type Props = ComponentProps<typeof Image>;
+export type Props = OptionalDensities & ImageProps;
+
+type ImageProps = LocalImageProps | RemoteImageProps;
+
+type WithDensities = SetNonNullable<ImageProps, "densities">;
+type OptionalDensities = SetOptional<WithDensities, "densities">;
+
+const props = {
+  densities: [1.5, 2],
+  ...Astro.props,
+} as ImageProps;
 ---
 
-<Image densities={[1.5, 2]} {...Astro.props as any} />
+<Image {...props} />

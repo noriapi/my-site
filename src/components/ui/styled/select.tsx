@@ -1,7 +1,8 @@
 import { type Assign, Select } from "@ark-ui/solid";
 import type { ComponentProps } from "solid-js";
-import { type SelectVariantProps, select } from "styled-system/recipes";
+import { select, type SelectVariantProps } from "styled-system/recipes";
 import type { HTMLStyledProps } from "styled-system/types";
+
 import { createStyleContext } from "./utils/create-style-context";
 
 const { withRootProvider, withContext } = createStyleContext(select);
