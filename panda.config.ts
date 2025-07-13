@@ -47,6 +47,19 @@ export default defineConfig({
           },
         },
       },
+      recipes: {
+        text: {
+          compoundVariants: [
+            {
+              variant: "heading",
+              size: "3xl",
+              css: {
+                lineHeight: "3rem",
+              },
+            },
+          ],
+        },
+      },
       slotRecipes: {
         alert: {
           base: {
