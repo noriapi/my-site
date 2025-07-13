@@ -29,9 +29,9 @@ export default defineConfig({
     { name: "Mobile Safari", use: { ...devices["iPhone 12"] } },
   ],
   webServer: {
-    command: "wrangler dev --ip=127.0.0.1",
+    command: "wrangler dev --ip=127.0.0.1 --log-level=warn",
     url: "http://localhost:8787",
-    stdout: process.env.CI ? "ignore" : "pipe",
+    stdout: "pipe",
     reuseExistingServer: !process.env.CI,
   },
 });
