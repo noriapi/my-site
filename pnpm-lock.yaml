@@ -138,6 +138,9 @@ importers:
       textlint-filter-rule-comments:
         specifier: ^1.2.2
         version: 1.2.2(textlint@15.2.0)
+      textlint-plugin-mdx:
+        specifier: ^1.0.2
+        version: 1.0.2(typescript@5.8.3)
       textlint-rule-preset-ja-spacing:
         specifier: ^2.4.3
         version: 2.4.3
@@ -5383,6 +5386,11 @@ packages:
     resolution: {integrity: sha512-AtyxreCPb3Hq/bd6Qd6szY1OGgnW34LOjQXAHzE8NoXbTUudQqALPdRe+hvRsf81rnmGLxBiCUXZbnbpIseFyw==}
     peerDependencies:
       textlint: '>=6.8.0'
+
+  textlint-plugin-mdx@1.0.2:
+    resolution: {integrity: sha512-La+pgFdhw78F93PKm/c8IYipZPUMOxuwSVX9ZcVMT9Q9f3xF7N5rU37dotVjn+D8kmN0AJaxm0qtT5nEEP51mA==}
+    peerDependencies:
+      typescript: ^5.0.0
 
   textlint-rule-helper@2.3.1:
     resolution: {integrity: sha512-b1bijvyiUmKinfFE5hkQMSXs3Ky8jyZ3Y6SOoTRJKV9HLL2LWUVFAUezO7z4FpAkVvYruDYWCwA5qWV8GmvyUw==}
@@ -13468,6 +13476,10 @@ snapshots:
   textlint-filter-rule-comments@1.2.2(textlint@15.2.0):
     dependencies:
       textlint: 15.2.0
+
+  textlint-plugin-mdx@1.0.2(typescript@5.8.3):
+    dependencies:
+      typescript: 5.8.3
 
   textlint-rule-helper@2.3.1:
     dependencies:
