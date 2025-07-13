@@ -1,0 +1,12 @@
+---
+// Lightbox の Markdown 用のラッパー
+import { Box } from "styled-system/jsx";
+
+import Lightbox, { type Props as LightboxProps } from "./Lightbox.astro";
+
+export type Props = LightboxProps;
+---
+
+<Box class="img-container" width="fit-content" mx="auto" my="6">
+  <Lightbox width="300" {...Astro.props} />
+</Box>
