@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import { Box, Container, Flex, Stack } from "styled-system/jsx";
+import { Box, Flex, Stack } from "styled-system/jsx";
 import { center, container } from "styled-system/patterns";
+
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { components, MdContainer } from "~/components/ui/markdown";
-import TagsList from "~/components/ui/TagsList.astro";
 import { TableOfContent } from "~/components/ui/table-of-content";
+import TagsList from "~/components/ui/TagsList.astro";
 import { Text } from "~/components/ui/text";
 import Noriapi from "~/layouts/Noriapi.astro";
 import { displayDate } from "~/lib/display-date";

@@ -34,8 +34,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Biome
-        run: pnpm lint:biome
+      - name: ESLint
+        run: pnpm lint:eslint
 
       - name: Prettier
         run: pnpm lint:format

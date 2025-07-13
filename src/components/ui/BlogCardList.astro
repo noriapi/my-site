@@ -3,6 +3,7 @@ import { type CollectionEntry } from "astro:content";
 import type { ComponentProps } from "solid-js";
 import { styled } from "styled-system/jsx";
 import { grid } from "styled-system/patterns";
+
 import BlogCard from "~/components/ui/BlogCard.astro";
 
 interface Props extends Omit<ComponentProps<typeof styled.ul>, "class"> {

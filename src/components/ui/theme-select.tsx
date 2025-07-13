@@ -13,10 +13,12 @@ import { Dynamic, Portal } from "solid-js/web";
 import { css, cx } from "styled-system/css";
 import { flex, hstack, visuallyHidden } from "styled-system/patterns";
 import { icon } from "styled-system/recipes";
+
 import CheckIcon from "~icons/lucide/check";
 import MoonIcon from "~icons/lucide/moon";
 import SunIcon from "~icons/lucide/sun";
 import SunMoonIcon from "~icons/lucide/sun-moon";
+
 import { createListCollection, Select } from "./select";
 
 const THEME_STORAGE_KEY = "theme";

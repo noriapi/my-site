@@ -1,13 +1,15 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
 import type { MarkdownLayoutProps } from "astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { css } from "styled-system/css";
 import { Container } from "styled-system/jsx";
 import { center } from "styled-system/patterns";
+
 import AlternateLangs from "~/components/meta/AlternateLangs.astro";
 import LanguageLinks from "~/components/ui/LanguageLinks.astro";
 import { Link } from "~/components/ui/link";
 import { getLocale, translator } from "~/lib/i18n";
+
 import NoAltWinMenuLayout from "./NoAltWinMenu.astro";
 
 type Props = MarkdownLayoutProps<{
