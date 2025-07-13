@@ -1,0 +1,176 @@
+---
+title: "「スマートフォン連携」を使って iPhone から Windows にリンクを送る方法"
+description: "「スマートフォン連携」アプリに「ショートカット」アプリを組み合わせることで、通常では不可能なリンクの送信を可能にする方法"
+tags: ["生活", "iPhone", "Windows"]
+publishDate: 2025-07-13
+---
+
+import Lb from "~/components/ui/Lb.astro";
+import shortcutEditThumb from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-thumb.png";
+import shortcutEdit0InitialAction from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-0-initial-action.png";
+import shortcutEdit1SelectNotify from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-1-select-notify.png";
+import shortcutEdit2NotifyAdded from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-2-notify-added.png";
+import shortcutEdit3NotifyInput from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-3-notify-input.png";
+import shortcutEdit4DeleteHellow from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-4-delete-hello.png";
+import shortcutEdit5SelectInput from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-5-select-input.png";
+import shortcutEdit6CheckSharesheet from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-6-check-share-sheet.png";
+import shortcutEdit8NoInput from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-8-no-input.png";
+import shortcutEdit9Ok from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-9-ok.png";
+import shortcutEdit10Meta from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-10-meta.png";
+import shortcutEdit11Complete from "~/assets/images/blog/iphone-windows-links-phone-link/shortcut-edit-11-complete.png";
+import sharePageThumb from "~/assets/images/blog/iphone-windows-links-phone-link/share-page-thumb.png";
+import sharePage from "~/assets/images/blog/iphone-windows-links-phone-link/share-page.png";
+import shareMemo from "~/assets/images/blog/iphone-windows-links-phone-link/share-memo.png";
+import shareMenuList from "~/assets/images/blog/iphone-windows-links-phone-link/share-menu-list.png";
+import shareMenuEditActions from "~/assets/images/blog/iphone-windows-links-phone-link/share-menu-edit-actions.png";
+import shareMenuEdited from "~/assets/images/blog/iphone-windows-links-phone-link/share-menu-edited.png";
+import windowsNotification from "~/assets/images/blog/iphone-windows-links-phone-link/windows-notification.png";
+
+1. Windows「スマートフォン連携」の通知をオン
+2. iPhone「ショートカット」を以下のように作成
+   <Lb
+     src={shortcutEditThumb}
+     alt="iOSアプリ「ショートカット」のスクリーンショット。"
+     priority
+   />
+3. 共有メニューから「PC に送る」
+   <Lb
+     src={sharePageThumb}
+     alt="iPhone共有メニューのスクリーンショット"
+     priority
+   />
+4. Windows に通知される
+   <Lb
+     src={windowsNotification}
+     alt="Windows 通知のスクリーンショット"
+     priority
+   />
+
+通常では「スマートフォン連携」はファイルしか送れませんが、このように「ショートカット」アプリと組み合わせることでいろいろなものが送れるようになります。
+
+## ショートカットの作り方
+
+### 1. 「通知を表示」を追加
+
+`アクションを検索` の部分に `通知` と入力。
+
+<Lb
+  src={shortcutEdit0InitialAction}
+  alt="iOSアプリ「ショートカット」で、アクションを検索する場面のスクリーンショット。"
+/>
+
+`通知を表示` を選択。
+
+<Lb
+  src={shortcutEdit1SelectNotify}
+  alt="iOSアプリ「ショートカット」で、「通知を表示」アクションを選択しているスクリーンショット。"
+/>
+
+以下のようになる。
+
+<Lb
+  src={shortcutEdit2NotifyAdded}
+  alt="iOSアプリ「ショートカット」で、「通知を表示」アクションを追加したあとのスクリーンショット。"
+/>
+
+### 2. 「ショートカットの入力」を選択
+
+`こんにちは` の部分をタップして、候補に表示される `ショートカットの入力` を選択。
+
+<Lb
+  src={shortcutEdit3NotifyInput}
+  alt="iOSアプリ「ショートカット」で、通知の内容を変更する前のスクリーンショット。"
+/>
+
+もとからある **こんにちは** は削除する。
+
+<Lb
+  src={shortcutEdit4DeleteHellow}
+  alt="iOSアプリ「ショートカット」で、通知の内容を変更した後のスクリーンショット。"
+/>
+
+### 3. 共有シートから入力を受け取る
+
+`指定なし` の部分をタップすると、この画面になる。
+
+<Lb
+  src={shortcutEdit5SelectInput}
+  alt="iOSアプリ「ショートカット」で、「指定なし」をタップしたあとに表示される画面のスクリーンショット。"
+/>
+
+`共有シートに表示` にチェックを入れる。
+
+<Lb
+  src={shortcutEdit6CheckSharesheet}
+  alt="iOSアプリ「ショートカット」で、「共有シートに表示」にチェックを入れた後のスクリーンショット。"
+/>
+
+### 4. 入力がない場合は停止
+
+「もし入力がない場合: `続ける`」の部分をタップし、`停止して応答` に変更する。
+
+<Lb
+  src={shortcutEdit8NoInput}
+  alt="iOSアプリ「ショートカット」で、「もし入力がない場合」を選択している場面のスクリーンショット。"
+/>
+
+これでひとまず完成。
+
+<Lb
+  src={shortcutEdit9Ok}
+  alt="iOSアプリ「ショートカット」で、PCに送る処理を行うショートカットのスクリーンショット。"
+/>
+
+### 5. 名前とアイコンを変更する
+
+一番上の `通知を表示 ▽` の部分をタップして、名称やアイコンをわかりやすいものに変える。
+
+<Lb
+  src={shortcutEdit10Meta}
+  alt="iOSアプリ「ショートカット」で、メタ情報を変更する場面のスクリーンショット。"
+/>
+
+### 6. 完成
+
+<Lb
+  src={shortcutEdit11Complete}
+  alt="iOSアプリ「ショートカット」で、メタ情報を変更した後のスクリーンショット。"
+/>
+
+## 使い方
+
+共有アイコンから共有メニューを開き、一番下までスクロールすると、追加したショートカット（この例では `PCに送る`）があるはずです。
+
+<Lb src={shareMenuList} alt="iPhone共有メニューのスクリーンショット" />
+
+`アクションを編集...` をタップして追加したアクションを `よく使う項目` に追加しましょう。
+
+<Lb
+  src={shareMenuEditActions}
+  alt="iPhone共有メニューでアクションを編集している場面のスクリーンショット"
+/>
+
+このようになります。
+
+<Lb
+  src={shareMenuEdited}
+  alt="iPhone共有メニューでアクションを編集したあとのスクリーンショット"
+/>
+
+共有ボタンから `PCに送る` をタップすると、Web ページへのリンクが Windows へ送信されます。
+
+<Lb
+  src={sharePage}
+  alt="iPhone共有メニューからPCに送る場面のスクリーンショット"
+/>
+
+通知をタップすると、Web ページが開かれます。
+
+<Lb src={windowsNotification} alt="Windows 通知のスクリーンショット" />
+
+Web ページ以外にも、メモを送信したりできます。
+
+<Lb
+  src={shareMemo}
+  alt="iPhone共有メニューでメモを共有する場面のスクリーンショット"
+/>
