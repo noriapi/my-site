@@ -15,7 +15,9 @@ import { Text, type TextProps } from "./text";
 export const A = Link;
 
 export function H1(props: HeadingProps) {
-  return <Heading {...props} as="h1" size="3xl" my="3" scrollMarginTop="6" />;
+  // h1 タグは別箇所でページタイトルとしてレンダーするため
+  // ここでは h1 も h2 とし、見た目だけ変える。
+  return <Heading {...props} as="h2" size="3xl" my="3" scrollMarginTop="6" />;
 }
 
 export function H2(props: HeadingProps) {
