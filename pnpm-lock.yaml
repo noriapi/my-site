@@ -164,7 +164,7 @@ importers:
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.14)(lightningcss@1.25.1)(yaml@2.8.0))
       wrangler:
         specifier: ^4.19.1
-        version: 4.24.4(@cloudflare/workers-types@4.20250620.0)
+        version: 4.25.0(@cloudflare/workers-types@4.20250620.0)
 
 packages:
 
@@ -6024,8 +6024,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.24.4:
-    resolution: {integrity: sha512-qjDdZWt/aiK19YrQbjFjJoa9+y+arsXcUpRomwMdmbccZw/w5QgDsEeXMxoPSisUDQlW9ZX5A68ZPWY1/im54w==}
+  wrangler@4.25.0:
+    resolution: {integrity: sha512-SepXQbzWkdp0O7qAx3i0go+fw5I0VkDqLV2G3ewbffO5k8kpvuCkhalS23KO+7+o8+Oa3vfC7x+16IL3rj2n4w==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -6348,7 +6348,7 @@ snapshots:
       astro: 5.12.0(@azure/storage-blob@12.27.0)(@types/node@24.0.14)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.45.1)(typescript@5.8.3)(yaml@2.8.0)
       tinyglobby: 0.2.14
       vite: 6.3.5(@types/node@24.0.14)(lightningcss@1.25.1)(yaml@2.8.0)
-      wrangler: 4.24.4(@cloudflare/workers-types@4.20250620.0)
+      wrangler: 4.25.0(@cloudflare/workers-types@4.20250620.0)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -14222,7 +14222,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250712.0
       '@cloudflare/workerd-windows-64': 1.20250712.0
 
-  wrangler@4.24.4(@cloudflare/workers-types@4.20250620.0):
+  wrangler@4.25.0(@cloudflare/workers-types@4.20250620.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
       '@cloudflare/unenv-preset': 2.3.3(unenv@2.0.0-rc.17)(workerd@1.20250712.0)
