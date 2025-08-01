@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.54.1-noble
+FROM mcr.microsoft.com/playwright:v1.54.2-noble
 ENV PNPM_HOME="/pnpm"
 RUN apt-get purge -y fonts-wqy-zenhei && \
   npm install -g pnpm@10.12.1
