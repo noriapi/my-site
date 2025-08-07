@@ -24,7 +24,7 @@ jobs:
 
       - name: .vrt-update
         id: command
-        uses: github/command@v2.0.1
+        uses: github/command@v2.0.2
         with:
           command: .vrt-update
           skip_ci: true
