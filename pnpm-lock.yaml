@@ -83,13 +83,13 @@ importers:
         version: 9.32.0
       '@iconify-json/lucide':
         specifier: ^1.2.48
-        version: 1.2.58
+        version: 1.2.61
       '@pandacss/dev':
         specifier: ^0.54.0
         version: 0.54.0(typescript@5.8.3)
       '@park-ui/panda-preset':
         specifier: ^0.43.1
-        version: 0.43.1(@internationalized/date@3.5.5)(@pandacss/dev@0.54.0(typescript@5.8.3))
+        version: 0.43.1(@internationalized/date@3.8.2)(@pandacss/dev@0.54.0(typescript@5.8.3))
       '@playwright/test':
         specifier: ^1.53.1
         version: 1.54.2
@@ -917,8 +917,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify-json/lucide@1.2.58':
-    resolution: {integrity: sha512-4ONe3ONaauEaf7wEQIvlWz2xHaMXUXuQeJVRBMu4PmsBrMEfdnc2vRZRyAudmcQo8yWmEsLu6WM7/5qWUdDJHQ==}
+  '@iconify-json/lucide@1.2.61':
+    resolution: {integrity: sha512-0sLmi3vyEsJ6XL/uhl0a+uphdYIW1viYkUmiuT4SK3e2R3o3GIWY9k8N+SZL++GVBbMKy9oatx8KrzyoPZ6WqQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -6226,7 +6226,7 @@ snapshots:
 
   '@antfu/utils@8.1.1': {}
 
-  '@ark-ui/anatomy@3.5.0(@internationalized/date@3.5.5)':
+  '@ark-ui/anatomy@3.5.0(@internationalized/date@3.8.2)':
     dependencies:
       '@zag-js/accordion': 0.62.1
       '@zag-js/anatomy': 0.62.1
@@ -6239,7 +6239,7 @@ snapshots:
       '@zag-js/color-utils': 0.62.1
       '@zag-js/combobox': 0.62.1
       '@zag-js/date-picker': 0.62.1
-      '@zag-js/date-utils': 0.62.1(@internationalized/date@3.5.5)
+      '@zag-js/date-utils': 0.62.1(@internationalized/date@3.8.2)
       '@zag-js/dialog': 0.62.1
       '@zag-js/editable': 0.62.1
       '@zag-js/file-upload': 0.62.1
@@ -7078,7 +7078,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify-json/lucide@1.2.58':
+  '@iconify-json/lucide@1.2.61':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -7691,9 +7691,9 @@ snapshots:
 
   '@pandacss/types@0.54.0': {}
 
-  '@park-ui/panda-preset@0.43.1(@internationalized/date@3.5.5)(@pandacss/dev@0.54.0(typescript@5.8.3))':
+  '@park-ui/panda-preset@0.43.1(@internationalized/date@3.8.2)(@pandacss/dev@0.54.0(typescript@5.8.3))':
     dependencies:
-      '@ark-ui/anatomy': 3.5.0(@internationalized/date@3.5.5)
+      '@ark-ui/anatomy': 3.5.0(@internationalized/date@3.8.2)
       '@pandacss/dev': 0.54.0(typescript@5.8.3)
       effect: 3.10.15
     transitivePeerDependencies:
@@ -8637,6 +8637,10 @@ snapshots:
   '@zag-js/date-utils@0.62.1(@internationalized/date@3.5.5)':
     dependencies:
       '@internationalized/date': 3.5.5
+
+  '@zag-js/date-utils@0.62.1(@internationalized/date@3.8.2)':
+    dependencies:
+      '@internationalized/date': 3.8.2
 
   '@zag-js/date-utils@1.21.1(@internationalized/date@3.8.2)':
     dependencies:
