@@ -16,19 +16,19 @@ importers:
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.6.2)(typescript@5.8.3)
       '@astrojs/cloudflare':
         specifier: ^12.5.4
-        version: 12.6.2(@types/node@24.1.0)(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))(lightningcss@1.25.1)(yaml@2.8.0)
+        version: 12.6.2(@types/node@24.2.0)(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))(lightningcss@1.25.1)(yaml@2.8.0)
       '@astrojs/markdown-remark':
         specifier: ^6.3.2
         version: 6.3.5
       '@astrojs/mdx':
         specifier: ^4.3.0
-        version: 4.3.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))
+        version: 4.3.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))
       '@astrojs/sitemap':
         specifier: ^3.4.1
         version: 3.4.2
       '@astrojs/solid-js':
         specifier: ^5.1.0
-        version: 5.1.0(@types/node@24.1.0)(lightningcss@1.25.1)(solid-js@1.9.8)(yaml@2.8.0)
+        version: 5.1.0(@types/node@24.2.0)(lightningcss@1.25.1)(solid-js@1.9.8)(yaml@2.8.0)
       '@expressive-code/plugin-collapsible-sections':
         specifier: ^0.41.2
         version: 0.41.3
@@ -46,10 +46,10 @@ importers:
         version: 4.3.3(solid-js@1.9.8)
       astro:
         specifier: ^5.9.2
-        version: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
+        version: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
       astro-expressive-code:
         specifier: ^0.41.2
-        version: 0.41.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))
+        version: 0.41.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -98,7 +98,7 @@ importers:
         version: 15.2.1
       '@types/node':
         specifier: ^24.0.0
-        version: 24.1.0
+        version: 24.2.0
       eslint:
         specifier: ^9.31.0
         version: 9.32.0
@@ -161,7 +161,7 @@ importers:
         version: 22.2.0(@vue/compiler-sfc@3.4.19)
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0))
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0))
       wrangler:
         specifier: ^4.19.1
         version: 4.27.0(@cloudflare/workers-types@4.20250801.0)
@@ -1761,8 +1761,8 @@ packages:
   '@types/node@17.0.45':
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
 
-  '@types/node@24.1.0':
-    resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
+  '@types/node@24.2.0':
+    resolution: {integrity: sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -5551,8 +5551,8 @@ packages:
   uncrypto@0.1.3:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
 
-  undici-types@7.8.0:
-    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
+  undici-types@7.10.0:
+    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
@@ -6343,14 +6343,14 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/cloudflare@12.6.2(@types/node@24.1.0)(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))(lightningcss@1.25.1)(yaml@2.8.0)':
+  '@astrojs/cloudflare@12.6.2(@types/node@24.2.0)(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))(lightningcss@1.25.1)(yaml@2.8.0)':
     dependencies:
       '@astrojs/internal-helpers': 0.7.1
       '@astrojs/underscore-redirects': 1.0.0
       '@cloudflare/workers-types': 4.20250801.0
-      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
+      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
       tinyglobby: 0.2.14
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
       wrangler: 4.27.0(@cloudflare/workers-types@4.20250801.0)
     transitivePeerDependencies:
       - '@types/node'
@@ -6423,12 +6423,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.3.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))':
+  '@astrojs/mdx@4.3.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0))':
     dependencies:
       '@astrojs/markdown-remark': 6.3.5
       '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
       acorn: 8.15.0
-      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
+      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -6452,11 +6452,11 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.25.76
 
-  '@astrojs/solid-js@5.1.0(@types/node@24.1.0)(lightningcss@1.25.1)(solid-js@1.9.8)(yaml@2.8.0)':
+  '@astrojs/solid-js@5.1.0(@types/node@24.2.0)(lightningcss@1.25.1)(solid-js@1.9.8)(yaml@2.8.0)':
     dependencies:
       solid-js: 1.9.8
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
-      vite-plugin-solid: 2.11.6(solid-js@1.9.8)(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0))
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vite-plugin-solid: 2.11.6(solid-js@1.9.8)(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0))
     transitivePeerDependencies:
       - '@testing-library/jest-dom'
       - '@types/node'
@@ -8151,7 +8151,7 @@ snapshots:
 
   '@types/fontkit@2.0.8':
     dependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
 
   '@types/hast@2.3.10':
     dependencies:
@@ -8181,9 +8181,9 @@ snapshots:
 
   '@types/node@17.0.45': {}
 
-  '@types/node@24.1.0':
+  '@types/node@24.2.0':
     dependencies:
-      undici-types: 7.8.0
+      undici-types: 7.10.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -8191,7 +8191,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
 
   '@types/unist@2.0.11': {}
 
@@ -9524,12 +9524,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-expressive-code@0.41.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)):
+  astro-expressive-code@0.41.3(astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)):
     dependencies:
-      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
+      astro: 5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0)
       rehype-expressive-code: 0.41.3
 
-  astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.1.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0):
+  astro@5.12.8(@azure/storage-blob@12.27.0)(@types/node@24.2.0)(encoding@0.1.13)(lightningcss@1.25.1)(rollup@4.46.2)(typescript@5.8.3)(yaml@2.8.0):
     dependencies:
       '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.7.1
@@ -9585,8 +9585,8 @@ snapshots:
       unist-util-visit: 5.0.0
       unstorage: 1.16.1(@azure/storage-blob@12.27.0)
       vfile: 6.0.3
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
-      vitefu: 1.1.1(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0))
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vitefu: 1.1.1(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0))
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.3
@@ -13723,7 +13723,7 @@ snapshots:
 
   uncrypto@0.1.3: {}
 
-  undici-types@7.8.0: {}
+  undici-types@7.10.0: {}
 
   undici@5.29.0:
     dependencies:
@@ -14001,7 +14001,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-plugin-solid@2.11.6(solid-js@1.9.8)(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)):
+  vite-plugin-solid@2.11.6(solid-js@1.9.8)(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)):
     dependencies:
       '@babel/core': 7.27.4
       '@types/babel__core': 7.20.5
@@ -14009,23 +14009,23 @@ snapshots:
       merge-anything: 5.1.7
       solid-js: 1.9.8
       solid-refresh: 0.6.3(solid-js@1.9.8)
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
-      vitefu: 1.1.1(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0))
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vitefu: 1.1.1(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0))
     transitivePeerDependencies:
       - supports-color
 
-  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)):
     dependencies:
       debug: 4.4.1
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.8.3)
     optionalDependencies:
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0):
+  vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.4.6(picomatch@4.0.3)
@@ -14034,14 +14034,14 @@ snapshots:
       rollup: 4.46.2
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
       fsevents: 2.3.3
       lightningcss: 1.25.1
       yaml: 2.8.0
 
-  vitefu@1.1.1(vite@6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)):
+  vitefu@1.1.1(vite@6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)):
     optionalDependencies:
-      vite: 6.3.5(@types/node@24.1.0)(lightningcss@1.25.1)(yaml@2.8.0)
+      vite: 6.3.5(@types/node@24.2.0)(lightningcss@1.25.1)(yaml@2.8.0)
 
   volar-service-css@0.0.62(@volar/language-service@2.4.14):
     dependencies:
