@@ -50,7 +50,7 @@
     "@actions/github": "^6.0.1",
     "@eslint/js": "^9.31.0",
     "@iconify-json/lucide": "^1.2.48",
-    "@pandacss/dev": "^0.54.0",
+    "@pandacss/dev": "^1.0.0",
     "@park-ui/panda-preset": "^0.43.1",
     "@playwright/test": "^1.53.1",
     "@textlint/textlint-plugin-markdown": "^15.0.0",
