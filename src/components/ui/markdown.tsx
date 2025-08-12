@@ -127,30 +127,25 @@ export function P(props: TextProps) {
   );
 }
 
+const listProps = {
+  listStylePosition: "inside",
+  my: "5",
+  ps: "1",
+  lineHeight: "1.7",
+  css: {
+    "li > &": {
+      my: "1",
+      ps: "5",
+    },
+  },
+};
+
 export function Ul(props: ComponentProps<typeof styled.ul>) {
-  return (
-    <styled.ul
-      {...props}
-      listStyleType="disc"
-      listStylePosition="inside"
-      my="5"
-      ps="1"
-      lineHeight="1.7"
-    />
-  );
+  return <styled.ul {...props} {...listProps} listStyleType="disc" />;
 }
 
 export function Ol(props: ComponentProps<typeof styled.ol>) {
-  return (
-    <styled.ol
-      {...props}
-      listStyleType="decimal"
-      listStylePosition="inside"
-      my="5"
-      ps="1"
-      lineHeight="1.7"
-    />
-  );
+  return <styled.ol {...props} {...listProps} listStyleType="decimal" />;
 }
 
 export function Li(props: ComponentProps<typeof styled.li>) {
