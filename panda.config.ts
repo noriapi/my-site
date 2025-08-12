@@ -67,6 +67,9 @@ export default defineConfig({
               background: "colorPalette.a2",
               borderColor: "colorPalette.5",
             },
+            description: {
+              color: "fg.default",
+            },
             icon: {
               color: "colorPalette.emphasized",
             },
