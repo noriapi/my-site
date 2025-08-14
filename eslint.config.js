@@ -1,4 +1,4 @@
-import js from "@eslint/js";
+import eslint from "@eslint/js";
 import { globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginAstro from "eslint-plugin-astro";
@@ -13,11 +13,7 @@ export default tseslint.config([
     "dist/",
     ".astro/",
   ]),
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-  },
+  eslint.configs.recommended,
   {
     files: ["**/*.cjs"],
     languageOptions: {
