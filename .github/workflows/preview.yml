@@ -24,7 +24,7 @@ jobs:
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -96,7 +96,7 @@ jobs:
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Visual Regression Tests
         run: docker compose run --rm --build -P tests pnpm playwright test
@@ -141,7 +141,7 @@ jobs:
         with:
           config: ${{ vars.PERMISSIONS_CONFIG }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -190,7 +190,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Update comment
         uses: actions/github-script@v7
