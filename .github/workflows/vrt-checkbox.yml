@@ -70,7 +70,7 @@ jobs:
             })
             core.setOutput("ref", pr.data.head.ref)
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ steps.data.outputs.ref }}
