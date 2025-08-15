@@ -1,6 +1,13 @@
 ---
 import { css } from "styled-system/css";
-import { Container, Divider, HStack } from "styled-system/jsx";
+import {
+  Box,
+  Container,
+  Divider,
+  Flex,
+  HStack,
+  Stack,
+} from "styled-system/jsx";
 import { circle, visuallyHidden } from "styled-system/patterns";
 
 import ojisan from "~/assets/images/ojisan.png";
@@ -8,6 +15,7 @@ import { translator } from "~/lib/i18n";
 
 import Img from "./Img.astro";
 import { Link } from "./link";
+import { MobileNavbar } from "./mobile-navbar";
 import { ThemeSelect } from "./theme-select";
 
 const linkProps = {
@@ -24,30 +32,48 @@ const t = translator(Astro.currentLocale);
     borderBottomWidth: "medium",
   })}
 >
-  <Container maxWidth="6xl">
-    <HStack gap="10" minHeight="3rem" alignItems="stretch">
-      <HStack flexGrow="1" alignItems="stretch">
+  <HStack
+    gap="10"
+    minHeight="3rem"
+    alignItems="stretch"
+    justify="space-between"
+    maxWidth="6xl"
+    px={{ base: "0", md: "8" }}
+    mx="auto"
+    class="navbar-container-inner"
+  >
+    <Box display="flex" alignItems="stretch" class="navbar-left">
+      <HStack alignItems="stretch" display={{ base: "none", md: "flex" }}>
         <Link {...linkProps} href="/no-alt-win-menu">No Alt Win Menu</Link>
       </HStack>
-      <HStack alignItems="stretch" gap="3">
-        <Link {...linkProps} href="/blog/" textStyle="md"> Blog </Link>
-        <Link {...linkProps} href="/about" textStyle="md">
-          <span class={visuallyHidden()}>About</span>
-          <Img
-            src={ojisan}
-            alt={t({
-              ja: "Noriapiのアイコン",
-              en: "Noriapi's icon",
-            })}
-            width="30"
-            height="30"
-            class={circle()}
-            priority
-          />
-        </Link>
-        <Divider orientation="vertical" h="6" alignSelf="center" />
-        <ThemeSelect client:load lang={Astro.currentLocale} />
-      </HStack>
+
+      <Flex alignItems="stretch" display={{ base: "flex", md: "none" }}>
+        <MobileNavbar client:load>
+          <Stack width="100%">
+            <Link {...linkProps} href="/no-alt-win-menu">No Alt Win Menu</Link>
+          </Stack>
+        </MobileNavbar>
+      </Flex>
+    </Box>
+
+    <HStack alignItems="stretch" gap="3" class="navbar-right">
+      <Link {...linkProps} href="/blog/" textStyle="md"> Blog </Link>
+      <Link {...linkProps} href="/about" textStyle="md">
+        <span class={visuallyHidden()}>About</span>
+        <Img
+          src={ojisan}
+          alt={t({
+            ja: "Noriapiのアイコン",
+            en: "Noriapi's icon",
+          })}
+          width="30"
+          height="30"
+          class={circle()}
+          priority
+        />
+      </Link>
+      <Divider orientation="vertical" h="6" alignSelf="center" />
+      <ThemeSelect client:load lang={Astro.currentLocale} />
     </HStack>
-  </Container>
+  </HStack>
 </nav>
