@@ -29,7 +29,7 @@ jobs:
           number: ${{ github.event.issue.number }}
 
       - name: Eyes Reaction
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         if: steps.check-checkbox.outputs.changed == 'true' && fromJSON(steps.check-checkbox.outputs.state).update-screenshots
         env:
           COMMENT_ID: ${{ steps.check-checkbox.outputs.comment-id }}
@@ -61,7 +61,7 @@ jobs:
 
       - name: Get data
         id: data
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const pr = await github.rest.pulls.get({
@@ -88,7 +88,7 @@ jobs:
           git push
 
       - name: Add +1 Reaction
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           COMMENT_ID: ${{ needs.precheck.outputs.comment-id }}
         with:
@@ -101,7 +101,7 @@ jobs:
 
       - name: Add -1 Reaction on Failure
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           COMMENT_ID: ${{ needs.precheck.outputs.comment-id }}
         with:
