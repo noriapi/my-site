@@ -35,7 +35,7 @@
     "@r4ai/remark-callout": "^0.6.2",
     "@solid-primitives/media": "^2.3.1",
     "@solid-primitives/storage": "^4.3.2",
-    "astro": "^5.9.2",
+    "astro": "^5.15.9",
     "astro-expressive-code": "^0.41.2",
     "dayjs": "^1.11.13",
     "is-absolute-url": "^4.0.1",
